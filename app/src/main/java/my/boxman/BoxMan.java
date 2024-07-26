@@ -170,7 +170,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		myMaps.m_Sets = new int[42]; //系统参数设置数组
 
 		//路径设置
-//		myMaps.sRoot = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getPath(); // this folder is deleted when the app is uninstalled
+//		myMaps.sRoot = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getPath(); // this folder is deleted when the app is uninstalled and the user can't add files to it.
 //		myMaps.sRoot = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getPath();
 		myMaps.sRoot = Environment.getExternalStorageDirectory().getPath();
 
@@ -307,7 +307,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 
-		expView = (ExpandableListView) findViewById(R.id.explist);
+		expView = findViewById(R.id.explist);
 		expAdapter = new MyExpandableListView();
 		expView.setAdapter(expAdapter);
 
@@ -359,11 +359,6 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		//用提高APP服务级别的方式，避免因相机崩溃的问题
 //		serviceIntent = new Intent(this, MyService.class);
 //		startService(serviceIntent);
-
-		setTitle(getString(R.string.app_name) + " " + mySQLite.m_SQL.count_Level());
-		myMaps.curJi = false;
-		expAdapter.notifyDataSetChanged();
-		expView.expandGroup(myMaps.m_Sets[0]);
 	}
 
 	//加载 Gif 皮肤
@@ -383,12 +378,16 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inPreferredConfig = myMaps.cfg;
 			opts.inJustDecodeBounds = true;  //仅提取图片宽高
-			BitmapFactory.decodeFile(myMaps.sRoot+myMaps.sPath + "banner.png", opts);
-			//建议使用 200 x 42 尺寸内的水印
-//			if (opts.outWidth <= 200 && opts.outHeight <= 42) {
-				opts.inJustDecodeBounds = false;   //提取图片
-				myMaps.markGif2 = BitmapFactory.decodeFile(myMaps.sRoot+myMaps.sPath + "banner.png", opts);
-//			}
+
+			String bannerFileName = myMaps.sRoot+myMaps.sPath + "banner.png";
+			if(new File(bannerFileName).exists()) {
+				BitmapFactory.decodeFile(bannerFileName, opts);
+				//建议使用 200 x 42 尺寸内的水印
+	//			if (opts.outWidth <= 200 && opts.outHeight <= 42) {
+					opts.inJustDecodeBounds = false;   //提取图片
+					myMaps.markGif2 = BitmapFactory.decodeFile(bannerFileName, opts);
+	//			}
+			}
 		} catch (Exception e) {
 			myMaps.markGif2 = null;
 		}
@@ -2036,10 +2035,12 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 
 	@Override
 	protected void onStart() {
-//		setTitle(getString(R.string.app_name) + " " + mySQLite.m_SQL.count_Level());
-//		myMaps.curJi = false;
-//		expAdapter.notifyDataSetChanged();
-//		expView.expandGroup(myMaps.m_Sets[0]);
+		if(myMaps.sRoot != null && expAdapter != null) {		// may be null if yet the user hasn't granted permissions
+			setTitle(getString(R.string.app_name) + " " + mySQLite.m_SQL.count_Level());
+			myMaps.curJi = false;
+			expAdapter.notifyDataSetChanged();
+			expView.expandGroup(myMaps.m_Sets[0]);
+		}
 		super.onStart();
 	}
 

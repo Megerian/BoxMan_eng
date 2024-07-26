@@ -665,6 +665,11 @@
     <string name="automatically_select_latest_competition">Automatically select latest competition</string>
     <string name="import_competition_puzzles">Import competition puzzles</string>
     <string name="network_error_">Network error：</string>
+    <string name="find_similar_puzzles2">Find similar puzzles</string>
+    <string name="start">Start</string>
+    <string name="a_total_of_">"A total of "</string>
+    <string name="puzzles_copied_to">" puzzles copied to"</string>
+    <string name="puzzle_copied">" puzzles copied"</string>
 
     <item type="id" name="tag_g"></item>
     <item type="id" name="tag_c"></item>

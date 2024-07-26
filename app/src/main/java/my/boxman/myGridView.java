@@ -733,7 +733,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				}
 
 				String[] m_menu = {
-						"自动",
+						getString(R.string.auto),
 						"1 个",
 						"2 个",
 						"3 个",
@@ -1235,10 +1235,10 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 							myMaps.mArray.add(k);
 						}
 					}
-					str2 = "共 " + myMaps.mArray.size() + " 个关卡复制到";
+					str2 = getString(R.string.a_total_of_) + myMaps.mArray.size() + getString(R.string.puzzles_copied_to);
 				} else {  //单关卡迁移
 					myMaps.mArray.add(m_Num);
-					str2 = (m_Num+1) + " 号关卡复制到";
+					str2 = (m_Num+1) + getString(R.string.puzzle_copied);
 				}
 
 				mWhich = 0;
@@ -1582,7 +1582,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				});
 
 				Builder builder4 = new Builder(this, AlertDialog.THEME_HOLO_DARK);
-				builder4.setTitle("搜索相似关卡").setView(view2).setNegativeButton(getString(R.string.cancel), null).setPositiveButton("开始", new DialogInterface.OnClickListener(){
+				builder4.setTitle(R.string.find_similar_puzzles2).setView(view2).setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.start), new DialogInterface.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
 							int len = 0;

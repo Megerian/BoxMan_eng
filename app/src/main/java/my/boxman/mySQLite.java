@@ -70,7 +70,6 @@ public class mySQLite {
 			// 之所以不在这里初始化，是因为这边是静态的方法，而mSDB并没有设置为静态的，也不推荐设为静态的
 			// mSDB = SQLiteDatabase.openOrCreateDatabase(DATABASE_PATH + dbName, null);
 		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			try {
 				os.close();
@@ -79,7 +78,7 @@ public class mySQLite {
 		}
 	}
 
-	//判断数据库是否存在
+	//判断数据库是否存在 | check if the database already exists
 	private static boolean checkDataBase() {
 		SQLiteDatabase checkDB = null;
 		String databaseFilename = DATABASE_PATH + dbName;
@@ -87,15 +86,15 @@ public class mySQLite {
 		try {
 			// 返回最新的数据库
 			checkDB = SQLiteDatabase.openDatabase(databaseFilename, null, SQLiteDatabase.OPEN_READONLY);
-		} catch (SQLiteException e) {
-			// TODO: handle exception
+		} catch (Exception e) {
+			// first start of app => database not there, yet
 		}
 
 		if (checkDB != null) {
 			checkDB.close();
 		}
 		// 如果checkDB为null，则没有数据库，返回false
-		return checkDB == null ? false : true;
+		return checkDB != null;
 	}
 
 	//删除临时表
