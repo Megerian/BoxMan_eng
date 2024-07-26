@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<item
+		android:id="@+id/levels_add"
+		android:title="╋"
+		android:showAsAction="always" />
+
+	<item
+		android:id="@+id/levels_top"
+		android:showAsAction="always"
+		android:title="@string/puzzles_top" />
+
+	<item
+		android:id="@+id/levels_bottom"
+		android:showAsAction="always"
+		android:title="@string/puzzles_bottom" />
+
+	<item
+		android:id="@+id/levels_goto"
+		android:title="@string/go_to___" />
+
+	<item
+		android:id="@+id/levels_select"
+		android:checkable="true"
+		android:title="@string/puzzles_select_multiple" />
+
+	<item
+		android:id="@+id/levels_showtitle"
+		android:checkable="true"
+		android:title="@string/puzzles_show_title" />
+
+	<item
+		android:id="@+id/levels_showdup"
+		android:checkable="true"
+		android:title="@string/puzzles_show_duplicates" />
+
+	<item
+		android:id="@+id/levels_first_nosolved"
+		android:title="@string/puzzles_first_not_solved" />
+
+	<item
+		android:id="@+id/levels_recent"
+		android:title="@string/puzzles_recent" />
+
+	<item
+		android:id="@+id/levels_clear"
+		android:title="@string/puzzles_clear" />
+
+	<item
+		android:id="@+id/levels_col_count"
+		android:title="@string/puzzles_columns_count" />
+
+	<item
+		android:id="@+id/levels_delete_more"
+		android:title="@string/puzzles_delete_more___" />
+
+	<item
+		android:id="@+id/levels_about"
+		android:title="@string/puzzles_about" />
+
+</menu>

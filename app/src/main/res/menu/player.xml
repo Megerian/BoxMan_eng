@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item
+		android:id="@+id/player_settings1"
+		android:title="@string/player_setup1___" />
+
+	<item
+		android:id="@+id/player_settings2"
+		android:title="@string/player_setup2___" />
+
+	<item
+		android:id="@+id/player_ReStart"
+		android:title="@string/player_restart" />
+
+	<item
+		android:id="@+id/player_Home"
+		android:title="@string/player_undo_all" />
+
+	<item
+	    android:id="@+id/player_End"
+		android:title="@string/go_to_end_"/>
+
+	<item
+		android:id="@+id/player_EX"
+		android:title="@string/export___"/>
+
+	<item
+        android:id="@+id/player_IN"
+        android:title="@string/import_"/>
+
+	<item
+		android:id="@+id/player_Yass_Solver"
+		android:title="@string/player_yass_solver" />
+
+<!--	<item-->
+<!--		android:id="@+id/player_Festival_Solver"-->
+<!--		android:title="Solver求解"/>-->
+
+	<item
+		android:id="@+id/player_load"
+		android:title="@string/player_load___" />
+
+	<item
+		android:id="@+id/player_save"
+		android:title="@string/player_save" />
+
+	<item
+		android:id="@+id/player_about"
+		android:title="@string/player_about" />
+
+	<item
+		android:id="@+id/player_help"
+		android:title="@string/player_help" />
+
+	<item
+		android:id="@+id/player_exit"
+		android:title="@string/player_exit" />
+
+</menu>

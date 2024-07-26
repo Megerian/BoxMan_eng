@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdk 34
+    defaultConfig {
+        applicationId 'my.boxman'
+        minSdkVersion 21
+        targetSdkVersion 35
+        versionCode 9
+        versionName "9.99t-eng"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    android.applicationVariants.configureEach {
+        variant ->
+            variant.outputs.configureEach {
+                //这里修改apk文件名:
+                outputFileName = "BoxMan${defaultConfig.versionName}_${releaseTime()}.apk"
+            }
+    }
+    productFlavors {
+    }
+    useLibrary 'org.apache.http.legacy'   //解决导入org.apache问题
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    namespace 'my.boxman'
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/json-simple-1.1.jar')
+    implementation 'androidx.core:core:1.13.1'
+}

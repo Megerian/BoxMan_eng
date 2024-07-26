@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:keepScreenOn="true">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="#363636">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="#334455"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/export3_puzzle_set_"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" >
+
+            <CheckBox
+                android:id="@+id/ex_ans"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="4dp"
+                android:text="@string/export3_solutions_only" />
+
+            <CheckBox
+                android:id="@+id/ex_all"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="4dp"
+                android:text="@string/export3_complete" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/ex_sets"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:cacheColorHint="@null"
+        android:divider="#000000"
+        android:dividerHeight="4px"
+        android:fastScrollEnabled="false"
+        android:background="#363636"
+        android:textSize="16sp"
+        android:padding="4dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#445566">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#363636"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/export3_options"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="#363636">
+        </View>
+
+        <CheckBox
+            android:id="@+id/ex_lurd3"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:padding="4dp"
+            android:text="@string/export3_including_solution" />
+
+        <View
+            android:layout_width="16dp"
+            android:layout_height="match_parent"
+            android:background="#363636">
+        </View>
+
+        <CheckBox
+            android:id="@+id/ex_comment3"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:padding="4dp"
+            android:text="@string/export3_with_solution_notes" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="#363636">
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#363636"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="#363636">
+        </View>
+
+        <CheckBox
+            android:id="@+id/ex_rewrite3"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:padding="4dp"
+            android:text="@string/export3_overwrite_if_necessary" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="#363636">
+    </View>
+
+</LinearLayout>

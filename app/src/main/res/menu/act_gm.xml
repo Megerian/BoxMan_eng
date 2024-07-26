@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<item
+		android:id="@+id/act_recording"
+		android:showAsAction="always"
+		android:title="@string/record_actions"/>
+
+	<!--<item-->
+	<!--android:id="@+id/act_yass"-->
+	<!--android:title="YASS求解"/>-->
+
+	<item
+		android:id="@+id/act_L_90"
+		android:title="@string/rotate_90_left" />
+
+	<item
+		android:id="@+id/act_R_90"
+		android:title="@string/rotate_90_right" />
+
+	<item
+		android:id="@+id/act_180"
+		android:title="@string/rotate_180_degrees" />
+
+	<item
+		android:id="@+id/act_LR"
+		android:title="@string/horizontal_flip" />
+
+	<item
+		android:id="@+id/act_UD"
+		android:title="@string/flip_vertically" />
+
+	<item
+		android:id="@+id/act_micro_about"
+		android:title="@string/description_of_macro_function" />
+
+	<item
+		android:id="@+id/act_about"
+		android:title="@string/import_instructions" />
+
+</menu>

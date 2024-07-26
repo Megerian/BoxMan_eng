@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+   	<!--<item-->
+	    <!--android:id="@+id/menu_dir"-->
+		<!--android:title="导入关卡集(文件夹)..."/>-->
+
+	<item
+		android:id="@+id/menu_set"
+		android:title="@string/import_" />
+
+	<item
+		android:id="@+id/menu_exp_ans"
+		android:title="@string/menu_export___" />
+
+	<item
+		android:id="@+id/menu_recent"
+		android:title="@string/menu_recent_puzzles" />
+
+	<item
+		android:id="@+id/menu_query"
+		android:title="@string/menu_puzzle_search" />
+
+	<item
+		android:id="@+id/menu_NewSet"
+		android:title="@string/menu_new_set" />
+
+	<item
+		android:id="@+id/menu_builder"
+		android:title="@string/menu_create_puzzle" />
+
+	<item
+		android:id="@+id/menu_recog"
+		android:title="@string/menu_extract_puzzle_from_image" />
+
+	<item
+		android:id="@+id/menu_submit_list"
+		android:title="@string/menu_mf8_competition_list" />
+
+	<item
+		android:id="@+id/menu_help"
+		android:title="@string/menu_help" />
+
+	<item
+		android:id="@+id/menu_about"
+		android:title="@string/menu_about" />
+
+</menu>

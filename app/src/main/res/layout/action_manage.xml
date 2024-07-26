@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:background="#363636"
+        android:layout_height="415dp">
+
+        <EditText
+            android:id="@+id/etAction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:typeface="monospace"
+            android:background="#363636"
+            android:textSize="20sp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"/>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/execute"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/cb_curPos"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:padding="4dp"
+            android:text="@string/action_from_current"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/cb_curTrun"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:paddingLeft="4dp"
+            android:text="@string/action_rotation"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp">
+
+        <Button
+            android:id="@+id/btLoadAct"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:padding="2dp"
+            android:text="@string/action_load"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent">
+        </View>
+
+        <Button
+            android:id="@+id/btSavedAct"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:padding="2dp"
+            android:text="@string/action_save"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent">
+        </View>
+
+        <Button
+            android:id="@+id/btClear"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:padding="2dp"
+            android:text="@string/action_clear"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent">
+        </View>
+
+        <Button
+            android:id="@+id/btSave_t"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:padding="2dp"
+            android:text="@string/action_save_temporary"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent">
+        </View>
+
+        <CheckBox
+            android:id="@+id/cb_PreEdit"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:checked="false"
+            android:text="@string/action_preedit"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent">
+        </View>
+
+        <Button
+            android:id="@+id/btDO"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:padding="2dp"
+            android:text="@string/action_execute"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView >

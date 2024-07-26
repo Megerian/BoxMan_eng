@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<item
+		android:id="@+id/edit_complete"
+		android:title="@string/Submit" />
+
+	<item
+		android:id="@+id/edit_play"
+		android:title="@string/play"/>
+
+	<item
+		android:id="@+id/edit_rule"
+		android:title="@string/ruler___"/>
+
+	<item
+		android:id="@+id/edit_setup"
+		android:title="@string/settings___"/>
+
+	<item
+		android:id="@+id/edit_clear"
+		android:title="@string/reset_the_map"/>
+
+	<item
+		android:id="@+id/edit_block_save"
+		android:title="@string/save_block_as" />
+
+	<item
+		android:id="@+id/edit_export"
+		android:title="@string/export_xsb"/>
+
+	<item
+		android:id="@+id/edit_import"
+		android:title="@string/import_xsv_and_lurd"/>
+
+	<item
+		android:id="@+id/edit_resize"
+		android:title="@string/resize___"/>
+
+	<item
+		android:id="@+id/edit_normalize"
+		android:title="@string/normalize"/>
+
+	<item
+		android:id="@+id/edit_inf"
+		android:title="@string/puzzle_data"/>
+
+	<item
+		android:id="@+id/edit_help"
+		android:title="@string/operation_instructions"/>
+
+	<item
+		android:id="@+id/edit_exit"
+		android:title="@string/exit"/>
+
+</menu>

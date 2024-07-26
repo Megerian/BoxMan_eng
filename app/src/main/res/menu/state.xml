@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<item
+		android:id="@+id/st_ex_all_ans_file"
+		android:title="@string/state_export_all_solutions_to_file" />
+
+	<item
+		android:id="@+id/st_ex_all_ans"
+		android:title="@string/state_export_all_solutions_to_clipboard" />
+
+	<item
+		android:id="@+id/st_ex_ans_comment"
+		android:checkable="true"
+		android:title="@string/state_export_solution_comments" />
+
+	<item
+		android:id="@+id/st_ex_submit_list"
+		android:title="@string/mf8_solutions_list" />
+
+</menu>
