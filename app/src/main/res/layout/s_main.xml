@@ -4,6 +4,7 @@
 	android:layout_height="fill_parent"
 	android:orientation="vertical"
 	android:background="#ff004040"
+	android:fitsSystemWindows="true"
 	android:keepScreenOn="true">
 
     <ExpandableListView 
