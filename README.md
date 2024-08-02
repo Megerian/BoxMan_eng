@@ -14,3 +14,5 @@
 1. Some code in this software adopts or refers to open-source code from the Internet. We express our gratitude to the original authors.
 2. The image materials used in this software are sourced from the internet. Copyright belongs to the original authors.
 3. The puzzle files included in this software are copyrighted by their respective creators.
+
+![image](https://github.com/user-attachments/assets/c61a9cee-2637-446d-aef2-30cc5781c3fd)
