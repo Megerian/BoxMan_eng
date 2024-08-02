@@ -141,8 +141,9 @@ public class myAbout2 extends Activity {
         Bitmap bitmap;
 
     	try {
-			if(Map.equals("--"))
+			if(Map.equals("--")) {
 				throw new Exception();
+			}
     		Arr = Map.split("\r\n|\n\r|\n|\\|");
     		Rows = Arr.length;
     		Cols = Arr[0].length();
