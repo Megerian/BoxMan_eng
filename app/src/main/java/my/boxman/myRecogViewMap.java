@@ -86,14 +86,41 @@ public class myRecogViewMap extends View {
 
     //计算原始变换矩阵
     private Matrix getInnerMatrix(Matrix matrix) {
-        if (matrix == null) matrix = new Matrix();
-        else matrix.reset();
-        //原图大小
-        RectF tempSrc = new RectF(0, 0, m_nPicWidth, m_nPicHeight);
-        //控件大小
-        RectF tempDst = new RectF(0, 0, getWidth(), getHeight() - m_nArenaTop);
-        //计算fit center矩阵
-        matrix.setRectToRect(tempSrc, tempDst, Matrix.ScaleToFit.CENTER);
+        if (matrix == null) {
+            matrix = new Matrix();
+        } else {
+            matrix.reset();
+        }
+
+        // Original image dimensions
+        float srcWidth = m_nPicWidth;
+        float srcHeight = m_nPicHeight;
+
+        // View dimensions
+        float dstWidth = getWidth();
+        float dstHeight = getHeight() - m_nArenaTop;
+
+        // Calculate the scale factor to fit the image within the view
+        float scaleX = dstWidth / srcWidth;
+        float scaleY = dstHeight / srcHeight;
+
+        // Use the smaller scale factor to ensure the image fits within the view
+        float scale = Math.min(scaleX, scaleY);
+
+        // Truncate scale to one decimal place
+        scale = (int) (scale * 10) / 10.0f;
+
+        // Calculate the scaled dimensions
+        int scaledWidth = (int) (srcWidth * scale);
+        int scaledHeight = (int) (srcHeight * scale);
+
+        // Calculate the translation to center the image (if there is extra space)
+        int dx = (int) ((dstWidth - scaledWidth) / 2);
+        int dy = (int) ((dstHeight - scaledHeight) / 2);
+
+        // Apply the scaling and translation to the matrix
+        matrix.setScale(scale, scale);
+        matrix.postTranslate(dx, dy);
 
         return matrix;
     }
