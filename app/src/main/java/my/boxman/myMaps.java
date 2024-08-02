@@ -1,7 +1,5 @@
 package my.boxman;
 
-import static androidx.core.content.ContextCompat.getString;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -72,6 +70,8 @@ public class myMaps {
 			"/"                         // 自定义 3
 	};
 
+	static String localCode = "ZH"; // Language
+
 	static String[] sAction;  //动作寄存器缓存
 	static boolean m_ActionIsRedy = false; //状态是否准备就绪
 	static boolean m_ActionIsPos = true;   //是否从关卡的当前点执行动作
@@ -133,7 +133,51 @@ public class myMaps {
 	static String J_Comment;  //关卡集"注释"
 
 	static long m_Set_id;  //增补关卡之关卡集 id
-	static int[] m_Sets;  //系统参数设置(0-关卡集组，1-关卡集， 2-关卡预览图标题，3-长按目标点提示关联网点及网口， 4-关卡背景色， 5-仓管员图片方向，6-瞬移，7-轮转方位，8-显示可达提示，9-标尺不随关卡旋转，10-移动速度，11-死锁提示，12-标识重复关卡，13-即景模式，14-仓管员移动方向，15-使用音量键选择关卡，16-显示系统虚拟按键，17-是否允许穿越，18-unDO、ReDo，19-是否采用YASC绘制习惯，20-禁用全屏，21-编辑关卡图时，地图中的标尺字体颜色，22-编辑关卡图时，哪些元素携带标尺，23-单步进退，25-推关卡时显示时间提示，26-查找相似关卡的默认相似度，27-仓管员转向动画，28-演示时仅推动，29-自动爬阶梯，30-导出答案的注释信息，31-导入关卡为一个时，自动打开，32-逆推时使用正推的目标点，33-每行浏览的图标数，34-每行浏览的图标默认数，35-布局中的图标默认高度，36-识别，37-打开无解关卡时，自动加载最新状态，38-区分奇偶地板格，39-偶位地板格明暗度，40-奇位地板格明暗度)
+
+	// System parameter settings
+	// 0 - Level set group
+	// 1 - Level set
+	// 2 - Level preview image title
+	// 3 - Long press target point to show connected network points and ports
+	// 4 - Level background color
+	// 5 - Warehouse keeper image direction
+	// 6 - Teleportation
+	// 7 - Rotation direction
+	// 8 - Show reachable hints
+	// 9 - Ruler does not rotate with the level
+	// 10 - Movement speed
+	// 11 - Deadlock prompt
+	// 12 - Mark duplicate levels
+	// 13 - Immersive mode
+	// 14 - Warehouse keeper movement direction
+	// 15 - Use volume keys to select levels
+	// 16 - Show system virtual keys
+	// 17 - Allow crossing
+	// 18 - unDO, ReDo
+	// 19 - Use YASC drawing habits
+	// 20 - Disable full screen
+	// 21 - Ruler font color in the map when editing level maps
+	// 22 - Which elements carry a ruler when editing level maps
+	// 23 - Single step forward/backward
+	// 25 - Show time prompt when pushing levels
+	// 26 - Default similarity for finding similar levels
+	// 27 - Warehouse keeper turning animation
+	// 28 - Only push when demonstrating
+	// 29 - Automatically climb ladders
+	// 30 - Annotation information for exporting answers
+	// 31 - Automatically open when importing one level
+	// 32 - Use forward push targets when pushing backwards
+	// 33 - Number of icons browsed per row
+	// 34 - Default number of icons browsed per row
+	// 35 - Default height of icons in layout
+	// 36 - Recognition
+	// 37 - Automatically load latest status when opening unsolvable levels
+	// 38 - Distinguish between odd and even floor grids
+	// 39 - Brightness of even floor grids
+	// 40 - Brightness of odd floor grids
+	// 41 - Boxes use manual nubmering
+	// 42 - Language (0 = Chinese, 1 = English)
+	static int[] m_Settings;  //系统参数设置(0-关卡集组，1-关卡集， 2-关卡预览图标题，3-长按目标点提示关联网点及网口， 4-关卡背景色， 5-仓管员图片方向，6-瞬移，7-轮转方位，8-显示可达提示，9-标尺不随关卡旋转，10-移动速度，11-死锁提示，12-标识重复关卡，13-即景模式，14-仓管员移动方向，15-使用音量键选择关卡，16-显示系统虚拟按键，17-是否允许穿越，18-unDO、ReDo，19-是否采用YASC绘制习惯，20-禁用全屏，21-编辑关卡图时，地图中的标尺字体颜色，22-编辑关卡图时，哪些元素携带标尺，23-单步进退，25-推关卡时显示时间提示，26-查找相似关卡的默认相似度，27-仓管员转向动画，28-演示时仅推动，29-自动爬阶梯，30-导出答案的注释信息，31-导入关卡为一个时，自动打开，32-逆推时使用正推的目标点，33-每行浏览的图标数，34-每行浏览的图标默认数，35-布局中的图标默认高度，36-识别，37-打开无解关卡时，自动加载最新状态，38-区分奇偶地板格，39-偶位地板格明暗度，40-奇位地板格明暗度)
 	static String mMatchNo = "";  //第 n 期比赛
 	static String mMatchDate1 = "";  //比赛开始日期
 	static String mMatchDate2 = "";  //比赛结束日期
@@ -899,7 +943,7 @@ public class myMaps {
 
 		myMaps.m_lstMaps.clear();  //关卡集链表
 
-		myMaps.m_Sets[0] = 3;
+		myMaps.m_Settings[0] = 3;
 		myMaps.sFile = "创编关卡";
 		myMaps.J_Title = "创编关卡";
 		myMaps.J_Author = "";

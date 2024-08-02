@@ -443,7 +443,7 @@ public class myEditView extends Activity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && myMaps.m_Sets[16] == 0) {
+        if (hasFocus && myMaps.m_Settings[16] == 0) {
             hideSystemUI();
         }
     }
@@ -452,7 +452,7 @@ public class myEditView extends Activity {
     @Override
     public void onOptionsMenuClosed(Menu menu) {
         super.onOptionsMenuClosed(menu);
-        if (myMaps.m_Sets[16] == 0) hideSystemUI();
+        if (myMaps.m_Settings[16] == 0) hideSystemUI();
     }
 
     @Override
@@ -492,8 +492,8 @@ public class myEditView extends Activity {
                         getString(R.string.system_navigation_keys)
                 };
                 final boolean[] mChk = {
-                        myMaps.m_Sets[19] == 1,   //YASC绘制习惯
-                        myMaps.m_Sets[16] == 1,  //系统导航键
+                        myMaps.m_Settings[19] == 1,   //YASC绘制习惯
+                        myMaps.m_Settings[16] == 1,  //系统导航键
                 };
                 Builder builder2 = new Builder(this, AlertDialog.THEME_HOLO_DARK);
                 builder2.setTitle(getString(R.string.settings)).setMultiChoiceItems(m_menu, mChk, new DialogInterface.OnMultiChoiceClickListener() {
@@ -504,15 +504,15 @@ public class myEditView extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //YASC绘制习惯
-                        if (mChk[0]) myMaps.m_Sets[19] = 1;
-                        else myMaps.m_Sets[19] = 0;
+                        if (mChk[0]) myMaps.m_Settings[19] = 1;
+                        else myMaps.m_Settings[19] = 0;
 
                         //系统导航键
                         if (mChk[1]) {
-                            myMaps.m_Sets[16] = 1;
+                            myMaps.m_Settings[16] = 1;
                             showSystemUI();
                         } else {
-                            myMaps.m_Sets[16] = 0;
+                            myMaps.m_Settings[16] = 0;
                             hideSystemUI();
                         }
 
@@ -818,7 +818,7 @@ public class myEditView extends Activity {
                 final SeekBar input_color = (SeekBar) view2.findViewById(R.id.dialog_rule_color);  //标尺字体颜色 -- 仅灰度变化就够用了
                 final EditText et1 = (EditText) view2.findViewById(R.id.dialog_rule_color1);       //颜色示例1
                 final EditText et2 = (EditText) view2.findViewById(R.id.dialog_rule_color2);       //颜色示例2
-                final int[] mColor = {myMaps.m_Sets[21] & 0x000000ff};
+                final int[] mColor = {myMaps.m_Settings[21] & 0x000000ff};
                 et1.setTextColor((mColor[0] << 16) | (mColor[0] << 8) | mColor[0] | 0xff000000);
                 et2.setTextColor((mColor[0] << 16) | (mColor[0] << 8) | mColor[0] | 0xff000000);
 
@@ -842,7 +842,7 @@ public class myEditView extends Activity {
                 });
 
                 final String [] items = {getString(R.string.walls),getString(R.string.floors),getString(R.string.goals),getString(R.string.boxes),getString(R.string.player)};
-                final boolean checkedItems[] = {(myMaps.m_Sets[22] & 1) > 0, (myMaps.m_Sets[22] & 2) > 0, (myMaps.m_Sets[22] & 4) > 0, (myMaps.m_Sets[22] & 8) > 0, (myMaps.m_Sets[22] & 16) > 0};
+                final boolean checkedItems[] = {(myMaps.m_Settings[22] & 1) > 0, (myMaps.m_Settings[22] & 2) > 0, (myMaps.m_Settings[22] & 4) > 0, (myMaps.m_Settings[22] & 8) > 0, (myMaps.m_Settings[22] & 16) > 0};
                 Builder dlg2 = new Builder(this, AlertDialog.THEME_HOLO_DARK);
                 dlg2.setView(view2).setCancelable(true);
                 dlg2.setTitle(R.string.puzzle_elements).setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
@@ -850,24 +850,24 @@ public class myEditView extends Activity {
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         switch (which) {
                             case 0:
-                                if (isChecked) myMaps.m_Sets[22] |= 1;
-                                else myMaps.m_Sets[22] &= 30;
+                                if (isChecked) myMaps.m_Settings[22] |= 1;
+                                else myMaps.m_Settings[22] &= 30;
                                 break;
                             case 1:
-                                if (isChecked) myMaps.m_Sets[22] |= 2;
-                                else myMaps.m_Sets[22] &= 29;
+                                if (isChecked) myMaps.m_Settings[22] |= 2;
+                                else myMaps.m_Settings[22] &= 29;
                                 break;
                             case 2:
-                                if (isChecked) myMaps.m_Sets[22] |= 4;
-                                else myMaps.m_Sets[22] &= 27;
+                                if (isChecked) myMaps.m_Settings[22] |= 4;
+                                else myMaps.m_Settings[22] &= 27;
                                 break;
                             case 3:
-                                if (isChecked) myMaps.m_Sets[22] |= 8;
-                                else myMaps.m_Sets[22] &= 23;
+                                if (isChecked) myMaps.m_Settings[22] |= 8;
+                                else myMaps.m_Settings[22] &= 23;
                                 break;
                             case 4:
-                                if (isChecked) myMaps.m_Sets[22] |= 16;
-                                else myMaps.m_Sets[22] &= 15;
+                                if (isChecked) myMaps.m_Settings[22] |= 16;
+                                else myMaps.m_Settings[22] &= 15;
                                 break;
                         }
                     }
@@ -875,7 +875,7 @@ public class myEditView extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            myMaps.m_Sets[21] = (mColor[0] << 16) | (mColor[0] << 8) | mColor[0] | 0xff000000;
+                            myMaps.m_Settings[21] = (mColor[0] << 16) | (mColor[0] << 8) | mColor[0] | 0xff000000;
                             mMap.invalidate();
                             dialog.dismiss();
                         } catch (Exception e) {
@@ -2267,7 +2267,7 @@ public class myEditView extends Activity {
     }
 
     private void hideSystemUI() {
-        if (myMaps.m_Sets[16] == 1) return;
+        if (myMaps.m_Settings[16] == 1) return;
 
         int myFlags = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |         //隐藏导航栏或操作栏
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |        //隐藏状态栏和导航栏时的沉浸模式和保持交互性

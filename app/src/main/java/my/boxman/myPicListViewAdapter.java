@@ -169,13 +169,13 @@ public class myPicListViewAdapter extends BaseAdapter{
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inPreferredConfig = android.graphics.Bitmap.Config.RGB_565;
         opts.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(myMaps.sRoot + myMaps.myPathList[myMaps.m_Sets[36]] + pathName, opts);// 图片未加载进内存，但是可以读取长宽
+        BitmapFactory.decodeFile(myMaps.sRoot + myMaps.myPathList[myMaps.m_Settings[36]] + pathName, opts);// 图片未加载进内存，但是可以读取长宽
         int oriWidth = opts.outWidth;
         int oriHeight = opts.outHeight;
         opts.inSampleSize = oriWidth / width;
         opts.inSampleSize = opts.inSampleSize > oriHeight / height ? opts.inSampleSize : oriHeight / height;
         opts.inJustDecodeBounds = false;
-        Bitmap decodeFile = BitmapFactory.decodeFile(myMaps.sRoot + myMaps.myPathList[myMaps.m_Sets[36]] + pathName, opts);// 图片加载进内存
+        Bitmap decodeFile = BitmapFactory.decodeFile(myMaps.sRoot + myMaps.myPathList[myMaps.m_Settings[36]] + pathName, opts);// 图片加载进内存
         Bitmap result = Bitmap.createScaledBitmap(decodeFile, width, height, false);
         decodeFile.recycle();
         return result;

@@ -10,6 +10,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ import android.text.SpannedString;
 import android.text.method.NumberKeyListener;
 import android.text.style.AbsoluteSizeSpan;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -66,7 +66,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
+import java.util.Locale;
+import java.util.Objects;
 
 
 public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatusUpdate, myQueryFragment.FindStatusUpdate, myExportFragment.ExportStatusUpdate {
@@ -167,7 +168,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		groups = new String[] { getString(R.string.beginner_puzzles), getString(R.string.advanced_puzzles), getString(R.string.tricky_puzzles), getString(R.string.additional_puzzles) };
 
 		myMaps.res = getResources();
-		myMaps.m_Sets = new int[42]; //系统参数设置数组
+		myMaps.m_Settings = new int[44]; //系统参数设置数组 | Array of settings
 
 		//路径设置
 //		myMaps.sRoot = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getPath(); // this folder is deleted when the app is uninstalled and the user can't add files to it.
@@ -175,8 +176,10 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		myMaps.sRoot = Environment.getExternalStorageDirectory().getPath();
 
 		myMaps.sPath = new StringBuilder("/推箱快手/").toString();
-		loadSets();  //读入系统设置
+		loadSettings();  //读入系统设置
         myMaps.myPathList[0] = myMaps.sPath + "关卡图/";
+
+		setLocale();
 
 		//取得 Context
 		try {
@@ -312,8 +315,8 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		expView.setAdapter(expAdapter);
 
 		//打开上次的位置
-		if (myMaps.m_Sets[0] >= 0 && myMaps.m_Sets[0] < expView.getExpandableListAdapter().getGroupCount()) {
-			expView.expandGroup(myMaps.m_Sets[0]);
+		if (myMaps.m_Settings[0] >= 0 && myMaps.m_Settings[0] < expView.getExpandableListAdapter().getGroupCount()) {
+			expView.expandGroup(myMaps.m_Settings[0]);
 		}
 
 		//设置item点击的监听器
@@ -359,6 +362,18 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		//用提高APP服务级别的方式，避免因相机崩溃的问题
 //		serviceIntent = new Intent(this, MyService.class);
 //		startService(serviceIntent);
+	}
+
+	private void setLocale() {
+		if(Objects.equals(myMaps.localCode, "??")) {
+			myMaps.localCode = getResources().getConfiguration().locale.getLanguage();
+		}
+
+		Locale locale = new Locale(myMaps.localCode);
+		Locale.setDefault(locale);
+		Configuration config = new Configuration();
+		config.setLocale(locale);
+		getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 	}
 
 	//加载 Gif 皮肤
@@ -532,8 +547,8 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 					MyToast.showToast(this, getString(R.string.toast_puzzle_not_found), Toast.LENGTH_SHORT);
 					myMaps.curJi = false;
 				} else {
-					myMaps.m_Sets[0] = 0;
-					myMaps.m_Sets[1] = 0;
+					myMaps.m_Settings[0] = 0;
+					myMaps.m_Settings[1] = 0;
 					myMaps.m_Set_id = -1;
 					myMaps.sFile = "最近推过的关卡";
 					myMaps.J_Title = myMaps.sFile;
@@ -690,7 +705,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 
 				return true;
 			case R.id.menu_recog:
-				myMaps.edPicList(myMaps.sRoot + myMaps.myPathList[myMaps.m_Sets[36]]);
+				myMaps.edPicList(myMaps.sRoot + myMaps.myPathList[myMaps.m_Settings[36]]);
 				Intent intent4 = new Intent();
 				intent4.setClass(this, myPicListView.class);
 				startActivity(intent4);
@@ -764,25 +779,25 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 	}
 
 	//加载快手设置
-	private void loadSets() {
+	private void loadSettings() {
 		File f = new File(myMaps.sRoot+myMaps.sPath + "BoxMan.ini");
 		if (!f.exists()) {
-			myMaps.m_Sets[38] = 1;   //区分奇偶地板格
-			myMaps.m_Sets[11] = 1;   //死锁提示
-			myMaps.m_Sets[8]  = 1;   //显示可达提示
-			myMaps.m_Sets[27] = 1;   //仓管员转向动画
-			myMaps.m_Sets[3]  = 1;   //长按目标点提示关联网点及网口
-			myMaps.m_Sets[37] = 1;   //打开关卡是自动加载最新状态
-			myMaps.m_Sets[17] = 1;   //允许穿越
-			myMaps.m_Sets[29] = 1;   //自动爬阶梯
-			myMaps.m_Sets[25] = 1;   //推关卡时显示当前时间提示
+			myMaps.m_Settings[38] = 1;   //区分奇偶地板格
+			myMaps.m_Settings[11] = 1;   //死锁提示
+			myMaps.m_Settings[8]  = 1;   //显示可达提示
+			myMaps.m_Settings[27] = 1;   //仓管员转向动画
+			myMaps.m_Settings[3]  = 1;   //长按目标点提示关联网点及网口
+			myMaps.m_Settings[37] = 1;   //打开关卡是自动加载最新状态
+			myMaps.m_Settings[17] = 1;   //允许穿越
+			myMaps.m_Settings[29] = 1;   //自动爬阶梯
+			myMaps.m_Settings[25] = 1;   //推关卡时显示当前时间提示
 
-			myMaps.m_Sets[12] = 1;   //标识重复关卡
-			myMaps.m_Sets[10] = 3;   //移动速度
-			myMaps.m_Sets[22] = 1;   //编辑关卡图时，哪些元素携带标尺
-			myMaps.m_Sets[30] = 1;   //导出答案的注释信息
-			myMaps.m_Sets[31] = 1;   //导入关卡为一个时，自动打开
-			myMaps.m_Sets[40] = 5;   //奇位地板格明暗度
+			myMaps.m_Settings[12] = 1;   //标识重复关卡
+			myMaps.m_Settings[10] = 3;   //移动速度
+			myMaps.m_Settings[22] = 1;   //编辑关卡图时，哪些元素携带标尺
+			myMaps.m_Settings[30] = 1;   //导出答案的注释信息
+			myMaps.m_Settings[31] = 1;   //导入关卡为一个时，自动打开
+			myMaps.m_Settings[40] = 5;   //奇位地板格明暗度
 
 			myMaps.skin_File = "默认皮肤";
 			myMaps.bk_Pic = "使用背景色";
@@ -799,45 +814,46 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		IniFile file = new IniFile();
 		file.load(f);
 
-		myMaps.m_Sets[37] = 1;         // 打开无解关卡时，自动加载最新状态
-		myMaps.m_Sets[0] = Integer.parseInt(file.get("常规", "当前关卡集组别", "0").toString());
-		myMaps.m_Sets[1] = Integer.parseInt(file.get("常规", "当前关卡集", "0").toString());
-		myMaps.m_Sets[2] = Integer.parseInt(file.get("常规", "预览时是否显示关卡标题", "0").toString());
-		myMaps.m_Sets[12] = Integer.parseInt(file.get("常规", "是否标识出重复关卡", "1").toString());
-		myMaps.m_Sets[33] = Integer.parseInt(file.get("常规", "浏览时每行的图标数", "0").toString());
-		myMaps.m_Sets[34] = Integer.parseInt(file.get("常规", "浏览时每行的图标默认数", "0").toString());
+		myMaps.m_Settings[37] = 1;         // 打开无解关卡时，自动加载最新状态
+		myMaps.m_Settings[0] = Integer.parseInt(file.get("常规", "当前关卡集组别", "0").toString());
+		myMaps.m_Settings[1] = Integer.parseInt(file.get("常规", "当前关卡集", "0").toString());
+		myMaps.m_Settings[2] = Integer.parseInt(file.get("常规", "预览时是否显示关卡标题", "0").toString());
+		myMaps.m_Settings[12] = Integer.parseInt(file.get("常规", "是否标识出重复关卡", "1").toString());
+		myMaps.m_Settings[33] = Integer.parseInt(file.get("常规", "浏览时每行的图标数", "0").toString());
+		myMaps.m_Settings[34] = Integer.parseInt(file.get("常规", "浏览时每行的图标默认数", "0").toString());
+		myMaps.localCode = file.get("常规", "语言设置", "??").toString(); // Language: ZH = Chinese, EN = English
 
-		myMaps.m_Sets[4] = Integer.parseInt(file.get("界面", "背景色", "0").toString());
+		myMaps.m_Settings[4] = Integer.parseInt(file.get("界面", "背景色", "0").toString());
 		myMaps.skin_File = file.get("界面", "皮肤", "默认皮肤").toString();
 		myMaps.bk_Pic = file.get("界面", "背景图片", "使用背景色").toString();
-		myMaps.m_Sets[25] = Integer.parseInt(file.get("界面", "背景时间", "1").toString());
+		myMaps.m_Settings[25] = Integer.parseInt(file.get("界面", "背景时间", "1").toString());
 
-		myMaps.m_Sets[6] = Integer.parseInt(file.get("速度", "瞬移状态", "0").toString());
-		myMaps.m_Sets[10] = Integer.parseInt(file.get("速度", "移动速度", "3").toString());
+		myMaps.m_Settings[6] = Integer.parseInt(file.get("速度", "瞬移状态", "0").toString());
+		myMaps.m_Settings[10] = Integer.parseInt(file.get("速度", "移动速度", "3").toString());
 
-		myMaps.m_Sets[11] = Integer.parseInt(file.get("操作", "是否提示死锁", "1").toString());
-		myMaps.m_Sets[3] = Integer.parseInt(file.get("操作", "长按点位提示关联网", "0").toString());
-		myMaps.m_Sets[8] = Integer.parseInt(file.get("操作", "显示可达提示", "1").toString());
-		myMaps.m_Sets[27] = Integer.parseInt(file.get("操作", "仓管员转向动画", "1").toString());
-		myMaps.m_Sets[20] = Integer.parseInt(file.get("操作", "禁用全屏", "0").toString());
-		myMaps.m_Sets[28] = Integer.parseInt(file.get("操作", "演示时仅推动", "0").toString());
-		myMaps.m_Sets[9] = Integer.parseInt(file.get("操作", "标尺不随关卡旋转", "0").toString());
-		myMaps.m_Sets[15] = Integer.parseInt(file.get("操作", "是否允许音量键选择关卡", "0").toString());
-		myMaps.m_Sets[16] = Integer.parseInt(file.get("操作", "显示系统虚拟按键", "0").toString());
-		myMaps.m_Sets[17] = Integer.parseInt(file.get("操作", "是否允许穿越", "0").toString());
-		myMaps.m_Sets[29] = Integer.parseInt(file.get("操作", "自动爬阶梯", "0").toString());
-		myMaps.m_Sets[30] = Integer.parseInt(file.get("操作", "导出答案的注释信息", "1").toString());
-		myMaps.m_Sets[31] = Integer.parseInt(file.get("操作", "自动打开导入关卡", "1").toString());
-		myMaps.m_Sets[32] = Integer.parseInt(file.get("操作", "禁用逆推目标点", "0").toString());
-		myMaps.m_Sets[38] = Integer.parseInt(file.get("操作", "区分奇偶地板格", "0").toString());
-		myMaps.m_Sets[39] = Integer.parseInt(file.get("操作", "偶格位明暗度", "0").toString());
-		myMaps.m_Sets[40] = Integer.parseInt(file.get("操作", "奇格位明暗度", "5").toString());
-		myMaps.m_Sets[41] = Integer.parseInt(file.get("操作", "双击箱子编号", "0").toString());
+		myMaps.m_Settings[11] = Integer.parseInt(file.get("操作", "是否提示死锁", "1").toString());
+		myMaps.m_Settings[3] = Integer.parseInt(file.get("操作", "长按点位提示关联网", "0").toString());
+		myMaps.m_Settings[8] = Integer.parseInt(file.get("操作", "显示可达提示", "1").toString());
+		myMaps.m_Settings[27] = Integer.parseInt(file.get("操作", "仓管员转向动画", "1").toString());
+		myMaps.m_Settings[20] = Integer.parseInt(file.get("操作", "禁用全屏", "0").toString());
+		myMaps.m_Settings[28] = Integer.parseInt(file.get("操作", "演示时仅推动", "0").toString());
+		myMaps.m_Settings[9] = Integer.parseInt(file.get("操作", "标尺不随关卡旋转", "0").toString());
+		myMaps.m_Settings[15] = Integer.parseInt(file.get("操作", "是否允许音量键选择关卡", "0").toString());
+		myMaps.m_Settings[16] = Integer.parseInt(file.get("操作", "显示系统虚拟按键", "0").toString());
+		myMaps.m_Settings[17] = Integer.parseInt(file.get("操作", "是否允许穿越", "0").toString());
+		myMaps.m_Settings[29] = Integer.parseInt(file.get("操作", "自动爬阶梯", "0").toString());
+		myMaps.m_Settings[30] = Integer.parseInt(file.get("操作", "导出答案的注释信息", "1").toString());
+		myMaps.m_Settings[31] = Integer.parseInt(file.get("操作", "自动打开导入关卡", "1").toString());
+		myMaps.m_Settings[32] = Integer.parseInt(file.get("操作", "禁用逆推目标点", "0").toString());
+		myMaps.m_Settings[38] = Integer.parseInt(file.get("操作", "区分奇偶地板格", "0").toString());
+		myMaps.m_Settings[39] = Integer.parseInt(file.get("操作", "偶格位明暗度", "0").toString());
+		myMaps.m_Settings[40] = Integer.parseInt(file.get("操作", "奇格位明暗度", "5").toString());
+		myMaps.m_Settings[41] = Integer.parseInt(file.get("操作", "双击箱子编号", "0").toString());
 
-		myMaps.m_Sets[21] = Integer.parseInt(file.get("编辑", "关卡编辑中，图中标尺的字体颜色", "1677721600").toString());
-		myMaps.m_Sets[22] = Integer.parseInt(file.get("编辑", "关卡编辑中，携带标尺的元素", "1").toString());
-		myMaps.m_Sets[19] = Integer.parseInt(file.get("编辑", "是否采用YASC绘制习惯", "0").toString());
-		myMaps.m_Sets[36] = Integer.parseInt(file.get("识别", "图像识别", "0").toString());
+		myMaps.m_Settings[21] = Integer.parseInt(file.get("编辑", "关卡编辑中，图中标尺的字体颜色", "1677721600").toString());
+		myMaps.m_Settings[22] = Integer.parseInt(file.get("编辑", "关卡编辑中，携带标尺的元素", "1").toString());
+		myMaps.m_Settings[19] = Integer.parseInt(file.get("编辑", "是否采用YASC绘制习惯", "0").toString());
+		myMaps.m_Settings[36] = Integer.parseInt(file.get("识别", "图像识别", "0").toString());
 
 		myMaps.nickname = file.get("提交", "nickname", "").toString();
 		myMaps.uil = file.get("提交", "uil", "https://sokoban.cn/").toString();
@@ -851,18 +867,18 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		myMaps.myPathList[3] = file.get("识别", "sPicPath2", "").toString();
 		myMaps.myPathList[4] = file.get("识别", "sPicPath3", "").toString();
 
-		if (myMaps.m_Sets[36] < 0 || myMaps.m_Sets[36] > 4) {
-			myMaps.m_Sets[36] = 0;
+		if (myMaps.m_Settings[36] < 0 || myMaps.m_Settings[36] > 4) {
+			myMaps.m_Settings[36] = 0;
 		}
-		if (myMaps.m_Sets[39] < 0) {
-			myMaps.m_Sets[39] = 0;
-		} else if (myMaps.m_Sets[39] > 15) {
-			myMaps.m_Sets[39] = 15;
+		if (myMaps.m_Settings[39] < 0) {
+			myMaps.m_Settings[39] = 0;
+		} else if (myMaps.m_Settings[39] > 15) {
+			myMaps.m_Settings[39] = 15;
 		}
-		if (myMaps.m_Sets[40] < 0) {
-			myMaps.m_Sets[40] = 5;
-		} else if (myMaps.m_Sets[40] > 15) {
-			myMaps.m_Sets[40] = 15;
+		if (myMaps.m_Settings[40] < 0) {
+			myMaps.m_Settings[40] = 5;
+		} else if (myMaps.m_Settings[40] > 15) {
+			myMaps.m_Settings[40] = 15;
 		}
 	}
 
@@ -870,44 +886,45 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 	static void saveSets() {
 		IniFile file = new IniFile();
 
-		file.set("常规", "当前关卡集组别", myMaps.m_Sets[0]);
-		file.set("常规", "当前关卡集", myMaps.m_Sets[1]);
-		file.set("常规", "预览时是否显示关卡标题", myMaps.m_Sets[2]);
-		file.set("常规", "是否标识出重复关卡", myMaps.m_Sets[12]);
-		file.set("常规", "浏览时每行的图标数", myMaps.m_Sets[33]);
-		file.set("常规", "浏览时每行的图标默认数", myMaps.m_Sets[34]);
+		file.set("常规", "当前关卡集组别", myMaps.m_Settings[0]);
+		file.set("常规", "当前关卡集", myMaps.m_Settings[1]);
+		file.set("常规", "预览时是否显示关卡标题", myMaps.m_Settings[2]);
+		file.set("常规", "是否标识出重复关卡", myMaps.m_Settings[12]);
+		file.set("常规", "浏览时每行的图标数", myMaps.m_Settings[33]);
+		file.set("常规", "浏览时每行的图标默认数", myMaps.m_Settings[34]);
+		file.set("常规", "语言设置", myMaps.localCode);				// Language: ZH = Chinese, EN = English
 
-		file.set("界面", "背景色", myMaps.m_Sets[4]);
+		file.set("界面", "背景色", myMaps.m_Settings[4]);
 		file.set("界面", "皮肤", myMaps.skin_File);
 		file.set("界面", "背景图片", myMaps.bk_Pic);
-		file.set("界面", "背景时间", myMaps.m_Sets[25]);
+		file.set("界面", "背景时间", myMaps.m_Settings[25]);
 
-		file.set("速度", "瞬移状态", myMaps.m_Sets[6]);
-		file.set("速度", "移动速度", myMaps.m_Sets[10]);
+		file.set("速度", "瞬移状态", myMaps.m_Settings[6]);
+		file.set("速度", "移动速度", myMaps.m_Settings[10]);
 
-		file.set("操作", "是否提示死锁", myMaps.m_Sets[11]);
-		file.set("操作", "长按点位提示关联网", myMaps.m_Sets[3]);
-		file.set("操作", "显示可达提示", myMaps.m_Sets[8]);
-		file.set("操作", "仓管员转向动画", myMaps.m_Sets[27]);
-		file.set("操作", "禁用全屏", myMaps.m_Sets[20]);
-		file.set("操作", "演示时仅推动", myMaps.m_Sets[28]);
-		file.set("操作", "标尺是否同步旋转", myMaps.m_Sets[9]);
-		file.set("操作", "是否允许音量键选择关卡", myMaps.m_Sets[15]);
-		file.set("操作", "显示系统虚拟按键", myMaps.m_Sets[16]);
-		file.set("操作", "是否允许穿越", myMaps.m_Sets[17]);
-		file.set("操作", "自动爬阶梯", myMaps.m_Sets[29]);
-		file.set("操作", "导出答案的注释信息", myMaps.m_Sets[30]);
-		file.set("操作", "自动打开导入关卡", myMaps.m_Sets[31]);
-		file.set("操作", "禁用逆推目标点", myMaps.m_Sets[32]);
-		file.set("操作", "区分奇偶地板格", myMaps.m_Sets[38]);
-		file.set("操作", "偶格位明暗度", myMaps.m_Sets[39]);
-		file.set("操作", "奇格位明暗度", myMaps.m_Sets[40]);
-		file.set("操作", "双击箱子编号", myMaps.m_Sets[41]);
+		file.set("操作", "是否提示死锁", myMaps.m_Settings[11]);
+		file.set("操作", "长按点位提示关联网", myMaps.m_Settings[3]);
+		file.set("操作", "显示可达提示", myMaps.m_Settings[8]);
+		file.set("操作", "仓管员转向动画", myMaps.m_Settings[27]);
+		file.set("操作", "禁用全屏", myMaps.m_Settings[20]);
+		file.set("操作", "演示时仅推动", myMaps.m_Settings[28]);
+		file.set("操作", "标尺是否同步旋转", myMaps.m_Settings[9]);
+		file.set("操作", "是否允许音量键选择关卡", myMaps.m_Settings[15]);
+		file.set("操作", "显示系统虚拟按键", myMaps.m_Settings[16]);
+		file.set("操作", "是否允许穿越", myMaps.m_Settings[17]);
+		file.set("操作", "自动爬阶梯", myMaps.m_Settings[29]);
+		file.set("操作", "导出答案的注释信息", myMaps.m_Settings[30]);
+		file.set("操作", "自动打开导入关卡", myMaps.m_Settings[31]);
+		file.set("操作", "禁用逆推目标点", myMaps.m_Settings[32]);
+		file.set("操作", "区分奇偶地板格", myMaps.m_Settings[38]);
+		file.set("操作", "偶格位明暗度", myMaps.m_Settings[39]);
+		file.set("操作", "奇格位明暗度", myMaps.m_Settings[40]);
+		file.set("操作", "双击箱子编号", myMaps.m_Settings[41]);
 
-		file.set("编辑", "关卡编辑中，图中标尺的字体颜色", myMaps.m_Sets[21]);
-		file.set("编辑", "关卡编辑中，携带标尺的元素", myMaps.m_Sets[22]);
-		file.set("编辑", "是否采用YASC绘制习惯", myMaps.m_Sets[19]);
-		file.set("识别", "图像识别", myMaps.m_Sets[36]);
+		file.set("编辑", "关卡编辑中，图中标尺的字体颜色", myMaps.m_Settings[21]);
+		file.set("编辑", "关卡编辑中，携带标尺的元素", myMaps.m_Settings[22]);
+		file.set("编辑", "是否采用YASC绘制习惯", myMaps.m_Settings[19]);
+		file.set("识别", "图像识别", myMaps.m_Settings[36]);
 
 		file.set("提交", "nickname", myMaps.nickname);
 		file.set("提交", "uil", myMaps.uil);
@@ -919,6 +936,8 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 
 		file.set("识别", "sPicPath", myMaps.myPathList[2]);
 		file.set("识别", "sPicPath2", myMaps.myPathList[3]);
+		file.set("识别", "sPicPath3", myMaps.myPathList[4]);
+
 		file.set("识别", "sPicPath3", myMaps.myPathList[4]);
 
 		file.save(new File(myMaps.sRoot+myMaps.sPath + "BoxMan.ini"));
@@ -1352,10 +1371,10 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 			m_Open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					myMaps.m_Sets[31] = isChecked ? 1 : 0;
+					myMaps.m_Settings[31] = isChecked ? 1 : 0;
 				}
 			});
-			m_Open.setChecked (myMaps.m_Sets[31] == 1 ? true : false);
+			m_Open.setChecked (myMaps.m_Settings[31] == 1 ? true : false);
 			myMaps.m_Code = 0;
 			m_XSB.setChecked(true);
 			AlertDialog.Builder dlg = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
@@ -1416,11 +1435,11 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 			m_Open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					myMaps.m_Sets[31] = isChecked ? 1 : 0;
+					myMaps.m_Settings[31] = isChecked ? 1 : 0;
 				}
 			});
 
-			m_Open.setChecked (myMaps.m_Sets[31] == 1 ? true : false);
+			m_Open.setChecked (myMaps.m_Settings[31] == 1 ? true : false);
 			myMaps.isLurd = false;
 			m_XSB.setChecked(true);
 			AlertDialog.Builder dlg = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
@@ -1448,7 +1467,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		setTitle(getString(R.string.app_name) + " " + mySQLite.m_SQL.count_Level());
 
 		//导入统计提示
-		if (andOpen && myMaps.m_Sets[31] == 1 && myMaps.m_Nums[2] == 1) {  //导入后打开（长按关卡集的导入，仅导入了一个有效的关卡时）
+		if (andOpen && myMaps.m_Settings[31] == 1 && myMaps.m_Nums[2] == 1) {  //导入后打开（长按关卡集的导入，仅导入了一个有效的关卡时）
 			mySQLite.m_SQL.get_Set(myMaps.m_Set_id);
 			mySQLite.m_SQL.get_Last_Level(myMaps.m_Set_id);  //取得刚刚添加的关卡到“关卡列表”（仅含一个关卡的列表）
 
@@ -1496,8 +1515,8 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 			myMaps.curMap = null;
 			myMaps.m_lstMaps.clear();
 
-			myMaps.m_Sets[0] = 0;
-			myMaps.m_Sets[1] = 0;
+			myMaps.m_Settings[0] = 0;
+			myMaps.m_Settings[1] = 0;
 			myMaps.m_Set_id = -1;
 			myMaps.sFile = getString(R.string.puzzle_search);
 			myMaps.m_lstMaps = mlMaps;
@@ -1532,8 +1551,8 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 			menu.add(0, 9, 0,  getString(R.string.add_competition_puzzles_sokobanWS));
 		}
 		menu.add(0, 10, 0,  getString(R.string.details_));
-		myMaps.m_Sets[0] = groupPos;
-		myMaps.m_Sets[1] = childPos;
+		myMaps.m_Settings[0] = groupPos;
+		myMaps.m_Settings[1] = childPos;
 	}
 
 	@Override
@@ -2015,8 +2034,8 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		myMaps.curJi = true;
 
 		//记住点击的位置，下次打开游戏时定位到此
-		myMaps.m_Sets[0] = groupPos;
-		myMaps.m_Sets[1] = childPos;
+		myMaps.m_Settings[0] = groupPos;
+		myMaps.m_Settings[1] = childPos;
 
 		//加载关卡
 		loadLevels(groupPos, childPos);
@@ -2039,7 +2058,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 			setTitle(getString(R.string.app_name) + " " + mySQLite.m_SQL.count_Level());
 			myMaps.curJi = false;
 			expAdapter.notifyDataSetChanged();
-			expView.expandGroup(myMaps.m_Sets[0]);
+			expView.expandGroup(myMaps.m_Settings[0]);
 		}
 		super.onStart();
 	}

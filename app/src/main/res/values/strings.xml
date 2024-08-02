@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BoxMan</string>
-    <string name="import_">Import</string>
+    <string name="import_">Import…</string>
     <string name="error_in_program">Error in the puzzle library, can\'t continue the game</string>
     <string name="speed">Speed:</string>
     <string name="reverse_play">Reverse play!</string>
@@ -98,7 +98,7 @@
     <string name="find_similar_puzzles">Find similar puzzles</string>
     <string name="move_backwards">Move backwards</string>
     <string name="move_forwards">Move forwards</string>
-    <string name="move_to___">Move to....</string>
+    <string name="move_to___">Move to…</string>
     <string name="choose_a_new_puzzle_set">Choose a new puzzle set!</string>
     <string name="move_successful">Move successful!</string>
     <string name="error_move_failed">Error: move failed!</string>
@@ -143,7 +143,7 @@
     <string name="description_of_macro_function">Description of macro function</string>
     <string name="import_instructions">Import instructions</string>
     <string name="Submit">Submit</string>
-    <string name="save_block_as">Save Block As...</string>
+    <string name="save_block_as">Save Block As…</string>
     <string name="gif_export">GIF export</string>
     <string name="parent_folder">Parent</string>
     <string name="complete">Complete</string>
@@ -161,32 +161,32 @@
     <string name="color_red">Red:</string>
     <string name="color_green_">Green:</string>
     <string name="color_blue_">Blue:</string>
-    <string name="go_to___">Go to...</string>
+    <string name="go_to___">Go to…</string>
     <string name="puzzles_select_multiple">Select multiple</string>
     <string name="puzzles_show_title">Show title</string>
     <string name="puzzles_show_duplicates">Show duplicates</string>
     <string name="puzzles_first_not_solved">First not solved</string>
     <string name="puzzles_recent">Recent</string>
     <string name="puzzles_clear">Clear</string>
-    <string name="puzzles_columns_count">Columns count...</string>
-    <string name="puzzles_delete_more___">Delete more...</string>
+    <string name="puzzles_columns_count">Columns count…</string>
+    <string name="puzzles_delete_more___">Delete more…</string>
     <string name="puzzles_about">About</string>
-    <string name="menu_export___">Export...</string>
+    <string name="menu_export___">Export…</string>
     <string name="menu_recent_puzzles">Recent puzzles</string>
     <string name="menu_puzzle_search">Puzzle search</string>
-    <string name="menu_new_set">New set...</string>
+    <string name="menu_new_set">New set…</string>
     <string name="menu_create_puzzle">Create puzzle</string>
     <string name="menu_extract_puzzle_from_image">Extract from image</string>
     <string name="menu_mf8_competition_list">MF8 competition list</string>
     <string name="menu_help">Help</string>
     <string name="menu_about">About</string>
     <string name="piclist_path">path</string>
-    <string name="player_setup1___">Settings 1...</string>
-    <string name="player_setup2___">Setting to toggle...</string>
+    <string name="settings_menu">Settings…</string>
+    <string name="settings_to_toggle">Setting to toggle…</string>
     <string name="player_restart">Restart</string>
     <string name="player_undo_all">Undo all</string>
     <string name="player_yass_solver">YASS solver</string>
-    <string name="player_load___">Load...</string>
+    <string name="player_load___">Load…</string>
     <string name="player_save">Save</string>
     <string name="player_about">About</string>
     <string name="player_help">Help</string>
@@ -267,20 +267,20 @@
     <string name="end_">end</string>
     <string name="start_">start</string>
     <string name="not_yet_started">not yet started!</string>
-    <string name="no_puzzle_data_found_or_game_not_started_yet">No puzzle data found or the game hasn\'t started yet</string>
+    <string name="no_puzzle_data_found_or_game_not_started_yet">No puzzle data found or the game has not started yet</string>
     <string name="competition_information">Competition information</string>
     <string name="failure">Failure</string>
-    <string name="downloading___">Downloading...</string>
-    <string name="deleting___">Deleting...</string>
+    <string name="downloading___">Downloading…</string>
+    <string name="deleting___">Deleting…</string>
     <string name="alertTitle_attention">Attention</string>
     <string name="delete_puzzle_set_are_you_sure">Are you sure to delete the puzzle set?</string>
-    <string name="solution_deleted">Solution deleted...</string>
+    <string name="solution_deleted">Solution deleted…</string>
     <string name="all_solutions_are_deleted_are_you_sure">The solutions of  the puzzles in this set will be deleted in their entirety.\\nPlease make a backup!\\nAre you sure you want to delete the solutions?</string>
     <string name="clean_up">Clean up</string>
     <string name="delete_all_states_are_you_sure">All saved states of this set\'s puzzles will be cleared, confirmed?</string>
     <string name="status_clean_up">Status Cleanup</string>
     <string name="export">Export</string>
-    <string name="rename___">Rename...</string>
+    <string name="rename___">Rename…</string>
     <string name="not_found">Not found!</string>
     <string name="puzzle_search">Puzzle search</string>
     <string name="stored_in_export_folder">Stored in “Export/” folder.</string>
@@ -305,7 +305,7 @@
     <string name="button_rotate">Rotate</string>
     <string name="button_more">More</string>
     <string name="please_turn_off_bidirectional_playing_and_try_again">Please turn off bidirectional play and try again!</string>
-    <string name="transformations">transformation view</string>
+    <string name="transformations">view</string>
     <string name="original_view">Original view</string>
     <string name="puzzle">Puzzle</string>
     <string name="secondPartOfGoal_als">als</string>
@@ -323,8 +323,8 @@
     <string name="abbreviationNumber_no">No.</string>
     <string name="even_squares">Even squares</string>
     <string name="odd_squares">Odd squares</string>
-    <string name="automatically_load_latest_status_off">Automatically load the latest status -- Off!</string>
-    <string name="automatically_load_latest_status_on">Automatically load the latest status -- On!</string>
+    <string name="automatically_load_latest_status_off">Automatically load the latest status — Off!</string>
+    <string name="automatically_load_latest_status_on">Automatically load the latest status — On!</string>
     <string name="use_forward_pushes_to_reach_goals">Use forward pushes to reach goals</string>
     <string name="enable_reverse_play">Enable reverse play</string>
     <string name="no_area_selected">No area selected!</string>
@@ -339,9 +339,9 @@
     <string name="exported_lurd_to_clipboard">Exported LURD to clipboard.</string>
     <string name="invalid_characters_for_reverse_mode">Invalid characters for reverse moves!</string>
     <string name="solved">Solved!</string>
-    <string name="forward_and_reverse_join">Forward and reverse moes join together!</string>
+    <string name="forward_and_reverse_join">Forward and reverse moves join together!</string>
     <string name="puzzle_solved_in_forward_play">Puzzle solved!</string>
-    <string name="puzzle_solved_by_union_of_forward_and_reverse">ictory by combining forward and backward moves!</string>
+    <string name="puzzle_solved_by_union_of_forward_and_reverse">Solved by combining forward and backward moves!</string>
     <string name="select_puzzle">Select puzzle</string>
     <string name="reading_macro">Reading: macro</string>
     <string name="please_copy_the_macro_file_to_the_macros_folder">Please copy the macro document to the \'Macros/\' folder.</string>
@@ -603,12 +603,12 @@
     <string name="submit">Submit</string>
     <string name="record_actions">Record actions</string>
     <string name="play">Play</string>
-    <string name="ruler___">Ruler...</string>
-    <string name="settings___">Settings...</string>
+    <string name="ruler___">Ruler…</string>
+    <string name="settings___">Settings…</string>
     <string name="reset_the_map">Reset the map</string>
     <string name="export_xsb">Export(XSB)</string>
     <string name="import_xsv_and_lurd">Import(XSB and Lurd)</string>
-    <string name="resize___">Resize...</string>
+    <string name="resize___">Resize…</string>
     <string name="normalize">Normalize</string>
     <string name="puzzle_data">Puzzle data</string>
     <string name="operation_instructions">Operation instructions</string>
@@ -618,7 +618,7 @@
     <string name="title_similar_puzzles">Similar puzzles</string>
     <string name="import_may_be_incomplete">The operation was interrupted. The import may be incomplete!</string>
     <string name="no_parsable_content_found">No parsable content found!</string>
-    <string name="parsing___">Parsing...</string>
+    <string name="parsing___">Parsing…</string>
     <string name="main_puzzle">Main puzzle</string>
     <string name="extra_puzzle">Extra puzzle</string>
     <string name="extra_puzzle_2">Extra 2 puzzle</string>
@@ -670,6 +670,11 @@
     <string name="a_total_of_">"A total of "</string>
     <string name="puzzles_copied_to">" puzzles copied to"</string>
     <string name="puzzle_copied">" puzzles copied"</string>
+    <string name="change_language">Change language</string>
+    <string name="language">Language</string>
+    <string name="english">English / 英语</string>
+    <string name="chinese">Chinese / 简体中文</string>
+    <string name="restart_app_for_language_change">Restart the app to apply the language change.</string>
 
     <item type="id" name="tag_g"></item>
     <item type="id" name="tag_c"></item>

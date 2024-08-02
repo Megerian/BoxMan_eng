@@ -95,10 +95,10 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 		mItemClickListener = new ItemClickListener();
 		mItemLongClickListener = new ItemLongClickListener();
 		mGridView = (GridView)findViewById(R.id.m_gridView);
-		if (myMaps.m_Sets[33] < 1 || myMaps.m_Sets[33] > 10) {
-            myMaps.m_Sets[34] = 0;
-		} else if (myMaps.m_Sets[2] == 0) {
-			mGridView.setNumColumns(myMaps.m_Sets[33]);
+		if (myMaps.m_Settings[33] < 1 || myMaps.m_Settings[33] > 10) {
+            myMaps.m_Settings[34] = 0;
+		} else if (myMaps.m_Settings[2] == 0) {
+			mGridView.setNumColumns(myMaps.m_Settings[33]);
 		}
 		mListView = (ListView)findViewById(R.id.m_listview);
 		//设置标题栏标题为关卡集名
@@ -171,7 +171,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 			if (myMaps.isSelect) {
 				myMaps.m_lstMaps.get(arg2).Select = !myMaps.m_lstMaps.get(arg2).Select;
                 setSelectAll();  //设置全选开关状态
-				if (myMaps.m_Sets[2] == 0) {  //仅刷新被单击的条目，避免闪烁
+				if (myMaps.m_Settings[2] == 0) {  //仅刷新被单击的条目，避免闪烁
 					adapter.getView(arg2, arg1, mGridView).invalidate();
 				} else {
 					adapter.getView(arg2, arg1, mListView).invalidate();
@@ -266,7 +266,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				MyContMenu.getItem(5).setVisible(true);     // 导出...
 				MyContMenu.getItem(13).setVisible(true);    // 详细...
 			} else
-			if (myMaps.m_Sets[0] == 3) {  // 扩展关卡组
+			if (myMaps.m_Settings[0] == 3) {  // 扩展关卡组
 				if (myMaps.m_lstMaps.get(arg2).Lock) MyContMenu.getItem(2).setTitle("图标解锁");
 
 				MyContMenu.getItem(0).setVisible(true);     // 打开
@@ -317,12 +317,12 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 		} else {
 			menu.getItem(4).setChecked(false);
 		}
-		if (myMaps.m_Sets[2] == 0) {  //是否显示关卡标题
+		if (myMaps.m_Settings[2] == 0) {  //是否显示关卡标题
 			menu.getItem(5).setChecked(false);
 		} else {
 			menu.getItem(5).setChecked(true);
 		}
-		if (myMaps.m_Sets[12] == 0) {  //是否标识重复关卡
+		if (myMaps.m_Settings[12] == 0) {  //是否标识重复关卡
 			menu.getItem(6).setChecked(false);
 		} else {
 			menu.getItem(6).setChecked(true);
@@ -381,7 +381,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 			menu.getItem(6).setVisible(true);     // 标识重复关卡
 			menu.getItem(10).setVisible(true);    // 每行图标个数...
 		} else
-		if (myMaps.m_Sets[0] == 3) {  // 扩展关卡组
+		if (myMaps.m_Settings[0] == 3) {  // 扩展关卡组
 			menu.getItem(0).setVisible(true);     // ╋
 			menu.getItem(1).setVisible(true);     // 顶
 			menu.getItem(2).setVisible(true);     // 底
@@ -501,14 +501,14 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				}
 				return true;
 			case R.id.levels_top:  //顶
-				if (myMaps.m_Sets[2] == 0) {
+				if (myMaps.m_Settings[2] == 0) {
 					mGridView.setSelection(0);
 				} else {
 					mListView.setSelection(0);
 				}
 				return true;
 			case R.id.levels_bottom:  //底
-				if (myMaps.m_Sets[2] == 0) {
+				if (myMaps.m_Settings[2] == 0) {
 					mGridView.setSelection(mGridView.getCount()-1);
 				} else {
 					mListView.setSelection(mListView.getCount()-1);
@@ -529,7 +529,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 								n = Integer.parseInt(input_steps.getText().toString());
 								if (n < 1) n = 1;
 								else {
-									if (myMaps.m_Sets[2] == 0) {
+									if (myMaps.m_Settings[2] == 0) {
 										if (n > mGridView.getCount()) n = mGridView.getCount();
 									} else {
 										if (n > mListView.getCount()) n = mListView.getCount();
@@ -537,7 +537,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 								}
 							} catch (Exception e) { }
 							if (n > 0) {
-								if (myMaps.m_Sets[2] == 0) {
+								if (myMaps.m_Settings[2] == 0) {
 									mGridView.setSelection(n-1);
 								} else {
 									mListView.setSelection(n-1);
@@ -557,7 +557,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 							n = Integer.parseInt(input_steps.getText().toString());
 							if (n < 1) n = 1;
 							else {
-								if (myMaps.m_Sets[2] == 0) {
+								if (myMaps.m_Settings[2] == 0) {
 									if (n > mGridView.getCount()) n = mGridView.getCount();
 								} else {
 									if (n > mListView.getCount()) n = mListView.getCount();
@@ -565,7 +565,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 							}
 						} catch (Exception e) { }
 						if (n > 0) {
-							if (myMaps.m_Sets[2] == 0) {
+							if (myMaps.m_Settings[2] == 0) {
 								mGridView.setSelection(n-1);
 							} else {
 								mListView.setSelection(n-1);
@@ -589,19 +589,19 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				adapter.notifyDataSetChanged();
 				return true;
 			case R.id.levels_showtitle:  //显示关卡标题
-				if (myMaps.m_Sets[2] == 1) {
-					myMaps.m_Sets[2] = 0;
+				if (myMaps.m_Settings[2] == 1) {
+					myMaps.m_Settings[2] = 0;
 					mt.setChecked(false);
-					if (myMaps.m_Sets[33] < 1 || myMaps.m_Sets[33] > 10) {
-						myMaps.m_Sets[34] = 0;
+					if (myMaps.m_Settings[33] < 1 || myMaps.m_Settings[33] > 10) {
+						myMaps.m_Settings[34] = 0;
 					} else {
-						mGridView.setNumColumns(myMaps.m_Sets[33]);
+						mGridView.setNumColumns(myMaps.m_Settings[33]);
 					}
 					adapter.m_PicWidth = mGridView.getColumnWidth();
 				} else {
-					myMaps.m_Sets[2] = 1;
+					myMaps.m_Settings[2] = 1;
 					mt.setChecked(true);
-					adapter.m_PicWidth = myMaps.m_Sets[35];
+					adapter.m_PicWidth = myMaps.m_Settings[35];
 				}
 				updateLayout();
 				recycleBitmapCaches(0, myMaps.m_lstMaps.size());
@@ -609,11 +609,11 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				return true;
 			case R.id.levels_showdup:
 				//标识重复关卡
-				if (myMaps.m_Sets[12] == 1) {
-					myMaps.m_Sets[12] = 0;
+				if (myMaps.m_Settings[12] == 1) {
+					myMaps.m_Settings[12] = 0;
 					mt.setChecked(false);
 				} else {
-					myMaps.m_Sets[12] = 1;
+					myMaps.m_Settings[12] = 1;
 					mt.setChecked(true);
 				}
 				recycleBitmapCaches(0, myMaps.m_lstMaps.size());
@@ -727,7 +727,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				}
 				return true;
 			case R.id.levels_col_count:
-				if (myMaps.m_Sets[2] != 0) {
+				if (myMaps.m_Settings[2] != 0) {
 					MyToast.showToast(myGridView.this, getString(R.string.not_available_in_title_mode), Toast.LENGTH_SHORT);
 					return true;
 				}
@@ -746,20 +746,20 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 						"10 个"
 				};
 				AlertDialog.Builder builder1 = new Builder(myGridView.this, AlertDialog.THEME_HOLO_DARK);
-				builder1.setTitle(R.string.not_available_in_title_mode).setSingleChoiceItems(m_menu, myMaps.m_Sets[33], new DialogInterface.OnClickListener() {
+				builder1.setTitle(R.string.not_available_in_title_mode).setSingleChoiceItems(m_menu, myMaps.m_Settings[33], new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if (myMaps.m_Sets[34] == 0) {
-							myMaps.m_Sets[34] = mGridView.getNumColumns();
-                            myMaps.m_Sets[35] = mGridView.getColumnWidth();
+						if (myMaps.m_Settings[34] == 0) {
+							myMaps.m_Settings[34] = mGridView.getNumColumns();
+                            myMaps.m_Settings[35] = mGridView.getColumnWidth();
 						}
 
 						if (which == 0) {
-							mGridView.setNumColumns(myMaps.m_Sets[34]);
+							mGridView.setNumColumns(myMaps.m_Settings[34]);
 						} else {
 							mGridView.setNumColumns(which);
 						}
-						myMaps.m_Sets[33] = which;
+						myMaps.m_Settings[33] = which;
 						recycleBitmapCaches(0, myMaps.m_lstMaps.size());
 						mGridView.invalidateViews();
 						adapter.notifyDataSetChanged();
@@ -839,10 +839,10 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 			m_Open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					myMaps.m_Sets[31] = isChecked ? 1 : 0;
+					myMaps.m_Settings[31] = isChecked ? 1 : 0;
 				}
 			});
-			m_Open.setChecked (myMaps.m_Sets[31] == 1 ? true : false);
+			m_Open.setChecked (myMaps.m_Settings[31] == 1 ? true : false);
 			myMaps.m_Code = 0;
 			m_XSB.setChecked(true);
 			Builder dlg = new Builder(this, AlertDialog.THEME_HOLO_DARK);
@@ -903,10 +903,10 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 			m_Open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					myMaps.m_Sets[31] = isChecked ? 1 : 0;
+					myMaps.m_Settings[31] = isChecked ? 1 : 0;
 				}
 			});
-			m_Open.setChecked (myMaps.m_Sets[31] == 1 ? true : false);
+			m_Open.setChecked (myMaps.m_Settings[31] == 1 ? true : false);
 			myMaps.isLurd = false;
 			m_XSB.setChecked(true);
 			Builder dlg = new Builder(this, AlertDialog.THEME_HOLO_DARK);
@@ -961,7 +961,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 					myMaps.m_lstMaps.add(m_list.remove(0));
 				}
 				recycleBitmapCaches(num, myMaps.m_lstMaps.size());
-				if (myMaps.m_Sets[2] == 0) {
+				if (myMaps.m_Settings[2] == 0) {
 					mGridView.setSelection(myMaps.m_lstMaps.size()-1);
 				} else {
 					mListView.setSelection(myMaps.m_lstMaps.size()-1);
@@ -973,7 +973,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 		my_SetTitle();
 
 		//导入统计提示
-		if (andOpen && myMaps.m_Sets[31] == 1 && myMaps.m_Nums[2] == 1) {  //导入后打开（长按关卡集的导入，仅导入了一个有效的关卡时）
+		if (andOpen && myMaps.m_Settings[31] == 1 && myMaps.m_Nums[2] == 1) {  //导入后打开（长按关卡集的导入，仅导入了一个有效的关卡时）
 //			mySQLite.m_SQL.get_Set(myMaps.m_Set_id);
 //			mySQLite.m_SQL.get_Last_Level(myMaps.m_Set_id);  //取得刚刚添加的关卡到“关卡列表”（仅含一个关卡的列表）
 
@@ -1047,7 +1047,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 		}
 		myMaps.curMap = null;
 		my_SetTitle();
-		if (myMaps.m_Sets[2] == 0) {  //刷新
+		if (myMaps.m_Settings[2] == 0) {  //刷新
 			mGridView.invalidateViews();
 		} else {
 			mListView.invalidateViews();
@@ -1337,7 +1337,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 						if(keyCode == KeyEvent.KEYCODE_ENTER){
 							try {
 								int n = Integer.parseInt(input_steps.getText().toString());
-								if (myMaps.m_Sets[2] == 0) {
+								if (myMaps.m_Settings[2] == 0) {
 									if (n > mGridView.getCount()) n = mGridView.getCount();
 								} else {
 									if (n > mListView.getCount()) n = mListView.getCount();
@@ -1353,7 +1353,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 										}
 										updateNO();  //关卡顺序改变
 										adapter.notifyDataSetChanged();
-										if (myMaps.m_Sets[2] == 0) {
+										if (myMaps.m_Settings[2] == 0) {
 											mGridView.setSelection(n - 1);
 										} else {
 											mListView.setSelection(n - 1);
@@ -1374,7 +1374,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 					public void onClick(DialogInterface dialog, int which) {
 						try {
 							int n = Integer.parseInt(input_steps.getText().toString());
-							if (myMaps.m_Sets[2] == 0) {
+							if (myMaps.m_Settings[2] == 0) {
 								if (n > mGridView.getCount()) n = mGridView.getCount();
 							} else {
 								if (n > mListView.getCount()) n = mListView.getCount();
@@ -1389,7 +1389,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 									}
 									updateNO();  //关卡顺序改变
 									adapter.notifyDataSetChanged();
-									if (myMaps.m_Sets[2] == 0) {
+									if (myMaps.m_Settings[2] == 0) {
 										mGridView.setSelection(n - 1);
 									} else {
 										mListView.setSelection(n - 1);
@@ -1571,12 +1571,12 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				mAdapter2 = new MyAdapter2(this, (ArrayList)getData2(m_menu4));
 				m_Similarity.setAdapter(mAdapter2);                                                   //相似度
 				m_Similarity.setChoiceMode(ListView.CHOICE_MODE_SINGLE);                              //开启单选模式
-				if (myMaps.m_Sets[26] < 0 || myMaps.m_Sets[26] > 7) myMaps.m_Sets[26] = 0;
-				m_Similarity.setItemChecked(myMaps.m_Sets[26], true);
+				if (myMaps.m_Settings[26] < 0 || myMaps.m_Settings[26] > 7) myMaps.m_Settings[26] = 0;
+				m_Similarity.setItemChecked(myMaps.m_Settings[26], true);
 				m_Similarity.setOnItemClickListener(new OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						myMaps.m_Sets[26] = position;
+						myMaps.m_Settings[26] = position;
 						mAdapter2.notifyDataSetChanged();
 					}
 				});
@@ -1604,7 +1604,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
                                     mDialog = new myFindFragment();
                                     Bundle bundle = new Bundle();
                                     bundle.putLongArray("mSets", m_sets);
-                                    bundle.putInt("mSimilarity", Integer.valueOf(m_menu4[myMaps.m_Sets[26]]));
+                                    bundle.putInt("mSimilarity", Integer.valueOf(m_menu4[myMaps.m_Settings[26]]));
                                     bundle.putBoolean("mAns", m_Ans.isChecked());
                                     bundle.putBoolean("mSort", m_Sort.isChecked());
                                     bundle.putBoolean("mIgnoreBox", m_Ignore_Box.isChecked());
@@ -1649,7 +1649,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
                                     for (int k = num[0]; k <= num[1]; k++) {
                                         myMaps.m_lstMaps.get(k-1).Select = true;
                                     }
-                                    if (myMaps.m_Sets[2] == 0) {  //刷新
+                                    if (myMaps.m_Settings[2] == 0) {  //刷新
                                         mGridView.invalidateViews();
                                     } else {
                                         mListView.invalidateViews();
@@ -1669,7 +1669,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				for (int k = 0; k < myMaps.m_lstMaps.size (); k++) {
 					myMaps.m_lstMaps.get(k).Select = !myMaps.m_lstMaps.get(k).Select;
 				}
-				if (myMaps.m_Sets[2] == 0) {  //刷新
+				if (myMaps.m_Settings[2] == 0) {  //刷新
 					mGridView.invalidateViews();
 				} else {
 					mListView.invalidateViews();
@@ -1719,7 +1719,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 
 	private void updateLayout() {
 		int n = mGridView.getFirstVisiblePosition();
-		if (myMaps.m_Sets[2] == 0) {
+		if (myMaps.m_Settings[2] == 0) {
 			mGridView.setVisibility(View.VISIBLE);
 			mGridView.setAdapter(adapter);
 			mGridView.setOnScrollListener(this);

@@ -123,7 +123,7 @@ public class myPathfinder {
             }
 
             //检查穿越情况
-            if (myMaps.m_Sets[17] == 1) {
+            if (myMaps.m_Settings[17] == 1) {
                 for (int i = 1; i < mMapRows - 1; i++) {
                     for (int j = 1; j < mMapCols - 1; j++) {
                         if ('-' == tmpLevel[i][j] && !mark[i][j]) {
@@ -229,7 +229,7 @@ public class myPathfinder {
             if (isFound) break;
 
             //四邻排查后，对不可达的特殊点，进行穿越排查
-            if (myMaps.m_Sets[17] == 1) {
+            if (myMaps.m_Settings[17] == 1) {
                 for (int i = 1; i < mMapRows - 1; i++) {
                     for (int j = 1; j < mMapCols - 1; j++) {
                         if ('-' == tmpLevel[i][j] && !mark[i][j]) {
@@ -515,7 +515,7 @@ public class myPathfinder {
             }
 
             //四邻排查后，对不可达的特殊点，进行穿越排查
-            if (myMaps.m_Sets[17] == 1) {
+            if (myMaps.m_Settings[17] == 1) {
                 for (int i = 1; i < mMapRows - 1; i++) {
                     for (int j = 1; j < mMapCols - 1; j++) {
                         if ('-' == tmpLevel[i][j] && !mark[i][j]) {
@@ -614,7 +614,7 @@ public class myPathfinder {
             }
 
             //当割点法不可达时，对于被点击的箱子做穿越检查
-            if (myMaps.m_Sets[17] == 1 || tmpLevel[boxR][boxC] == '-') {
+            if (myMaps.m_Settings[17] == 1 || tmpLevel[boxR][boxC] == '-') {
                 tmpLevel[boxR][boxC] = '$';
                 ls_flg = manTo2(flg, tmpLevel, boxR, boxC, firR, firC, secR, secC);
                 tmpLevel[boxR][boxC] = '-';

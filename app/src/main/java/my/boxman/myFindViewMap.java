@@ -428,7 +428,7 @@ public class myFindViewMap extends View {
 
         super.onDraw(canvas);
 
-        setBackgroundColor(myMaps.m_Sets[4]);  //设置背景色
+        setBackgroundColor(myMaps.m_Settings[4]);  //设置背景色
 
         if (myMaps.bkPict != null) {
             for (int i = 0; i <= w_bkNum; i++) {

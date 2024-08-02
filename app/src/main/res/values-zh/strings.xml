@@ -64,8 +64,8 @@
     <string name="menu_help">帮助</string>
     <string name="menu_about">关于</string>
     <string name="piclist_path">位置</string>
-    <string name="player_setup1___">设置...</string>
-    <string name="player_setup2___">开关选项...</string>
+    <string name="settings_menu">设置...</string>
+    <string name="settings_to_toggle">开关选项...</string>
     <string name="player_restart">重新开始</string>
     <string name="player_undo_all">退至首</string>
     <string name="player_yass_solver">YASS求解</string>
@@ -670,4 +670,9 @@
     <string name="a_total_of_">"共 "</string>
     <string name="puzzles_copied_to">" 个关卡复制到"</string>
     <string name="puzzle_copied">" 号关卡复制到"</string>
+    <string name="change_language">语言设置</string>
+    <string name="language">切换语言</string>
+    <string name="english">英语 / English</string>
+    <string name="chinese">简体中文 / Chinese</string>
+    <string name="restart_app_for_language_change">重新启动应用以应用语言更改。</string>
 </resources>

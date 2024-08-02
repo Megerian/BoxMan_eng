@@ -65,12 +65,12 @@ public class myGridViewAdapter extends BaseAdapter{
             viewHolder.textview_test = (TextView)convertView.findViewById(R.id.m_image_text);
             viewHolder.textview_test2 = (TextView)convertView.findViewById(R.id.m_image_text2);
             convertView.setTag(viewHolder);
-            myMaps.m_Sets[35] = viewHolder.imageview_thumbnail.getLayoutParams().height;
+            myMaps.m_Settings[35] = viewHolder.imageview_thumbnail.getLayoutParams().height;
         }else{
             viewHolder = (MyGridViewHolder)convertView.getTag();
         }
 
-        if (myMaps.m_Sets[2] == 0) {
+        if (myMaps.m_Settings[2] == 0) {
             viewHolder.textview_test.setVisibility(View.VISIBLE);
             viewHolder.textview_test2.setVisibility(View.GONE);
 
@@ -87,8 +87,8 @@ public class myGridViewAdapter extends BaseAdapter{
             viewHolder.textview_test2.setVisibility(View.VISIBLE);
             LinearLayout.LayoutParams para;
             para = (LinearLayout.LayoutParams) viewHolder.imageview_thumbnail.getLayoutParams();
-            para.height = myMaps.m_Sets[35];
-            para.width  = myMaps.m_Sets[35];
+            para.height = myMaps.m_Settings[35];
+            para.width  = myMaps.m_Settings[35];
             viewHolder.imageview_thumbnail.setLayoutParams(para);
         }
          
@@ -132,10 +132,10 @@ public class myGridViewAdapter extends BaseAdapter{
 
         Bitmap bitmap = myGridView.gridviewBitmapCaches.get(key);
 
-        if (myMaps.m_Sets[2] == 0) {
+        if (myMaps.m_Settings[2] == 0) {
             m_PicWidth = myGridView.mGridView.getColumnWidth();
         }
-        m_PicWidth = m_PicWidth > 0 ? m_PicWidth : myMaps.m_Sets[35];
+        m_PicWidth = m_PicWidth > 0 ? m_PicWidth : myMaps.m_Settings[35];
 
         if (myMaps.m_lstMaps.get(key).Lock || m_changeItem == key) {
             if (m_changeItem == key) {  //“锁”图标的处理
@@ -231,7 +231,7 @@ public class myGridViewAdapter extends BaseAdapter{
     			dw99.setBounds(0, 0, m_PicWidth, m_PicWidth);
     			dw99.draw(cvs99);
         	}
-        	bitmap = getBitmapThumbnail(bitmap, m_PicWidth, myMaps.m_Sets[12] == 1 && mySQLite.m_SQL.find_Level(myMaps.m_lstMaps.get(key).key, myMaps.m_lstMaps.get(key).Level_id) > -1 && !myMaps.sFile.equals("创编关卡"));
+        	bitmap = getBitmapThumbnail(bitmap, m_PicWidth, myMaps.m_Settings[12] == 1 && mySQLite.m_SQL.find_Level(myMaps.m_lstMaps.get(key).key, myMaps.m_lstMaps.get(key).Level_id) > -1 && !myMaps.sFile.equals("创编关卡"));
         }
         return bitmap;
     }  

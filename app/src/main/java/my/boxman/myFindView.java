@@ -371,7 +371,7 @@ public class myFindView extends Activity {
         else n = Cols2;
 
         //参加对比的格子不够数，不需比较
-        if ((int)Math.ceil((double) m * n  * 100 / (Rows1 * Cols1)) < mLeast_Similarity[myMaps.m_Sets[26]]) return 0;
+        if ((int)Math.ceil((double) m * n  * 100 / (Rows1 * Cols1)) < mLeast_Similarity[myMaps.m_Settings[26]]) return 0;
 
         dR1 = Rows1 - Rows2;
         dC1 = Cols1 - Cols2;
@@ -614,7 +614,7 @@ public class myFindView extends Activity {
 
     //为消除音量键的按键音
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (myMaps.m_Sets[15] == 1 && (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN))
+        if (myMaps.m_Settings[15] == 1 && (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN))
             return true;
 
         return super.onKeyUp(keyCode, event);
@@ -624,14 +624,14 @@ public class myFindView extends Activity {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             finish();
             return true;
-        } else if (myMaps.m_Sets[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+        } else if (myMaps.m_Settings[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             int n1 = myMaps.m_lstMaps.indexOf(myMaps.curMap);
             if (n1 > 0) {
                 //指向上一关卡
                 myLoadLevel(n1-1);
             }
             return true;
-        } else if (myMaps.m_Sets[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+        } else if (myMaps.m_Settings[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             int n2 = myMaps.m_lstMaps.indexOf(myMaps.curMap);
             if (n2 >= 0 && n2+1 < myMaps.m_lstMaps.size()) {
                 //指向下一关卡

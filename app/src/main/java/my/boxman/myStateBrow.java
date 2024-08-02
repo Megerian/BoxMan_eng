@@ -722,7 +722,7 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 						for (int k = 0; k < len; k++) {
 							if ("LURD".indexOf(strAns.charAt(k)) >= 0) p++;
 						}
-						fout.write(("Solution (moves " + len + ", pushes " + p + (myMaps.m_Sets[30] == 1 ? myMaps.m_State.time : "") + "): \n").getBytes());
+						fout.write(("Solution (moves " + len + ", pushes " + p + (myMaps.m_Settings[30] == 1 ? myMaps.m_State.time : "") + "): \n").getBytes());
 						fout.write(strAns.getBytes());
 					}
 				}
@@ -738,7 +738,7 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 						for (int k = 0; k < len; k++) {
 							if ("LURD".indexOf(strAns.charAt(k)) >= 0) p++;
 						}
-						fout.write(("Solution (moves " + len + ", pushes " + p + (myMaps.m_Sets[30] == 1 ? myMaps.m_State.time : "") + "): \n").getBytes());
+						fout.write(("Solution (moves " + len + ", pushes " + p + (myMaps.m_Settings[30] == 1 ? myMaps.m_State.time : "") + "): \n").getBytes());
 					}
 					fout.write(strAns.getBytes());
 				}
@@ -789,7 +789,7 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 								if ("LURD".indexOf(strAns.charAt(k)) >= 0) p++;
 							}
 							str.append("Solution (moves ").append(len).append(", pushes ").append(p);
-							if (myMaps.m_Sets[30] == 1) {  //是否导出答案备注
+							if (myMaps.m_Settings[30] == 1) {  //是否导出答案备注
 								str.append(", comment ").append(myMaps.m_State.time);
 							}
 							str.append("): \n");
@@ -809,7 +809,7 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 							if ("LURD".indexOf(strAns.charAt(k)) >= 0) p++;
 						}
 						str.append("Solution (moves ").append(len).append(", pushes ").append(p);
-						if (myMaps.m_Sets[30] == 1) {  //是否导出答案备注
+						if (myMaps.m_Settings[30] == 1) {  //是否导出答案备注
 							str.append(", comment ").append(myMaps.m_State.time);
 						}
 						str.append("): \n");
@@ -944,7 +944,7 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.state, menu);
-		if (myMaps.m_Sets[30] == 0) {  //导出答案的注释信息
+		if (myMaps.m_Settings[30] == 0) {  //导出答案的注释信息
 			menu.getItem(2).setChecked(false);
 		} else {
 			menu.getItem(2).setChecked(true);
@@ -966,11 +966,11 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 			myExport2(-1);
 			return true;
 		case R.id.st_ex_ans_comment:  //导出答案的注释信息
-			if (myMaps.m_Sets[30] == 1) {
-				myMaps.m_Sets[30] = 0;
+			if (myMaps.m_Settings[30] == 1) {
+				myMaps.m_Settings[30] = 0;
 				mt.setChecked(false);
 			} else {
-				myMaps.m_Sets[30] = 1;
+				myMaps.m_Settings[30] = 1;
 				mt.setChecked(true);
 			}
 			return true;

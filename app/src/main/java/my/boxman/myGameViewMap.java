@@ -300,11 +300,11 @@ public class myGameViewMap extends View {
                 } else if (m_rChangeBK.contains((int) e.getX(), (int) e.getY())) {  //“标尺”开关
                     myMaps.m_bBiaochi = !myMaps.m_bBiaochi;
                 } else if (m_lChangeBK && m_rColor_BK.contains((int) e.getX(), (int) e.getY())) {  //背景时间
-                    if (myMaps.m_Sets[25] == 0) myMaps.m_Sets[25] = 1;
-                    else myMaps.m_Sets[25] = 0;
+                    if (myMaps.m_Settings[25] == 0) myMaps.m_Settings[25] = 1;
+                    else myMaps.m_Settings[25] = 0;
                     invalidate();
-                } else if (!m_Game.bt_BK.isChecked() && (mClickObj == '*' || myMaps.m_Sets[3] == 1 && mClickObj == '.')) {  //长按点位上箱子，显示关联网点、网口
-                    if (myMaps.m_Sets[13] == 0) {     // 需要在非“互动双推”模式下
+                } else if (!m_Game.bt_BK.isChecked() && (mClickObj == '*' || myMaps.m_Settings[3] == 1 && mClickObj == '.')) {  //长按点位上箱子，显示关联网点、网口
+                    if (myMaps.m_Settings[13] == 0) {     // 需要在非“互动双推”模式下
                         m_Game.m_Net_Inf(m_Game.m_cArray, m_iR, m_iC);  //计算网点、网口
                         m_Game.m_bNetLock = true;
                     } else {
@@ -321,7 +321,7 @@ public class myGameViewMap extends View {
                     m_bManTo = false;  //关闭人的可达点状态
                     m_bManTo2 = false;
                     m_Game.boxCanMove();
-                } else if (mClickObj == '-' || mClickObj == '.' && (myMaps.m_Sets[3] == 0 || m_Game.bt_BK.isChecked())) {  //长按空地，显示哪些箱子可以到这里
+                } else if (mClickObj == '-' || mClickObj == '.' && (myMaps.m_Settings[3] == 0 || m_Game.bt_BK.isChecked())) {  //长按空地，显示哪些箱子可以到这里
                     if (m_Game.mMicroTask != null) return;
                     if (m_Game.bt_BK.isChecked() && m_Game.m_nRow0 < 0) return; //当尚未指定人的位置时，返回
                     m_iR2 = m_iR;
@@ -333,20 +333,20 @@ public class myGameViewMap extends View {
                     m_boxCanMove2 = false;
                 } else if (mClickObj == '@' || mClickObj == '+') {  //长按仓管员，正推，选择导出 GIF 的开始点；逆推，切换“禁用逆推目标点”选项开关
                     if (m_Game.bt_BK.isChecked()) {
-                        if (myMaps.m_Sets[32] == 1) {
-                            myMaps.m_Sets[32] = 0;
+                        if (myMaps.m_Settings[32] == 1) {
+                            myMaps.m_Settings[32] = 0;
                             MyToast.showToast(m_Game, getContext().getString(R.string.enable_reverse_play), Toast.LENGTH_SHORT);
                         } else {
-                            myMaps.m_Sets[32] = 1;
+                            myMaps.m_Settings[32] = 1;
                             MyToast.showToast(m_Game, getContext().getString(R.string.use_forward_pushes_to_reach_goals), Toast.LENGTH_SHORT);
                         }
                     } else {
                         if (m_Game.m_iStep[1] == 0) {  // 在关卡初态，即尚未任何动作
-                            if (myMaps.m_Sets[37] == 1) {
-                                myMaps.m_Sets[37] = 0;
+                            if (myMaps.m_Settings[37] == 1) {
+                                myMaps.m_Settings[37] = 0;
                                 MyToast.showToast(m_Game, getContext().getString(R.string.automatically_load_latest_status_off), Toast.LENGTH_SHORT);
                             } else {
-                                myMaps.m_Sets[37] = 1;
+                                myMaps.m_Settings[37] = 1;
                                 MyToast.showToast(m_Game, getContext().getString(R.string.automatically_load_latest_status_on), Toast.LENGTH_SHORT);
                             }
                         } else {
@@ -358,7 +358,7 @@ public class myGameViewMap extends View {
                     if (m_Game.mMicroTask != null) return;
                     if (!m_Game.bt_Sel.isChecked()) {
                         if (m_Game.bt_BK.isChecked()) {  //是否做逆推的双目标点提示
-                            if (myMaps.m_Sets[32] == 1) m_lShowDst2 = !m_lShowDst2;
+                            if (myMaps.m_Settings[32] == 1) m_lShowDst2 = !m_lShowDst2;
                         } else if (myMaps.curMap.Num > 0 && myMaps.mState2.size() > 0 && m_Game.m_iStep[1] == 0) {
                             m_lShowAnsInf = !m_lShowAnsInf;  //是否允许在开始推关卡之前显示答案信息
                             invalidate();
@@ -384,7 +384,7 @@ public class myGameViewMap extends View {
                     boolean flg;
                     if (mClickObj == '$' || mClickObj == '*') {  //箱子编号
                         if (myMaps.m_bBianhao) {  //自动箱子编号状态打开时，不使用人工箱子编号
-                        } else if (myMaps.m_Sets[41] == 1) {  //箱子使用人工编号{  //箱子使用人工编号
+                        } else if (myMaps.m_Settings[41] == 1) {  //箱子使用人工编号 | boxes use manual numbering
                             if (m_Game.m_iBoxNum[m_iR][m_iC] < 0) {
                                 for (short k = 0; k < 286; k++) {
                                     flg = false;
@@ -412,7 +412,7 @@ public class myGameViewMap extends View {
                             m_Game.mark44[RC[1]][RC[0]] = !m_Game.mark44[RC[1]][RC[0]];  //切换标尺显示标志
                         }
                     } else if (mClickObj == '#' || mClickObj == '_') {  //双击箱子、墙、墙外
-                        if (myMaps.m_Sets[20] == 0) m_Game.setMenuVisible();  //全屏
+                        if (myMaps.m_Settings[20] == 0) m_Game.setMenuVisible();  //全屏
                     } else if (mClickObj == '@' || mClickObj == '+') {  //双击仓管员
                         if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0) {  // 超简或简版皮肤，横竖屏切换
                             myMaps.isHengping = !myMaps.isHengping;
@@ -442,9 +442,9 @@ public class myGameViewMap extends View {
                     if (m_Game.mMicroTask == null) m_Game.DoEvent(11);
                     return true;
                 } else if (m_rNext_Speed.contains((int) e.getX(), (int) e.getY())) {  //逐级加速
-                    if (myMaps.m_Sets[10] > 0) myMaps.m_Sets[10]--;
-                    else myMaps.m_Sets[10] = 4;
-                    MyToast.showToast(myMaps.ctxDealFile, getContext().getString(R.string.speed) + m_Game.m_sSleep[myMaps.m_Sets[10]], Toast.LENGTH_SHORT);
+                    if (myMaps.m_Settings[10] > 0) myMaps.m_Settings[10]--;
+                    else myMaps.m_Settings[10] = 4;
+                    MyToast.showToast(myMaps.ctxDealFile, getContext().getString(R.string.speed) + m_Game.m_sSleep[myMaps.m_Settings[10]], Toast.LENGTH_SHORT);
                     return true;
                 } else if (m_rPre.contains((int) e.getX(), (int) e.getY())) {
                     m_Game.DoEvent(7);   //上一关
@@ -834,10 +834,10 @@ public class myGameViewMap extends View {
         else mArray = m_Game.m_cArray;
 
         //根据箱子的移动位置，计算所用的图片（是否使用在目标点上的图片）
-        switch (myMaps.m_Sets[14]) {
+        switch (myMaps.m_Settings[14]) {
             case 1:
-                if (m_Game.bt_BK.isChecked() && myMaps.m_Sets[18] > 0 ||
-                    !m_Game.bt_BK.isChecked() && myMaps.m_Sets[18] < 0) {
+                if (m_Game.bt_BK.isChecked() && myMaps.m_Settings[18] > 0 ||
+                    !m_Game.bt_BK.isChecked() && myMaps.m_Settings[18] < 0) {
                     if (mArray[i][j] == '*') box_Goal[1] = true;
                     else box_Goal[1] = false;
                     if (mArray[i][j+1] == '.') box_Goal[0] = true;
@@ -850,8 +850,8 @@ public class myGameViewMap extends View {
                 }
                 break;
             case 2:
-                if (m_Game.bt_BK.isChecked() && myMaps.m_Sets[18] > 0 ||
-                    !m_Game.bt_BK.isChecked() && myMaps.m_Sets[18] < 0) {
+                if (m_Game.bt_BK.isChecked() && myMaps.m_Settings[18] > 0 ||
+                    !m_Game.bt_BK.isChecked() && myMaps.m_Settings[18] < 0) {
                     if (mArray[i][j] == '*') box_Goal[1] = true;
                     else box_Goal[1] = false;
                     if (mArray[i+1][j] == '.') box_Goal[0] = true;
@@ -864,8 +864,8 @@ public class myGameViewMap extends View {
                 }
                 break;
             case 3:
-                if (m_Game.bt_BK.isChecked() && myMaps.m_Sets[18] > 0 ||
-                    !m_Game.bt_BK.isChecked() && myMaps.m_Sets[18] < 0) {
+                if (m_Game.bt_BK.isChecked() && myMaps.m_Settings[18] > 0 ||
+                    !m_Game.bt_BK.isChecked() && myMaps.m_Settings[18] < 0) {
                     if (mArray[i][j] == '*') box_Goal[1] = true;
                     else box_Goal[1] = false;
                     if (mArray[i][j-1] == '.') box_Goal[0] = true;
@@ -878,8 +878,8 @@ public class myGameViewMap extends View {
                 }
                 break;
             case 4:
-                if (m_Game.bt_BK.isChecked() && myMaps.m_Sets[18] > 0 ||
-                    !m_Game.bt_BK.isChecked() && myMaps.m_Sets[18] < 0) {
+                if (m_Game.bt_BK.isChecked() && myMaps.m_Settings[18] > 0 ||
+                    !m_Game.bt_BK.isChecked() && myMaps.m_Settings[18] < 0) {
                     if (mArray[i][j] == '*') box_Goal[1] = true;
                     else box_Goal[1] = false;
                     if (mArray[i-1][j] == '.') box_Goal[0] = true;
@@ -894,7 +894,7 @@ public class myGameViewMap extends View {
         }
 
         //动画移动的理论方向与距离
-        switch (myMaps.m_Sets[14]) {
+        switch (myMaps.m_Settings[14]) {
             case 1:
                 d_M_Row = 0;
                 if (d_Moves <= 0) d_M_Col = m_PicWidth;
@@ -998,7 +998,7 @@ public class myGameViewMap extends View {
 
         // 显示背景色或背景图片
         if (myMaps.bk_Pic == null || myMaps.bk_Pic.length() <= 0 || myMaps.bk_Pic.equals("使用背景色")) {
-            setBackgroundColor(myMaps.m_Sets[4]);  //设置背景色
+            setBackgroundColor(myMaps.m_Settings[4]);  //设置背景色
         } else {
             if (myMaps.bkPict != null) {
                 for (int i = 0; i <= w_bkNum; i++) {
@@ -1059,7 +1059,7 @@ public class myGameViewMap extends View {
                 rt.right = rt.left + m_PicWidth;
                 rt.bottom = rt.top + m_PicWidth;
 
-                if (myMaps.m_Sets[13] == 1) {  //“互动双推”模式
+                if (myMaps.m_Settings[13] == 1) {  //“互动双推”模式
                     if (m_Game.bt_BK.isChecked()) {
                         ch = m_Game.bk_cArray[i][j];  //逆推迷宫
                         if (m_Game.m_cArray[i][j] == '$' || m_Game.m_cArray[i][j] == '*'){
@@ -1114,7 +1114,7 @@ public class myGameViewMap extends View {
                 } else {   //非“互动双推”模式
                     if (m_Game.bt_BK.isChecked()) {
                         ch = m_Game.bk_cArray[i][j];  //逆推迷宫
-                        if (myMaps.m_Sets[32] == 1) {  //逆推时使用正推的目标点
+                        if (myMaps.m_Settings[32] == 1) {  //逆推时使用正推的目标点
                             switch (m_Game.m_cArray[i][j]) {
                                 case '.':
                                 case '*':
@@ -1156,11 +1156,11 @@ public class myGameViewMap extends View {
                     leftTmp = rt.left;
                     topTmp = rt.top;
                     canvas.drawBitmap(myMaps.FloorPic, leftTmp, topTmp, myPaint);   //地板————第一层
-                    if (myMaps.m_Sets[38] == 1) {  // 区分奇偶格位显示
+                    if (myMaps.m_Settings[38] == 1) {  // 区分奇偶格位显示
                         if ((i + j) % 2 == 1) {    // 奇格位
-                            myPaint.setARGB(myMaps.m_Sets[40] * 5, 0, 0, 0);
+                            myPaint.setARGB(myMaps.m_Settings[40] * 5, 0, 0, 0);
                         } else {                   // 偶格位
-                            myPaint.setARGB(myMaps.m_Sets[39] * 5, 255, 255, 255);
+                            myPaint.setARGB(myMaps.m_Settings[39] * 5, 255, 255, 255);
                         }
                         myPaint.setStyle(Paint.Style.FILL);
                         canvas.drawRect(rt, myPaint);
@@ -1289,7 +1289,7 @@ public class myGameViewMap extends View {
                             canvas.drawBitmap(myMaps.BoxPic, leftTmp, topTmp, myPaint);
                             if (myMaps.m_bBianhao) {  //箱子使用自动编号
                                 boxNum(canvas, rt, m_Game.m_iBoxNum2[i][j]);
-                            } else if (myMaps.m_Sets[41] == 1) {
+                            } else if (myMaps.m_Settings[41] == 1) {
                                 boxNum(canvas, rt, m_Game.m_iBoxNum[i][j]);
                             }
                         }
@@ -1301,7 +1301,7 @@ public class myGameViewMap extends View {
                             canvas.drawBitmap(myMaps.BoxGoalPic, leftTmp, topTmp, myPaint);
                             if (myMaps.m_bBianhao) {  //箱子使用自动编号
                                 boxNum(canvas, rt, m_Game.m_iBoxNum2[i][j]);
-                            } else if (myMaps.m_Sets[41] == 1) {
+                            } else if (myMaps.m_Settings[41] == 1) {
                                 boxNum(canvas, rt, m_Game.m_iBoxNum[i][j]);
                             }
                         }
@@ -1318,7 +1318,7 @@ public class myGameViewMap extends View {
                             } else {     // 标准皮肤
                                 leftTmp = rt.left;
                                 topTmp = rt.top;
-                                switch (PlayDir[myMaps.m_nTrun][myMaps.m_Sets[5]]) {
+                                switch (PlayDir[myMaps.m_nTrun][myMaps.m_Settings[5]]) {
                                     case 1:  //左
                                         canvas.drawBitmap(myMaps.ManPic_l, leftTmp, topTmp, myPaint);
                                         break;
@@ -1347,7 +1347,7 @@ public class myGameViewMap extends View {
                             } else {     // 标准皮肤
                                 leftTmp = rt.left;
                                 topTmp = rt.top;
-                                switch (PlayDir[myMaps.m_nTrun][myMaps.m_Sets[5]]) {
+                                switch (PlayDir[myMaps.m_nTrun][myMaps.m_Settings[5]]) {
                                     case 1:  //左
                                         canvas.drawBitmap(myMaps.ManGoalPic_l, leftTmp, topTmp, myPaint);
                                         break;
@@ -1391,11 +1391,11 @@ public class myGameViewMap extends View {
                 topTmp = rt.top+12.5f;
                 if (m_Game.bt_BK.isChecked()) {  //逆推
                     if (m_bBoxTo2 && m_Game.mPathfinder.mark4[i][j]) { // 箱子可达位置提示
-                        if ((myMaps.m_Sets[8] == 1 || (m_iR == i && m_iC == j)) && (myMaps.m_Sets[24] == 0 || m_Game.mark14[i][j] > 0)) {
+                        if ((myMaps.m_Settings[8] == 1 || (m_iR == i && m_iC == j)) && (myMaps.m_Settings[24] == 0 || m_Game.mark14[i][j] > 0)) {
                             canvas.drawBitmap(myMaps.KedaPic, leftTmp, topTmp, myPaint);
                         }
                     }
-                    if (myMaps.m_Sets[8] == 1) {  // 显示可达位置提示
+                    if (myMaps.m_Settings[8] == 1) {  // 显示可达位置提示
                         if (m_boxCanMove2 && m_Game.mark12[i][j] || m_boxCanCome2 && m_Game.mark12[i][j]) { // 可动/来箱子提示
                             canvas.drawBitmap(myMaps.KedaPic, leftTmp, topTmp, myPaint);
                         }
@@ -1421,7 +1421,7 @@ public class myGameViewMap extends View {
                         myPaint.setARGB(255, 0, 0, 0);
                     }
                     //当“逆推时使用正推目标点”时，对逆推目标点做简单提示
-                    if (m_lShowDst2 && myMaps.m_Sets[32] == 1 && (m_Game.bk_cArray[i][j] == '.' || m_Game.bk_cArray[i][j] == '*' || m_Game.bk_cArray[i][j] == '+')) {
+                    if (m_lShowDst2 && myMaps.m_Settings[32] == 1 && (m_Game.bk_cArray[i][j] == '.' || m_Game.bk_cArray[i][j] == '*' || m_Game.bk_cArray[i][j] == '+')) {
                         myPaint.setARGB(127, 255, 255, 0);
                         myPaint.setStyle(Paint.Style.FILL);
                         rt1.set(rt.left+20, rt.top+20, rt.right-20, rt.bottom-20);
@@ -1433,11 +1433,11 @@ public class myGameViewMap extends View {
                     }
                 } else {  //正推
                     if (m_bBoxTo && m_Game.mPathfinder.mark3[i][j]) { //箱子可达位置提示
-                        if (myMaps.m_Sets[8] == 1 || (m_iR == i && m_iC == j)) {
+                        if (myMaps.m_Settings[8] == 1 || (m_iR == i && m_iC == j)) {
                             canvas.drawBitmap(myMaps.KedaPic, leftTmp, topTmp, myPaint);
                         }
                     }
-                    if (myMaps.m_Sets[8] == 1) {  //显示可达位置提示
+                    if (myMaps.m_Settings[8] == 1) {  //显示可达位置提示
                         if (m_boxCanMove && m_Game.mark11[i][j] || m_boxCanCome && m_Game.mark11[i][j]) { // 可动/来箱子提示
                             canvas.drawBitmap(myMaps.KedaPic, leftTmp, topTmp, myPaint);
                         }
@@ -1535,7 +1535,7 @@ public class myGameViewMap extends View {
                 else
                     canvas.drawBitmap(myMaps.ManPic_u, leftTmp, topTmp, myPaint);  // 不使用横屏皮肤
             } else {  // 标准皮肤
-                switch (PlayDir[myMaps.m_nTrun][myMaps.m_Sets[5]]) {
+                switch (PlayDir[myMaps.m_nTrun][myMaps.m_Settings[5]]) {
                     case 1:  //左
                         canvas.drawBitmap(myMaps.ManPic_l, leftTmp, topTmp, myPaint);
                         break;
@@ -1588,11 +1588,11 @@ public class myGameViewMap extends View {
             canvas.drawRect(mrBrightnessShade, myPaint);
             canvas.drawRect(mrBrightnessShade2, myPaint);
             myPaint.setARGB(255, 0, 0, 150);
-            canvas.drawRect(mrBrightnessShade.left, mrBrightnessShade.top, mrBrightnessShade.left + (myMaps.m_Sets[39]+1) * 40, mrBrightnessShade.bottom, myPaint);
-            canvas.drawRect(mrBrightnessShade2.left, mrBrightnessShade2.top, mrBrightnessShade2.left + (myMaps.m_Sets[40]+1) * 40, mrBrightnessShade2.bottom, myPaint);
+            canvas.drawRect(mrBrightnessShade.left, mrBrightnessShade.top, mrBrightnessShade.left + (myMaps.m_Settings[39]+1) * 40, mrBrightnessShade.bottom, myPaint);
+            canvas.drawRect(mrBrightnessShade2.left, mrBrightnessShade2.top, mrBrightnessShade2.left + (myMaps.m_Settings[40]+1) * 40, mrBrightnessShade2.bottom, myPaint);
             myPaint.setARGB(255, 255, 255, 255);  //设置字体颜色
-            canvas.drawText("" + myMaps.m_Sets[39], mrBrightnessShade.right + 15, m_nArenaTop + mrBrightnessShade.top - ss / 2, myPaint);
-            canvas.drawText("" + myMaps.m_Sets[40], mrBrightnessShade.right + 15, m_nArenaTop + mrBrightnessShade2.top - ss / 2, myPaint);
+            canvas.drawText("" + myMaps.m_Settings[39], mrBrightnessShade.right + 15, m_nArenaTop + mrBrightnessShade.top - ss / 2, myPaint);
+            canvas.drawText("" + myMaps.m_Settings[40], mrBrightnessShade.right + 15, m_nArenaTop + mrBrightnessShade2.top - ss / 2, myPaint);
 
             int c = m_nArenaTop + mrBrightnessShade.top + 15;
             myPaint.setARGB(127, 255, 0, 255);  //设置字体颜色
@@ -1679,7 +1679,7 @@ public class myGameViewMap extends View {
             canvas.drawRect(rt2, myPaint);
             rt3.set(ww+rt5.width()+hh, hh*3/4, ww+rt5.width()+rt7.width()+hh, m_nArenaTop-hh*3/4);
             canvas.drawRect(rt3, myPaint);
-            if (myMaps.m_Sets[12] == 1 && mySQLite.m_SQL.find_Level(myMaps.curMap.key, myMaps.curMap.Level_id) > -1) myPaint.setARGB(255, 127, 0, 0);
+            if (myMaps.m_Settings[12] == 1 && mySQLite.m_SQL.find_Level(myMaps.curMap.key, myMaps.curMap.Level_id) > -1) myPaint.setARGB(255, 127, 0, 0);
             else myPaint.setARGB(255, 80, 100, 110);
             rt4.set(ww+rt7.width()+rt5.width()*2+hh*2, hh*3/4, ww+rt7.width()+rt5.width()*2+rt6.width()+hh*2, m_nArenaTop-hh*3/4);
             canvas.drawRect(rt4, myPaint);
@@ -1767,7 +1767,7 @@ public class myGameViewMap extends View {
         }
 
         // 在背景上显示当前时间
-        if (myMaps.m_Sets[25] == 1) {
+        if (myMaps.m_Settings[25] == 1) {
             Date dt = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm E");
             String str_time = sdf.format(dt);
@@ -1785,7 +1785,7 @@ public class myGameViewMap extends View {
 
         ss = sp2px(myMaps.ctxDealFile, 16);
         myPaint.setTextSize(ss);
-        if (myMaps.m_Sets[13] == 1) {  //“互动双推”模式
+        if (myMaps.m_Settings[13] == 1) {  //“互动双推”模式
             rt.set(getWidth()-ss*4-ss/2, m_nArenaTop, getWidth(), m_nArenaTop+ss+ss/2);
             myPaint.setARGB(127, 0, 0, 0);
             myPaint.setStyle(Paint.Style.FILL);
@@ -2041,21 +2041,21 @@ public class myGameViewMap extends View {
             ss = sp2px(myMaps.ctxDealFile, 16);
             if (mrBrightnessShade.contains(i, j)) {         // 偶位明暗度调整条
                 v = (i - mrBrightnessShade.left) / 40;
-                myMaps.m_Sets[39] = v;
+                myMaps.m_Settings[39] = v;
             } else if (mrBrightnessShade2.contains(i, j)) {  // 奇位明暗度调整条
                 v = (i - mrBrightnessShade2.left) / 40;
-                myMaps.m_Sets[40] = v;
+                myMaps.m_Settings[40] = v;
             } else if (i > mrBrightnessShade.right + 90 && i < mrBrightnessShade.right + ss + 150 && j > mrBrightnessShade.top && j < mrBrightnessShade2.bottom) {
-                myMaps.m_Sets[39] = 0;
-                myMaps.m_Sets[40] = 5;
+                myMaps.m_Settings[39] = 0;
+                myMaps.m_Settings[40] = 5;
             } else if (i < mrBrightnessShade.left && j > mrBrightnessShade.top && j < mrBrightnessShade.bottom) {
-                if (i > mrBrightnessShade.left-30) myMaps.m_Sets[39] = 0;
+                if (i > mrBrightnessShade.left-30) myMaps.m_Settings[39] = 0;
             } else if (i < mrBrightnessShade.left && j > mrBrightnessShade2.top && j < mrBrightnessShade2.bottom) {
-                if (i > mrBrightnessShade.left-30) myMaps.m_Sets[40] = 0;
+                if (i > mrBrightnessShade.left-30) myMaps.m_Settings[40] = 0;
             } else if (i > mrBrightnessShade.right && j > mrBrightnessShade.top && j < mrBrightnessShade.bottom) {
-                if (i < mrBrightnessShade.right+30) myMaps.m_Sets[39] = 15;
+                if (i < mrBrightnessShade.right+30) myMaps.m_Settings[39] = 15;
             } else if (i > mrBrightnessShade.right && j > mrBrightnessShade2.top && j < mrBrightnessShade2.bottom) {
-                if (i < mrBrightnessShade.right+30) myMaps.m_Sets[40] = 15;
+                if (i < mrBrightnessShade.right+30) myMaps.m_Settings[40] = 15;
             }
 
             if (j < mrBrightnessShade.top-30 || j > mrBrightnessShade2.bottom+30) {
@@ -2179,11 +2179,11 @@ public class myGameViewMap extends View {
                     } else if (m_bBoxTo2 && m_Game.mPathfinder.mark4[m_iR][m_iC]) {  //若在箱子可达位置提示状态又点了该箱子 && click_Box_Row2 == m_iR && click_Box_Col2 == m_iC
                         if (mLadder2.size() > 0) mLadder2.clear();
                         m_bBoxTo2 = false; //取消箱子可达位置提示状态标志
-                    } else if (myMaps.m_Sets[29] == 1 && m_bBoxTo2 && (ladderDir2 = isLadder(true, m_iR, m_iC)) > 0) {  //是否触发爬阶梯（点击阶梯中的第二个箱子）
+                    } else if (myMaps.m_Settings[29] == 1 && m_bBoxTo2 && (ladderDir2 = isLadder(true, m_iR, m_iC)) > 0) {  //是否触发爬阶梯（点击阶梯中的第二个箱子）
                     } else {
                         click_Box_Row2 = m_iR;
                         click_Box_Col2 = m_iC;
-                        if (myMaps.m_Sets[11] == 1 && m_Game.mark15 != null && m_Game.mark15[m_iR][m_iC]) {
+                        if (myMaps.m_Settings[11] == 1 && m_Game.mark15 != null && m_Game.mark15[m_iR][m_iC]) {
                             MyToast.showToast(myMaps.ctxDealFile, getContext().getString(R.string.this_box_is_frozen), Toast.LENGTH_SHORT);
                             for (int r = 0; r < m_nRows; r++) {
                                 for (int c = 0; c < m_nCols; c++) {
@@ -2203,7 +2203,7 @@ public class myGameViewMap extends View {
                     if (ch == '-' || ch == '.' || //点按了空地
                             (m_bBoxTo2 && (ch == '@' || ch == '+'))) { //提示状态下点了人
                         if (m_bBoxTo2) {//若在箱子可达位置提示状态
-                            if (m_Game.mPathfinder.mark4[m_iR][m_iC] && (myMaps.m_Sets[24] == 0 || m_Game.mark14[m_iR][m_iC] > 0)) { //若为箱子的可达位置，自动推箱子的该位置
+                            if (m_Game.mPathfinder.mark4[m_iR][m_iC] && (myMaps.m_Settings[24] == 0 || m_Game.mark14[m_iR][m_iC] > 0)) { //若为箱子的可达位置，自动推箱子的该位置
                                 m_Game.mPathfinder.boxTo(true, click_Box_Row2, click_Box_Col2, m_iR, m_iC, m_Game.m_nRow2, m_Game.m_nCol2, m_Game.m_lstMovReDo2);
                                 if (m_Game.m_lstMovReDo2.size() > 0) {
                                     if (mLadder2.size() > 0) {  //加上爬阶梯路径
@@ -2391,12 +2391,12 @@ public class myGameViewMap extends View {
                     } else if (m_bBoxTo && m_Game.mPathfinder.mark3[m_iR][m_iC]) {//若在箱子可达位置提示状态又点了该箱子 && click_Box_Row == m_iR && click_Box_Col == m_iC
                         if (mLadder.size() > 0) mLadder.clear();
                         m_bBoxTo = false;    //取消箱子可达位置提示状态标志
-                    } else if (myMaps.m_Sets[29] == 1 && m_bBoxTo && (ladderDir = isLadder(false, m_iR, m_iC)) > 0) {  //是否触发爬阶梯（点击阶梯中的第二个箱子）
+                    } else if (myMaps.m_Settings[29] == 1 && m_bBoxTo && (ladderDir = isLadder(false, m_iR, m_iC)) > 0) {  //是否触发爬阶梯（点击阶梯中的第二个箱子）
                     } else {
                         if (mLadder.size() > 0) mLadder.clear();
                         click_Box_Row = m_iR;
                         click_Box_Col = m_iC;
-                        if (myMaps.m_Sets[11] == 1 && m_Game.mark16 != null && m_Game.mark16[m_iR][m_iC]) {
+                        if (myMaps.m_Settings[11] == 1 && m_Game.mark16 != null && m_Game.mark16[m_iR][m_iC]) {
                             MyToast.showToast(myMaps.ctxDealFile, getContext().getString(R.string.this_box_is_trapped_in_a_net), Toast.LENGTH_SHORT);
                             for (int r = 0; r < m_nRows; r++) {
                                 for (int c = 0; c < m_nCols; c++) {
@@ -2670,7 +2670,7 @@ public class myGameViewMap extends View {
 
         StringBuilder s = new StringBuilder();
 
-        if (myMaps.m_Sets[9] == 1) {  //标尺不随关卡旋转
+        if (myMaps.m_Settings[9] == 1) {  //标尺不随关卡旋转
             int n;
             switch (myMaps.m_nTrun) {
                 case 1:

@@ -662,15 +662,15 @@ public class myEditViewMap extends View {
                         canvas.drawBitmap(myMaps.skinBit, rtKMD, rt, myPaint);
                         break;
                 } //end switch
-                if (ch == '#' && (myMaps.m_Sets[22] & 1) > 0 ||
-                    (ch == '-' || ch == '_' || ch == ' ' || ch == '\0') && (myMaps.m_Sets[22] & 2) > 0 ||
-                    ch == '.' && (myMaps.m_Sets[22] & 4) > 0 ||
-                    (ch == '$' || ch == '*') && (myMaps.m_Sets[22] & 8) > 0 ||
-                    (ch == '@' || ch == '+') && (myMaps.m_Sets[22] & 16) > 0) {
+                if (ch == '#' && (myMaps.m_Settings[22] & 1) > 0 ||
+                    (ch == '-' || ch == '_' || ch == ' ' || ch == '\0') && (myMaps.m_Settings[22] & 2) > 0 ||
+                    ch == '.' && (myMaps.m_Settings[22] & 4) > 0 ||
+                    (ch == '$' || ch == '*') && (myMaps.m_Settings[22] & 8) > 0 ||
+                    (ch == '@' || ch == '+') && (myMaps.m_Settings[22] & 16) > 0) {
                     mStr = mGetCur2(i, j);  //标尺
                     myPaint.setTextSize(m_PicWidth /3);
                     myPaint.getTextBounds(mStr, 0, mStr.length(), rt0);
-                    myPaint.setColor(myMaps.m_Sets[21]);
+                    myPaint.setColor(myMaps.m_Settings[21]);
                     canvas.drawText(mStr, rt.left + (m_PicWidth-rt0.width())/2, rt.top + (m_PicWidth+rt0.height())/2, myPaint);
                     myPaint.setARGB(255, 0, 0, 0);
                 }
@@ -809,7 +809,7 @@ public class myEditViewMap extends View {
             }
             isDrawing = true;  //绘制之后
             if (!bSontinuous || m_iR != m_iR0 || m_iC != m_iC0) {  //非连续绘制；或连续绘制时，坐标改变
-                if (myMaps.m_Sets[19] == 1) {
+                if (myMaps.m_Settings[19] == 1) {
                     switch (m_Objs[cur_Obj]) {
                         case '.':
                             if (m_Edit.m_cArray[m_iR+m_nMapTop][m_iC+m_nMapLeft] == '$' ||

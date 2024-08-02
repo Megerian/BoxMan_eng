@@ -1,7 +1,5 @@
 package my.boxman;
 
-import static java.security.AccessController.getContext;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -60,7 +58,7 @@ public class myPicListView extends Activity implements OnScrollListener {
 		mPicGridView.setOnItemLongClickListener(mItemLongClickListener);
 
 		//设置标题栏标题为图片路径
-		setTitle(myMaps.myPathList[myMaps.m_Sets[36]]);
+		setTitle(myMaps.myPathList[myMaps.m_Settings[36]]);
 
 		//注册弹出菜单
 		registerForContextMenu(mPicGridView);
@@ -150,17 +148,17 @@ public class myPicListView extends Activity implements OnScrollListener {
 					myMaps.myPathList[3],
 					myMaps.myPathList[4]
 				};
-				int m = myMaps.m_Sets[36];
+				int m = myMaps.m_Settings[36];
 				if (m < 0 || m > 4) m = 0;
 				AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
 				builder.setTitle(getString(R.string.title_image_position)).setSingleChoiceItems(m_menu, m, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						myMaps.m_Sets[36] = which;
+						myMaps.m_Settings[36] = which;
 					}}).setNeutralButton(getString(R.string.button_edit), new DialogInterface.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if (myMaps.m_Sets[36] > 1 && myMaps.m_Sets[36] < 5) {
+						if (myMaps.m_Settings[36] > 1 && myMaps.m_Settings[36] < 5) {
 							dialog.dismiss();
 							Intent intent1 = new Intent();
 							intent1.setClass(myPicListView.this, myFileExplorerActivity.class);
@@ -171,14 +169,14 @@ public class myPicListView extends Activity implements OnScrollListener {
 					}}).setPositiveButton(R.string.button_open, new DialogInterface.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if (myMaps.myPathList[myMaps.m_Sets[36]].trim().isEmpty()) {
-							myMaps.myPathList[myMaps.m_Sets[36]] = "/";
+						if (myMaps.myPathList[myMaps.m_Settings[36]].trim().isEmpty()) {
+							myMaps.myPathList[myMaps.m_Settings[36]] = "/";
 						}
 						try {
 							dialog.dismiss();
 							recycleBitmapCaches(0, myMaps.mFile_List.size());
-							myMaps.edPicList(myMaps.sRoot + myMaps.myPathList[myMaps.m_Sets[36]]);
-							setTitle(myMaps.myPathList[myMaps.m_Sets[36]]);
+							myMaps.edPicList(myMaps.sRoot + myMaps.myPathList[myMaps.m_Settings[36]]);
+							setTitle(myMaps.myPathList[myMaps.m_Settings[36]]);
 							adapter.notifyDataSetChanged();
 						} catch (Exception e) {
 							MyToast.showToast(myPicListView.this, getString(R.string.incorrect_position), Toast.LENGTH_SHORT);
@@ -212,7 +210,7 @@ public class myPicListView extends Activity implements OnScrollListener {
 				}
 				break;
 			case 1:  //删除图片
-				File file = new File(new StringBuilder(myMaps.sRoot).append(myMaps.myPathList[myMaps.m_Sets[36]]).append(myMaps.mFile_List.get(m_Num)).toString());
+				File file = new File(new StringBuilder(myMaps.sRoot).append(myMaps.myPathList[myMaps.m_Settings[36]]).append(myMaps.mFile_List.get(m_Num)).toString());
 				if (file.exists() && file.isFile()) file.delete();
 				myMaps.mFile_List.remove(m_Num);
 				recycleBitmapCaches(m_Num, myMaps.mFile_List.size());
@@ -227,8 +225,8 @@ public class myPicListView extends Activity implements OnScrollListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 999) {
 			recycleBitmapCaches(0, myMaps.mFile_List.size());
-			myMaps.edPicList(myMaps.sRoot + myMaps.myPathList[myMaps.m_Sets[36]]);
-			setTitle(myMaps.myPathList[myMaps.m_Sets[36]]);
+			myMaps.edPicList(myMaps.sRoot + myMaps.myPathList[myMaps.m_Settings[36]]);
+			setTitle(myMaps.myPathList[myMaps.m_Settings[36]]);
 			adapter.notifyDataSetChanged();
         }
     }
@@ -247,7 +245,7 @@ public class myPicListView extends Activity implements OnScrollListener {
 			/* 下面两个字段需要组合使用 */
 			opts.inPurgeable = true;
 			opts.inInputShareable = true;
-			myMaps.edPict = BitmapFactory.decodeFile(myMaps.sRoot + myMaps.myPathList[myMaps.m_Sets[36]] + fn, opts);
+			myMaps.edPict = BitmapFactory.decodeFile(myMaps.sRoot + myMaps.myPathList[myMaps.m_Settings[36]] + fn, opts);
 		} catch (Exception e) {
 			if (myMaps.edPict != null && !myMaps.edPict.isRecycled()) {
 				myMaps.edPict.recycle();

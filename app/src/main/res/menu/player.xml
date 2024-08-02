@@ -3,11 +3,11 @@
 	android:fitsSystemWindows="true">
 	<item
 		android:id="@+id/player_settings1"
-		android:title="@string/player_setup1___" />
+		android:title="@string/settings_menu" />
 
 	<item
 		android:id="@+id/player_settings2"
-		android:title="@string/player_setup2___" />
+		android:title="@string/settings_to_toggle" />
 
 	<item
 		android:id="@+id/player_ReStart"

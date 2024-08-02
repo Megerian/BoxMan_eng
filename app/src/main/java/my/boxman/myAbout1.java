@@ -65,7 +65,7 @@ public class myAbout1 extends Activity {
 		et_Author.setText(myMaps.J_Author);
 		et_Comment.setText(myMaps.J_Comment);
 		
-		if (myMaps.m_Sets[0] < 3 || myMaps.sFile.equals("最近推过的关卡") || myMaps.sFile.equals("创编关卡") || myMaps.sFile.equals("相似关卡") || myMaps.sFile.equals("关卡查询")) {  //设置内置关卡只读
+		if (myMaps.m_Settings[0] < 3 || myMaps.sFile.equals("最近推过的关卡") || myMaps.sFile.equals("创编关卡") || myMaps.sFile.equals("相似关卡") || myMaps.sFile.equals("关卡查询")) {  //设置内置关卡只读
 			et_Title.setCursorVisible(false);      
 			et_Title.setFocusable(false);         
 			et_Title.setFocusableInTouchMode(false);    
@@ -104,7 +104,7 @@ public class myAbout1 extends Activity {
 					myMaps.J_Author = et_Author.getText().toString().trim();
 					myMaps.J_Comment = et_Comment.getText().toString().trim();
 					mySQLite.m_SQL.Update_T_Inf(myMaps.m_Set_id, myMaps.J_Title, myMaps.J_Author, myMaps.J_Comment);
-					myMaps.mSets3.get(myMaps.m_Sets[1]).title = str;
+					myMaps.mSets3.get(myMaps.m_Settings[1]).title = str;
 					myMaps.sFile = str;
 					myAbout1.this.finish();
 		    	}

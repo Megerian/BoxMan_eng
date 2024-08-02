@@ -95,7 +95,7 @@ public class myExport extends Activity implements myGifMakeFragment.GifMakeStatu
 					my_imPort_YASS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 				}
 				my_AND.append("Solution (moves ").append(len).append(", pushes ").append(p);
-				if (myMaps.m_Sets[30] == 1) {  //是否导出答案备注
+				if (myMaps.m_Settings[30] == 1) {  //是否导出答案备注
 					my_AND.append(", comment ").append(my_imPort_YASS);
 				}
 				my_AND.append("): \n");

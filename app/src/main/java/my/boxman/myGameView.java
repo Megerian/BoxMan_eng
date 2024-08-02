@@ -102,7 +102,7 @@ public class myGameView extends Activity {
     int m_iR9, m_iC9, m_iR10, m_iC10; //正逆推时，箱子停止的位置，判断死锁移动时使用
     int b_nRow = -1, b_nCol = -1, oldDir; //动画中的箱子
     final int m_iSleep[] = {50, 17, 10, 5, 2}; //移动速度
-    String m_sSleep[] = new String[4];
+    String[] m_sSleep = new String[4];
 
     LinkedList<Byte> m_lstMovedHistory = new LinkedList<Byte>();  //临时栈，记录当前点前的动作，MacroDebug 会用的到
 
@@ -207,7 +207,7 @@ public class myGameView extends Activity {
         int mRT = 0;
 
         //若仅仓管员的移动或为正推
-        if (b_nRow < 0 || (!bt_BK.isChecked() && myMaps.m_Sets[18] > 0)) {
+        if (b_nRow < 0 || (!bt_BK.isChecked() && myMaps.m_Settings[18] > 0)) {
             switch (mDir1) {
                 case 1:
                     switch (mDir2) {
@@ -267,14 +267,14 @@ public class myGameView extends Activity {
                 case 1:
                     switch (mDir2) {
                         case 4:  //90
-                            if (bt_BK.isChecked() && myMaps.m_Sets[18] < 0) mRT = -1080;
+                            if (bt_BK.isChecked() && myMaps.m_Settings[18] < 0) mRT = -1080;
                             else mRT = -2080;
                             break;
                         case 1:  //180
                             if (!bt_BK.isChecked()) mRT = -10170;
                             break;
                         case 2:  //-90
-                            if (bt_BK.isChecked() && myMaps.m_Sets[18] < 0) mRT = -2080;
+                            if (bt_BK.isChecked() && myMaps.m_Settings[18] < 0) mRT = -2080;
                             else mRT = -1080;
                             break;
                     }
@@ -282,11 +282,11 @@ public class myGameView extends Activity {
                 case 2:
                     switch (mDir2) {
                         case 3:  //-90
-                            if (bt_BK.isChecked() && myMaps.m_Sets[18] < 0) mRT = -2080;
+                            if (bt_BK.isChecked() && myMaps.m_Settings[18] < 0) mRT = -2080;
                             else mRT = -1080;
                             break;
                         case 1:  //90
-                            if (bt_BK.isChecked() && myMaps.m_Sets[18] < 0) mRT = -1080;
+                            if (bt_BK.isChecked() && myMaps.m_Settings[18] < 0) mRT = -1080;
                             else mRT = -2080;
                             break;
                         case 2:  //180
@@ -300,11 +300,11 @@ public class myGameView extends Activity {
                             if (!bt_BK.isChecked()) mRT = -10170;
                             break;
                         case 4:  //-90
-                            if (bt_BK.isChecked() && myMaps.m_Sets[18] < 0) mRT = -2080;
+                            if (bt_BK.isChecked() && myMaps.m_Settings[18] < 0) mRT = -2080;
                             else mRT = -1080;
                             break;
                         case 2:  //90
-                            if (bt_BK.isChecked() && myMaps.m_Sets[18] < 0) mRT = -1080;
+                            if (bt_BK.isChecked() && myMaps.m_Settings[18] < 0) mRT = -1080;
                             else mRT = -2080;
                             break;
                     }
@@ -312,14 +312,14 @@ public class myGameView extends Activity {
                 case 4:
                     switch (mDir2) {
                         case 3:  //90
-                            if (bt_BK.isChecked() && myMaps.m_Sets[18] < 0) mRT = -1080;
+                            if (bt_BK.isChecked() && myMaps.m_Settings[18] < 0) mRT = -1080;
                             else mRT = -2080;
                             break;
                         case 4:  //180
                             if (!bt_BK.isChecked()) mRT = -10170;
                             break;
                         case 1:  //-90
-                            if (bt_BK.isChecked() && myMaps.m_Sets[18] < 0) mRT = -2080;
+                            if (bt_BK.isChecked() && myMaps.m_Settings[18] < 0) mRT = -2080;
                             else mRT = -1080;
                             break;
                     }
@@ -366,7 +366,7 @@ public class myGameView extends Activity {
                 mMap.invalidate();
 
                 if (m_nStep > 0) {
-                    myTimer1.sleep(YanshiSpeed[myMaps.m_Sets[10]]);
+                    myTimer1.sleep(YanshiSpeed[myMaps.m_Settings[10]]);
                     m_bPush = false;
                 }
             } else {
@@ -397,15 +397,15 @@ public class myGameView extends Activity {
             m_bBusing = false;
         } else {
             if (mMap.d_Moves < mMap.m_PicWidth) {  //精细移动
-                if (mMap.d_Moves >= 0) mMap.d_Moves += m_iSleep[myMaps.m_Sets[10]];
-                else mMap.d_Moves += (myMaps.m_Sets[10] > 3 ? 10 : 30);
+                if (mMap.d_Moves >= 0) mMap.d_Moves += m_iSleep[myMaps.m_Settings[10]];
+                else mMap.d_Moves += (myMaps.m_Settings[10] > 3 ? 10 : 30);
                 if (mMap.d_Moves >= -10000 && mMap.d_Moves < -2080 || mMap.d_Moves >= -2000 && mMap.d_Moves < -1080 || mMap.d_Moves >= -1000 && mMap.d_Moves < 0)  //转向已经完成
                     mMap.d_Moves = 0;
             } else {  //初始移动
                 b_nRow = -1;
                 b_nCol = -1;
-                oldDir = myMaps.m_Sets[5];
-                if (m_bYanshi && myMaps.m_Sets[28] == 1) {
+                oldDir = myMaps.m_Settings[5];
+                if (m_bYanshi && myMaps.m_Settings[28] == 1) {
                     do {
                         reDo1();
                     } while (m_nStep > 0 && !m_bPush);
@@ -413,12 +413,12 @@ public class myGameView extends Activity {
                 } else {
                     reDo1();
                 }
-                myMaps.m_Sets[18] = 1;  //ReDo
-                if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0 || myMaps.m_Sets[27] == 0 || myMaps.m_Sets[10] < 3){
+                myMaps.m_Settings[18] = 1;  //ReDo
+                if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0 || myMaps.m_Settings[27] == 0 || myMaps.m_Settings[10] < 3){
                     mMap.d_Moves = 0;
                 } else {
                     if (!m_bACT_ERROR) {
-                        mMap.d_Moves = getRotate(oldDir, myMaps.m_Sets[14]);
+                        mMap.d_Moves = getRotate(oldDir, myMaps.m_Settings[14]);
                     }
                 }
             }
@@ -427,7 +427,7 @@ public class myGameView extends Activity {
         }
 
         //正推死锁判断
-        if (m_nStep == 0 && myMaps.m_Sets[11] == 1 && mMap.d_Moves >= mMap.m_PicWidth && myLock(m_iR9, m_iC9)) {
+        if (m_nStep == 0 && myMaps.m_Settings[11] == 1 && mMap.d_Moves >= mMap.m_PicWidth && myLock(m_iR9, m_iC9)) {
             lockDlg.show();
         }
     }
@@ -457,19 +457,19 @@ public class myGameView extends Activity {
             m_bBusing = false;
         } else {
             if (mMap.d_Moves < mMap.m_PicWidth) {  //精细移动
-                if (mMap.d_Moves >= 0) mMap.d_Moves += m_iSleep[myMaps.m_Sets[10]];
-                else mMap.d_Moves += (myMaps.m_Sets[10] > 3 ? 10 : 30);
+                if (mMap.d_Moves >= 0) mMap.d_Moves += m_iSleep[myMaps.m_Settings[10]];
+                else mMap.d_Moves += (myMaps.m_Settings[10] > 3 ? 10 : 30);
                 if (mMap.d_Moves >= -10000 && mMap.d_Moves < -2080 || mMap.d_Moves >= -2000 && mMap.d_Moves < -1080 || mMap.d_Moves >= -1000 && mMap.d_Moves < 0)
                     mMap.d_Moves = 0;
             } else {  //初始移动
                 b_nRow = -1;
                 b_nCol = -1;
-                oldDir = myMaps.m_Sets[5];
+                oldDir = myMaps.m_Settings[5];
                 unDo1();
-                myMaps.m_Sets[18] = -1;  //UnDo
-                if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0 || myMaps.m_Sets[27] == 0 || myMaps.m_Sets[10] < 3)
+                myMaps.m_Settings[18] = -1;  //UnDo
+                if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0 || myMaps.m_Settings[27] == 0 || myMaps.m_Settings[10] < 3)
                     mMap.d_Moves = 0;
-                else mMap.d_Moves = getRotate(oldDir, myMaps.m_Sets[14]);
+                else mMap.d_Moves = getRotate(oldDir, myMaps.m_Settings[14]);
             }
             mMap.invalidate();
             myTimer2.sleep(1);
@@ -505,7 +505,7 @@ public class myGameView extends Activity {
                 } while (m_nStep > 0 && (m_bPush && m_lstMovReDo2.getLast() == m_Dir || !m_bPush && m_lstMovReDo2.getLast() < 5));
                 mMap.invalidate();
                 if (m_nStep > 0) {
-                    myTimer3.sleep(YanshiSpeed[myMaps.m_Sets[10]]);
+                    myTimer3.sleep(YanshiSpeed[myMaps.m_Settings[10]]);
                     m_bPush = false;
                 }
             } else {
@@ -530,21 +530,21 @@ public class myGameView extends Activity {
             m_bBusing = false;
         } else {
             if (mMap.d_Moves < mMap.m_PicWidth) {  //精细移动
-                if (mMap.d_Moves >= 0) mMap.d_Moves += m_iSleep[myMaps.m_Sets[10]];
-                else mMap.d_Moves += (myMaps.m_Sets[10] > 3 ? 10 : 30);
+                if (mMap.d_Moves >= 0) mMap.d_Moves += m_iSleep[myMaps.m_Settings[10]];
+                else mMap.d_Moves += (myMaps.m_Settings[10] > 3 ? 10 : 30);
                 if (mMap.d_Moves >= -10000 && mMap.d_Moves < -2080 || mMap.d_Moves >= -2000 && mMap.d_Moves < -1080 || mMap.d_Moves >= -1000 && mMap.d_Moves < 0)
                     mMap.d_Moves = 0;
             } else {  //初始移动
                 b_nRow = -1;
                 b_nCol = -1;
-                oldDir = myMaps.m_Sets[5];
+                oldDir = myMaps.m_Settings[5];
                 reDo2();
-                myMaps.m_Sets[18] = 1;  //ReDo
-                if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0 || myMaps.m_Sets[27] == 0 || myMaps.m_Sets[10] < 3) {
+                myMaps.m_Settings[18] = 1;  //ReDo
+                if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0 || myMaps.m_Settings[27] == 0 || myMaps.m_Settings[10] < 3) {
                     mMap.d_Moves = 0;
                 } else {
                     if (!m_bACT_ERROR) {
-                        mMap.d_Moves = getRotate(oldDir, myMaps.m_Sets[14]);
+                        mMap.d_Moves = getRotate(oldDir, myMaps.m_Settings[14]);
                     }
                 }
             }
@@ -553,7 +553,7 @@ public class myGameView extends Activity {
         }
 
         //逆推死锁判断
-        if (m_nStep == 0 && myMaps.m_Sets[11] == 1 && mMap.d_Moves >= mMap.m_PicWidth && myLock2(m_iR10, m_iC10)) {
+        if (m_nStep == 0 && myMaps.m_Settings[11] == 1 && mMap.d_Moves >= mMap.m_PicWidth && myLock2(m_iR10, m_iC10)) {
             lockDlg.show();
         }
     }
@@ -579,19 +579,19 @@ public class myGameView extends Activity {
             m_bBusing = false;
         } else {
             if (mMap.d_Moves < mMap.m_PicWidth) {  //精细移动
-                if (mMap.d_Moves >= 0) mMap.d_Moves += m_iSleep[myMaps.m_Sets[10]];
-                else mMap.d_Moves += (myMaps.m_Sets[10] > 3 ? 10 : 30);
+                if (mMap.d_Moves >= 0) mMap.d_Moves += m_iSleep[myMaps.m_Settings[10]];
+                else mMap.d_Moves += (myMaps.m_Settings[10] > 3 ? 10 : 30);
                 if (mMap.d_Moves >= -10000 && mMap.d_Moves < -2080 || mMap.d_Moves >= -2000 && mMap.d_Moves < -1080 || mMap.d_Moves >= -1000 && mMap.d_Moves < 0)
                     mMap.d_Moves = 0;
             } else {  //初始移动
                 b_nRow = -1;
                 b_nCol = -1;
-                oldDir = myMaps.m_Sets[5];
+                oldDir = myMaps.m_Settings[5];
                 unDo2();
-                myMaps.m_Sets[18] = -1;  //UnDo
-                if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0 || myMaps.m_Sets[27] == 0 || myMaps.m_Sets[10] < 3)
+                myMaps.m_Settings[18] = -1;  //UnDo
+                if (myMaps.isSimpleSkin || myMaps.isSkin_200 == 0 || myMaps.m_Settings[27] == 0 || myMaps.m_Settings[10] < 3)
                     mMap.d_Moves = 0;
-                else mMap.d_Moves = getRotate(oldDir, myMaps.m_Sets[14]);
+                else mMap.d_Moves = getRotate(oldDir, myMaps.m_Settings[14]);
             }
             mMap.invalidate();
             myTimer4.sleep(1);
@@ -638,15 +638,15 @@ public class myGameView extends Activity {
         if (mMap.m_boxCanCome) mMap.m_boxCanCome = false;  //关闭可推过来箱子提示状态
 
         if (m_Dir < 5) {
-            myMaps.m_Sets[14] = m_Dir;  //动画移动方向
-            myMaps.m_Sets[5] = m_Dir;  //仓管员图片方向
+            myMaps.m_Settings[14] = m_Dir;  //动画移动方向
+            myMaps.m_Settings[5] = m_Dir;  //仓管员图片方向
             i = m_nRow + dr_reDo1[m_Dir];
             j = m_nCol + dc_reDo1[m_Dir];
             i2 = -1;
             j2 = -1;
         } else {
-            myMaps.m_Sets[14] = m_Dir - 4;  //动画移动方向
-            myMaps.m_Sets[5] = m_Dir - 4;  //仓管员图片方向
+            myMaps.m_Settings[14] = m_Dir - 4;  //动画移动方向
+            myMaps.m_Settings[5] = m_Dir - 4;  //仓管员图片方向
             i = m_nRow + dr_reDo1[m_Dir - 4];
             j = m_nCol + dc_reDo1[m_Dir - 4];
             i2 = m_nRow + dr_reDo1[m_Dir];
@@ -790,36 +790,36 @@ public class myGameView extends Activity {
 
         switch (m_Dir) {
             case 1:
-                myMaps.m_Sets[14] = 3;  //动画移动方向
-                myMaps.m_Sets[5] = 3;   //仓管员图片方向
+                myMaps.m_Settings[14] = 3;  //动画移动方向
+                myMaps.m_Settings[5] = 3;   //仓管员图片方向
                 break;
             case 2:
-                myMaps.m_Sets[14] = 4;
-                myMaps.m_Sets[5] = 4;
+                myMaps.m_Settings[14] = 4;
+                myMaps.m_Settings[5] = 4;
                 break;
             case 3:
-                myMaps.m_Sets[14] = 1;
-                myMaps.m_Sets[5] = 1;
+                myMaps.m_Settings[14] = 1;
+                myMaps.m_Settings[5] = 1;
                 break;
             case 4:
-                myMaps.m_Sets[14] = 2;
-                myMaps.m_Sets[5] = 2;
+                myMaps.m_Settings[14] = 2;
+                myMaps.m_Settings[5] = 2;
                 break;
             case 5:
-                myMaps.m_Sets[14] = 3;
-                myMaps.m_Sets[5] = 1;
+                myMaps.m_Settings[14] = 3;
+                myMaps.m_Settings[5] = 1;
                 break;
             case 6:
-                myMaps.m_Sets[14] = 4;
-                myMaps.m_Sets[5] = 2;
+                myMaps.m_Settings[14] = 4;
+                myMaps.m_Settings[5] = 2;
                 break;
             case 7:
-                myMaps.m_Sets[14] = 1;
-                myMaps.m_Sets[5] = 3;
+                myMaps.m_Settings[14] = 1;
+                myMaps.m_Settings[5] = 3;
                 break;
             case 8:
-                myMaps.m_Sets[14] = 2;
-                myMaps.m_Sets[5] = 4;
+                myMaps.m_Settings[14] = 2;
+                myMaps.m_Settings[5] = 4;
                 break;
         }
         if (m_Dir < 5) {
@@ -935,36 +935,36 @@ public class myGameView extends Activity {
 
         switch (m_Dir) {
             case 1:
-                myMaps.m_Sets[14] = 1;  //动画移动方向
-                myMaps.m_Sets[5] = 1;   //仓管员图片方向
+                myMaps.m_Settings[14] = 1;  //动画移动方向
+                myMaps.m_Settings[5] = 1;   //仓管员图片方向
                 break;
             case 2:
-                myMaps.m_Sets[14] = 2;
-                myMaps.m_Sets[5] = 2;
+                myMaps.m_Settings[14] = 2;
+                myMaps.m_Settings[5] = 2;
                 break;
             case 3:
-                myMaps.m_Sets[14] = 3;
-                myMaps.m_Sets[5] = 3;
+                myMaps.m_Settings[14] = 3;
+                myMaps.m_Settings[5] = 3;
                 break;
             case 4:
-                myMaps.m_Sets[14] = 4;
-                myMaps.m_Sets[5] = 4;
+                myMaps.m_Settings[14] = 4;
+                myMaps.m_Settings[5] = 4;
                 break;
             case 5:
-                myMaps.m_Sets[14] = 1;
-                myMaps.m_Sets[5] = 3;
+                myMaps.m_Settings[14] = 1;
+                myMaps.m_Settings[5] = 3;
                 break;
             case 6:
-                myMaps.m_Sets[14] = 2;
-                myMaps.m_Sets[5] = 4;
+                myMaps.m_Settings[14] = 2;
+                myMaps.m_Settings[5] = 4;
                 break;
             case 7:
-                myMaps.m_Sets[14] = 3;
-                myMaps.m_Sets[5] = 1;
+                myMaps.m_Settings[14] = 3;
+                myMaps.m_Settings[5] = 1;
                 break;
             case 8:
-                myMaps.m_Sets[14] = 4;
-                myMaps.m_Sets[5] = 2;
+                myMaps.m_Settings[14] = 4;
+                myMaps.m_Settings[5] = 2;
                 break;
         }
         if (m_Dir < 5) {
@@ -1107,23 +1107,23 @@ public class myGameView extends Activity {
         switch (m_Dir) {
             case 1:
             case 5:
-                myMaps.m_Sets[14] = 3;  //动画移动方向
-                myMaps.m_Sets[5] = 3;   //仓管员图片方向
+                myMaps.m_Settings[14] = 3;  //动画移动方向
+                myMaps.m_Settings[5] = 3;   //仓管员图片方向
                 break;
             case 2:
             case 6:
-                myMaps.m_Sets[14] = 4;
-                myMaps.m_Sets[5] = 4;
+                myMaps.m_Settings[14] = 4;
+                myMaps.m_Settings[5] = 4;
                 break;
             case 3:
             case 7:
-                myMaps.m_Sets[14] = 1;
-                myMaps.m_Sets[5] = 1;
+                myMaps.m_Settings[14] = 1;
+                myMaps.m_Settings[5] = 1;
                 break;
             case 4:
             case 8:
-                myMaps.m_Sets[14] = 2;
-                myMaps.m_Sets[5] = 2;
+                myMaps.m_Settings[14] = 2;
+                myMaps.m_Settings[5] = 2;
                 break;
             default:
         }
@@ -1218,7 +1218,7 @@ public class myGameView extends Activity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-            if (myMaps.m_Sets[25] == 1) {
+            if (myMaps.m_Settings[25] == 1) {
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
 
@@ -1344,7 +1344,7 @@ public class myGameView extends Activity {
                     if (m_lstMovUnDo2.isEmpty()) {
                         MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
                     } else {
-                        if (myMaps.m_Sets[23] == 1) m_nStep = 1;
+                        if (myMaps.m_Settings[23] == 1) m_nStep = 1;
                         else m_nStep = getStep(m_lstMovUnDo2);
                         UpData4(1);
                     }
@@ -1381,7 +1381,7 @@ public class myGameView extends Activity {
                         if (m_lstMovUnDo.isEmpty()) {
                             MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
                         } else {
-                            if (myMaps.m_Sets[23] == 1) m_nStep = 1;
+                            if (myMaps.m_Settings[23] == 1) m_nStep = 1;
                             else  {
                                 if (m_nLastSteps >= 0 && m_nLastSteps <= m_lstMovUnDo.size()) m_nStep = m_lstMovUnDo.size() - m_nLastSteps;
                                 else m_nStep = getStep2(m_lstMovUnDo);
@@ -1459,7 +1459,7 @@ public class myGameView extends Activity {
                     if (m_lstMovReDo2.isEmpty()) {
                         MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
                     } else {
-                        if (myMaps.m_Sets[23] == 1) m_nStep = 1;
+                        if (myMaps.m_Settings[23] == 1) m_nStep = 1;
                         else m_nStep = getStep2(m_lstMovReDo2);
                         UpData3(1);
                     }
@@ -1477,7 +1477,7 @@ public class myGameView extends Activity {
                         if (m_lstMovReDo.isEmpty()) {
                             MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
                         } else {
-                            if (myMaps.m_Sets[23] == 1) m_nStep = 1;
+                            if (myMaps.m_Settings[23] == 1) m_nStep = 1;
                             else m_nStep = getStep(m_lstMovReDo);
                             mMap.Box_Row0 = -1;  //记录箱子移动前的位置
                             m_nLastSteps = m_lstMovUnDo.size();
@@ -1546,8 +1546,8 @@ public class myGameView extends Activity {
             }
         });
         bt_IM = (CheckBox) findViewById(R.id.cb_IM);  //瞬移
-        bt_IM.setChecked(myMaps.m_Sets[6] == 1);  //上次瞬移开关状态
-        if (myMaps.m_Sets[6] == 1)
+        bt_IM.setChecked(myMaps.m_Settings[6] == 1);  //上次瞬移开关状态
+        if (myMaps.m_Settings[6] == 1)
             bt_IM.setBackgroundColor(0xff445566);
         else
             bt_IM.setBackgroundColor(0xff778899);
@@ -1558,10 +1558,10 @@ public class myGameView extends Activity {
                 if (mMap.m_lShowAnsInf) mMap.m_lShowAnsInf = false; //有了动作后，自动关闭答案信息的显示
                 if (isChecked) {
                     buttonView.setBackgroundColor(0xff445566);
-                    myMaps.m_Sets[6] = 1;  //记录瞬移开关状态，下次进入使用
+                    myMaps.m_Settings[6] = 1;  //记录瞬移开关状态，下次进入使用
                 } else {
                     buttonView.setBackgroundColor(0xff778899);
-                    myMaps.m_Sets[6] = 0;
+                    myMaps.m_Settings[6] = 0;
                 }
             }
         });
@@ -1832,8 +1832,8 @@ public class myGameView extends Activity {
         m_bBusing = false;
         m_bMoved = false;
         myMaps.m_StateIsRedy = false;
-        myMaps.m_Sets[14] = 2;
-        myMaps.m_Sets[5] = 2;
+        myMaps.m_Settings[14] = 2;
+        myMaps.m_Settings[5] = 2;
     }
 
     //自动箱子编号及计数有效的箱子和目标点
@@ -2042,8 +2042,8 @@ public class myGameView extends Activity {
             m_bYanshi2 = false;
             myMaps.m_StateIsRedy = false;
             m_imPort_YASS = "";
-            myMaps.m_Sets[14] = 2;
-            myMaps.m_Sets[5] = 2;
+            myMaps.m_Settings[14] = 2;
+            myMaps.m_Settings[5] = 2;
             m_nLastSteps = -1;
         } catch (Throwable ex) {
             myStop();
@@ -2069,7 +2069,7 @@ public class myGameView extends Activity {
         mMap.m_lChangeBK = false;  //是否显示更换背景按钮
         myMaps.isRecording = false;  //关闭录制模式
         mMap.d_Moves = mMap.m_PicWidth;
-        myMaps.m_Sets[13] = 0;  //加载新的关卡时，关闭“互动双推”模式
+        myMaps.m_Settings[13] = 0;  //加载新的关卡时，关闭“互动双推”模式
         levelReset(false);  //因为有了“互动双推”模式，计算静态死锁点中有正逆推的临时转换，影响正推箱子目标的复位，故此处特别进行正推关卡复位
 
         //舞台初始化
@@ -2084,7 +2084,7 @@ public class myGameView extends Activity {
         if (myMaps.mState2.size() > 0) {  // 若有答案
             myMaps.m_State = mySQLite.m_SQL.load_State(myMaps.mState2.get(0).id);
             if (myMaps.m_State.ans.length() > 0) formatPath(myMaps.m_State.ans, false);
-        } else if (myMaps.m_Sets[37] == 1 && myMaps.mState1.size() > 0) {  // 若无答案，自动加载最新状态
+        } else if (myMaps.m_Settings[37] == 1 && myMaps.mState1.size() > 0) {  // 若无答案，自动加载最新状态
             // 按保存时间排序，第一个为最新状态
             Collections.sort(myMaps.mState1, new Comparator() {
                 @Override
@@ -2486,7 +2486,7 @@ public class myGameView extends Activity {
     //正推通关
     private boolean myClearance() {
         //判断是否过关
-        if ((myMaps.m_Sets[13] == 0 || m_iStep[2] <= 0) && m_nGoals_OK == m_nGoals && m_iStep[0] > 0)
+        if ((myMaps.m_Settings[13] == 0 || m_iStep[2] <= 0) && m_nGoals_OK == m_nGoals && m_iStep[0] > 0)
             return true;
         return false;
     }
@@ -2494,7 +2494,7 @@ public class myGameView extends Activity {
     //逆推通关
     private boolean myClearance2() {
         //判断是否过关，逆推时，需要仓管员最后能回到正推地图中仓管员的初始位置
-        if ((myMaps.m_Sets[13] == 0 || m_iStep[0] <= 0) && m_nGoals_OK_2 == m_nGoals_2 && m_iStep[2] > 0 && mPathfinder.manTo2(true, bk_cArray, -1, -1, m_nRow2, m_nCol2, m_nRow3, m_nCol3))
+        if ((myMaps.m_Settings[13] == 0 || m_iStep[0] <= 0) && m_nGoals_OK_2 == m_nGoals_2 && m_iStep[2] > 0 && mPathfinder.manTo2(true, bk_cArray, -1, -1, m_nRow2, m_nCol2, m_nRow3, m_nCol3))
             return true;
         return false;
     }
@@ -2528,7 +2528,7 @@ public class myGameView extends Activity {
                 mMap.m_iR = m_nRow;
                 mMap.m_iC = m_nCol;
             }
-            myMaps.m_Sets[13] = 0;  //正逆相合后，立刻关闭“互动双推”模式，否则影响正推答案演示
+            myMaps.m_Settings[13] = 0;  //正逆相合后，立刻关闭“互动双推”模式，否则影响正推答案演示
         }
         return flg;
     }
@@ -2544,10 +2544,10 @@ public class myGameView extends Activity {
         mMap.invalidate();
         switch (act) {
             case 0:  //“互动双推”模式切换
-                if (myMaps.m_Sets[13] == 0) {
-                    myMaps.m_Sets[13] = 1;
+                if (myMaps.m_Settings[13] == 0) {
+                    myMaps.m_Settings[13] = 1;
                 } else {
-                    myMaps.m_Sets[13] = 0;
+                    myMaps.m_Settings[13] = 0;
                 }
 
                 mMap.invalidate();
@@ -2659,11 +2659,11 @@ public class myGameView extends Activity {
                 }
                 break;
             case 12:  //“奇偶格模式”开关
-                if (myMaps.m_Sets[38] == 1) {
-                    myMaps.m_Sets[38] = 0;
+                if (myMaps.m_Settings[38] == 1) {
+                    myMaps.m_Settings[38] = 0;
                     MyToast.showToast(myGameView.this, getString(R.string.parity_grid_mode_off), Toast.LENGTH_SHORT);
                 } else {
-                    myMaps.m_Sets[38] = 1;
+                    myMaps.m_Settings[38] = 1;
                     MyToast.showToast(myGameView.this, getString(R.string.parity_grid_mode_on), Toast.LENGTH_SHORT);
                 }
                 break;
@@ -3295,7 +3295,7 @@ public class myGameView extends Activity {
         myMaps.m_StateIsRedy = false;
         try {
             levelReset(false);  //正推复位
-            myMaps.m_Sets[13] = 0;  //求解后，关闭“互动双推”模式
+            myMaps.m_Settings[13] = 0;  //求解后，关闭“互动双推”模式
 
             int len = myMaps.m_State.ans.length();
             if (len > 0) {
@@ -3350,7 +3350,7 @@ public class myGameView extends Activity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && myMaps.m_Sets[16] == 0) {
+        if (hasFocus && myMaps.m_Settings[16] == 0) {
             hideSystemUI();
         }
     }
@@ -3360,7 +3360,7 @@ public class myGameView extends Activity {
     public void onOptionsMenuClosed(Menu menu) {
         super.onOptionsMenuClosed(menu);
 
-        if (myMaps.m_Sets[16] == 0) hideSystemUI();
+        if (myMaps.m_Settings[16] == 0) hideSystemUI();
     }
 
     @Override
@@ -3448,7 +3448,7 @@ public class myGameView extends Activity {
                 break;
             case R.id.player_save:  //保存状态
                 if (m_lstMovUnDo.size() > 0 || m_lstMovUnDo2.size() > 0) {
-                    if ((myMaps.m_Sets[13] == 0 || m_iStep[2] <= 0) && m_nGoals_OK == m_nGoals && m_iStep[0] > 0 && myMaps.curMap.Level_id > 0)  //箱子 == 目标 && 动过箱子，非试推状态
+                    if ((myMaps.m_Settings[13] == 0 || m_iStep[2] <= 0) && m_nGoals_OK == m_nGoals && m_iStep[0] > 0 && myMaps.curMap.Level_id > 0)  //箱子 == 目标 && 动过箱子，非试推状态
                         saveAns(1);
                     else
                         saveAns(0);
@@ -3555,19 +3555,21 @@ public class myGameView extends Activity {
                         getString(R.string.speed_settings),
                         getString(R.string.change_skin),
                         getString(R.string.change_background),
-                        getString(R.string.alternating_tile_brightness)
+                        getString(R.string.alternating_tile_brightness),
+                        getString(R.string.change_language),
                 };
                 Builder builder2 = new Builder(this, AlertDialog.THEME_HOLO_DARK);
                 builder2.setTitle(getString(R.string.settings)).setSingleChoiceItems(m_menu2, -1, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
+
                             case 0:   //速度设置
                                 Builder builder4 = new Builder(myGameView.this, AlertDialog.THEME_HOLO_DARK);
-                                builder4.setTitle(getString(R.string.movement_speed)).setSingleChoiceItems(m_sSleep, myMaps.m_Sets[10], new OnClickListener() {
+                                builder4.setTitle(getString(R.string.movement_speed)).setSingleChoiceItems(m_sSleep, myMaps.m_Settings[10], new OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        myMaps.m_Sets[10] = which;
+                                        myMaps.m_Settings[10] = which;
                                     }
                                 }).setPositiveButton(getString(R.string.okay), new OnClickListener() {
                                     @Override
@@ -3577,6 +3579,7 @@ public class myGameView extends Activity {
                                 });
                                 builder4.setCancelable(false).show();
                                 break;
+
                             case 1:   //更换皮肤
                                 skinList();
                                 m_nItemSelect = 0;
@@ -3615,6 +3618,7 @@ public class myGameView extends Activity {
                                 } else
                                     MyToast.showToast(myGameView.this, getString(R.string.skin_image_file_not_found), Toast.LENGTH_SHORT);
                                 break;
+
                             case 2:   //设置背景图片
                                 bkPicList();
                                 if (myMaps.mFile_List2.size() > 0) {
@@ -3667,11 +3671,34 @@ public class myGameView extends Activity {
                                     MyToast.showToast(myGameView.this, getString(R.string.image_file_not_found), Toast.LENGTH_SHORT);
                                 }
                                 break;
+
                             case 3:   //奇偶格位明暗度条
                                 dialog.dismiss();
                                 mMap.m_lParityBrightnessShade = true;
                                 mMap.invalidate();
                                 break;
+
+                            case 4:   //语言设置 | change language
+                                Builder languageSelection = new Builder(myGameView.this, AlertDialog.THEME_HOLO_DARK);
+                                String[] languages = new String[] { getString(R.string.chinese), getString(R.string.english) };
+                                int checkedItem = myMaps.localCode.equalsIgnoreCase("zh") ? 0 : 1;
+                                languageSelection.setTitle(getString(R.string.language)).setSingleChoiceItems(languages, checkedItem,
+                                        (languageDialog, selectedLanguageIndex) ->
+                                            myMaps.localCode = selectedLanguageIndex == 0 ? "zh" : "en"
+                                        )
+                                        .setPositiveButton(getString(R.string.okay), (languageDialog, selectedLanguageIndex) -> {
+                                            Locale locale = new Locale(myMaps.localCode);
+                                            Locale.setDefault(locale);
+                                            Configuration config = new Configuration();
+                                            config.setLocale(locale);
+                                            getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+
+                                            MyToast.showToast(myGameView.this, getString(R.string.restart_app_for_language_change), Toast.LENGTH_LONG);
+                                        }
+                                ).setNegativeButton(getString(R.string.cancel), null);
+                                languageSelection.setCancelable(false).show();
+                                break;
+
                         }  //end switch
                     }
                 }).setPositiveButton(R.string.back, new OnClickListener() {
@@ -3707,26 +3734,26 @@ public class myGameView extends Activity {
                         getString(R.string.volume_level)
                 };
                 final boolean[] mChk = {
-                        myMaps.m_Sets[41] == 1,  //双击箱子编号
+                        myMaps.m_Settings[41] == 1,  //双击箱子编号
                         myMaps.m_bBianhao,       //自动箱子编号
                         myMaps.m_bBiaochi,       //显示标尺
-                        myMaps.m_Sets[9] == 1,   //标尺不随关卡旋转
-                        myMaps.m_Sets[38] == 1,  //区分奇偶地板格
-                        myMaps.m_Sets[11] == 1,  //死锁提示
-                        myMaps.m_Sets[8] == 1,   //显示可达提示
-                        myMaps.m_Sets[27] == 1,  //仓管员转向动画
-                        myMaps.m_Sets[3] == 1,   //长按目标点提示关联网点及网口
-                        myMaps.m_Sets[37] == 1,  //关卡初态，长按仓管员，切换是否“自动加载最新状态”
-                        myMaps.m_Sets[32] == 1,  //禁用逆推目标点
-                        myMaps.m_Sets[17] == 1,  //允许穿越
-                        myMaps.m_Sets[23] == 1,  //单步进退
+                        myMaps.m_Settings[9] == 1,   //标尺不随关卡旋转
+                        myMaps.m_Settings[38] == 1,  //区分奇偶地板格
+                        myMaps.m_Settings[11] == 1,  //死锁提示
+                        myMaps.m_Settings[8] == 1,   //显示可达提示
+                        myMaps.m_Settings[27] == 1,  //仓管员转向动画
+                        myMaps.m_Settings[3] == 1,   //长按目标点提示关联网点及网口
+                        myMaps.m_Settings[37] == 1,  //关卡初态，长按仓管员，切换是否“自动加载最新状态”
+                        myMaps.m_Settings[32] == 1,  //禁用逆推目标点
+                        myMaps.m_Settings[17] == 1,  //允许穿越
+                        myMaps.m_Settings[23] == 1,  //单步进退
                         !bt_BK.isChecked() && mMap.m_lGoto || bt_BK.isChecked() && mMap.m_lGoto2,  //进度条
-                        myMaps.m_Sets[29] == 1,  //自动爬阶梯
-                        myMaps.m_Sets[16] == 1,  //显示系统虚拟按键
-                        myMaps.m_Sets[20] == 1,  //禁用全屏
-                        myMaps.m_Sets[28] == 1,  //演示时仅推动
-                        myMaps.m_Sets[25] == 1,  //在背景上显示当前时间
-                        myMaps.m_Sets[15] == 1   //音量键选择关卡
+                        myMaps.m_Settings[29] == 1,  //自动爬阶梯
+                        myMaps.m_Settings[16] == 1,  //显示系统虚拟按键
+                        myMaps.m_Settings[20] == 1,  //禁用全屏
+                        myMaps.m_Settings[28] == 1,  //演示时仅推动
+                        myMaps.m_Settings[25] == 1,  //在背景上显示当前时间
+                        myMaps.m_Settings[15] == 1   //音量键选择关卡
                 };
 
                 final Builder builder = new Builder(this, AlertDialog.THEME_HOLO_DARK);
@@ -3738,26 +3765,26 @@ public class myGameView extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            mChk[0] = myMaps.m_Sets[41] == 1;    //双击箱子编号
+                            mChk[0] = myMaps.m_Settings[41] == 1;    //双击箱子编号
                             mChk[1] = myMaps.m_bBianhao;    //自动箱子编号
                             mChk[2] = myMaps.m_bBiaochi;    //显示标尺
-                            mChk[3] = myMaps.m_Sets[9] == 1;    //标尺不随关卡旋转
-                            mChk[4] = myMaps.m_Sets[38] == 1;     //区分奇偶地板格
-                            mChk[5] = myMaps.m_Sets[11] == 1;     //死锁提示
-                            mChk[6] = myMaps.m_Sets[8] == 1;     //显示可达提示
-                            mChk[7] = myMaps.m_Sets[27] == 1;     //仓管员转向动画
-                            mChk[8] = myMaps.m_Sets[3] == 1;     //长按目标点提示关联网点及网口
-                            mChk[9] = myMaps.m_Sets[37] == 1;     //关卡初态，长按仓管员，切换是否“自动加载最新状态”
-                            mChk[10] = myMaps.m_Sets[32] == 1;    //禁用逆推目标点
-                            mChk[11] = myMaps.m_Sets[17] == 1;    //允许穿越
-                            mChk[12] = myMaps.m_Sets[23] == 1;   //单步进退
+                            mChk[3] = myMaps.m_Settings[9] == 1;    //标尺不随关卡旋转
+                            mChk[4] = myMaps.m_Settings[38] == 1;     //区分奇偶地板格
+                            mChk[5] = myMaps.m_Settings[11] == 1;     //死锁提示
+                            mChk[6] = myMaps.m_Settings[8] == 1;     //显示可达提示
+                            mChk[7] = myMaps.m_Settings[27] == 1;     //仓管员转向动画
+                            mChk[8] = myMaps.m_Settings[3] == 1;     //长按目标点提示关联网点及网口
+                            mChk[9] = myMaps.m_Settings[37] == 1;     //关卡初态，长按仓管员，切换是否“自动加载最新状态”
+                            mChk[10] = myMaps.m_Settings[32] == 1;    //禁用逆推目标点
+                            mChk[11] = myMaps.m_Settings[17] == 1;    //允许穿越
+                            mChk[12] = myMaps.m_Settings[23] == 1;   //单步进退
                             mChk[13] = !bt_BK.isChecked() && mMap.m_lGoto || bt_BK.isChecked() && mMap.m_lGoto2;   //进度条
-                            mChk[14] = myMaps.m_Sets[29] == 1;    //自动爬阶梯
-                            mChk[15] = myMaps.m_Sets[16] == 1;   //显示系统虚拟按键
-                            mChk[16] = myMaps.m_Sets[20] == 1;   //禁用全屏
-                            mChk[17] = myMaps.m_Sets[28] == 1;   //演示时仅推动
-                            mChk[18] = myMaps.m_Sets[25] == 1;   //在背景上显示当前时间
-                            mChk[19] = myMaps.m_Sets[15] == 1;   //音量键选择关卡
+                            mChk[14] = myMaps.m_Settings[29] == 1;    //自动爬阶梯
+                            mChk[15] = myMaps.m_Settings[16] == 1;   //显示系统虚拟按键
+                            mChk[16] = myMaps.m_Settings[20] == 1;   //禁用全屏
+                            mChk[17] = myMaps.m_Settings[28] == 1;   //演示时仅推动
+                            mChk[18] = myMaps.m_Settings[25] == 1;   //在背景上显示当前时间
+                            mChk[19] = myMaps.m_Settings[15] == 1;   //音量键选择关卡
 
                             dialog.dismiss();
                             builder.show();
@@ -3801,9 +3828,9 @@ public class myGameView extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         //双击箱子编号
-                        if (mChk[0]) myMaps.m_Sets[41] = 1;
+                        if (mChk[0]) myMaps.m_Settings[41] = 1;
                         else {
-                            myMaps.m_Sets[41] = 0;
+                            myMaps.m_Settings[41] = 0;
                             for (int i = 0; i < myMaps.curMap.Rows; i++) {
                                 for (int j = 0; j < myMaps.curMap.Cols; j++) {
                                     m_iBoxNum[i][j] = -1;
@@ -3824,22 +3851,22 @@ public class myGameView extends Activity {
                         }
 
                         //标尺不随关卡旋转
-                        if (mChk[3]) myMaps.m_Sets[9] = 1;
-                        else myMaps.m_Sets[9] = 0;
+                        if (mChk[3]) myMaps.m_Settings[9] = 1;
+                        else myMaps.m_Settings[9] = 0;
 
                         //区分奇偶地板格
-                        if (mChk[4]) myMaps.m_Sets[38] = 1;
-                        else myMaps.m_Sets[38] = 0;
+                        if (mChk[4]) myMaps.m_Settings[38] = 1;
+                        else myMaps.m_Settings[38] = 0;
 
                         //死锁提示
-                        if (mChk[5]) myMaps.m_Sets[11] = 1;
-                        else myMaps.m_Sets[11] = 0;
+                        if (mChk[5]) myMaps.m_Settings[11] = 1;
+                        else myMaps.m_Settings[11] = 0;
 
                         //显示可达提示
                         if (mChk[6]) {
-                            myMaps.m_Sets[8] = 1;
+                            myMaps.m_Settings[8] = 1;
                         } else {
-                            myMaps.m_Sets[8] = 0;
+                            myMaps.m_Settings[8] = 0;
                             mMap.m_bBoxTo = false;
                             mMap.m_bBoxTo2 = false;
                             mMap.m_boxCanCome = false;
@@ -3849,24 +3876,24 @@ public class myGameView extends Activity {
                         }
 
                         //仓管员转向动画
-                        if (mChk[7]) myMaps.m_Sets[27] = 1;
-                        else myMaps.m_Sets[27] = 0;
+                        if (mChk[7]) myMaps.m_Settings[27] = 1;
+                        else myMaps.m_Settings[27] = 0;
 
                         //长按目标点提示关联网点及网口
-                        if (mChk[8]) myMaps.m_Sets[3] = 1;
-                        else myMaps.m_Sets[3] = 0;
+                        if (mChk[8]) myMaps.m_Settings[3] = 1;
+                        else myMaps.m_Settings[3] = 0;
 
                         //是否“自动加载最新状态”
-                        if (mChk[9]) myMaps.m_Sets[37] = 1;
-                        else myMaps.m_Sets[37] = 0;
+                        if (mChk[9]) myMaps.m_Settings[37] = 1;
+                        else myMaps.m_Settings[37] = 0;
 
                         //禁用逆推目标点
-                        if (mChk[10]) myMaps.m_Sets[32] = 1;
-                        else myMaps.m_Sets[32] = 0;
+                        if (mChk[10]) myMaps.m_Settings[32] = 1;
+                        else myMaps.m_Settings[32] = 0;
 
                         //是否允许穿越
                         if (mChk[11]) {
-                            myMaps.m_Sets[17] = 1;
+                            myMaps.m_Settings[17] = 1;
                             mMap.m_bManTo = false;
                             mMap.m_bManTo2 = false;
                             mMap.m_bBoxTo = false;
@@ -3875,7 +3902,7 @@ public class myGameView extends Activity {
                             mMap.m_boxCanMove2 = false;  //关闭可动箱子提示状态
                             mMap.invalidate();
                         } else {
-                            myMaps.m_Sets[17] = 0;
+                            myMaps.m_Settings[17] = 0;
                             mMap.m_bManTo = false;
                             mMap.m_bManTo2 = false;
                             mMap.m_bBoxTo = false;
@@ -3886,8 +3913,8 @@ public class myGameView extends Activity {
                         }
 
                         //是否单步进退
-                        if (mChk[12]) myMaps.m_Sets[23] = 1;
-                        else myMaps.m_Sets[23] = 0;
+                        if (mChk[12]) myMaps.m_Settings[23] = 1;
+                        else myMaps.m_Settings[23] = 0;
 
                         //是否显示进度条
                         if (mChk[13]) {
@@ -3905,33 +3932,33 @@ public class myGameView extends Activity {
                         }
 
                         //自动爬阶梯
-                        if (mChk[14]) myMaps.m_Sets[29] = 1;
-                        else myMaps.m_Sets[29] = 0;
+                        if (mChk[14]) myMaps.m_Settings[29] = 1;
+                        else myMaps.m_Settings[29] = 0;
 
                         //显示系统导航键
                         if (mChk[15]) {
-                            myMaps.m_Sets[16] = 1;
+                            myMaps.m_Settings[16] = 1;
                             showSystemUI();
                         } else {
-                            myMaps.m_Sets[16] = 0;
+                            myMaps.m_Settings[16] = 0;
                             hideSystemUI();
                         }
 
                         //禁用全屏
-                        if (mChk[16]) myMaps.m_Sets[20] = 1;
-                        else myMaps.m_Sets[20] = 0;
+                        if (mChk[16]) myMaps.m_Settings[20] = 1;
+                        else myMaps.m_Settings[20] = 0;
 
                         //演示时仅推动
-                        if (mChk[17]) myMaps.m_Sets[28] = 1;
-                        else myMaps.m_Sets[28] = 0;
+                        if (mChk[17]) myMaps.m_Settings[28] = 1;
+                        else myMaps.m_Settings[28] = 0;
 
                         //在背景上显示当前时间
-                        if (mChk[18]) myMaps.m_Sets[25] = 1;
-                        else myMaps.m_Sets[25] = 0;
+                        if (mChk[18]) myMaps.m_Settings[25] = 1;
+                        else myMaps.m_Settings[25] = 0;
 
                         //使用音量键选择关卡
-                        if (mChk[19]) myMaps.m_Sets[15] = 1;
-                        else myMaps.m_Sets[15] = 0;
+                        if (mChk[19]) myMaps.m_Settings[15] = 1;
+                        else myMaps.m_Settings[15] = 0;
 
                         BoxMan.saveSets();  //保存设置
                     }
@@ -3957,7 +3984,7 @@ public class myGameView extends Activity {
                 for (int i = 0; i < myMaps.curMap.Rows; i++) {
                     for (int j = 0; j < myMaps.curMap.Cols; j++) {
                         ch = m_cArray[i][j];  //正推迷宫
-                        if (myMaps.m_Sets[13] == 1) {  //“互动双推”模式
+                        if (myMaps.m_Settings[13] == 1) {  //“互动双推”模式
                             if (bk_cArray[i][j] == '$' || bk_cArray[i][j] == '*') {  // 互动双推时，只有逆推地图中的箱子讲成为正推的目标点位
                                 switch (ch) {
                                     case '-':
@@ -4014,7 +4041,7 @@ public class myGameView extends Activity {
                                     ch2 = '_';
                                     break;
                             }
-                            if (myMaps.m_Sets[13] == 1) {  //“互动双推”模式
+                            if (myMaps.m_Settings[13] == 1) {  //“互动双推”模式
                                 if (ch2 == '$' || ch2 == '*') {  // 互动双推时，只有逆推地图中的箱子讲成为正推的目标点位
                                     switch (ch) {
                                         case '-':
@@ -4068,7 +4095,7 @@ public class myGameView extends Activity {
                                     ch2 = '_';
                                     break;
                             }
-                            if (myMaps.m_Sets[13] == 1) {  //“互动双推”模式
+                            if (myMaps.m_Settings[13] == 1) {  //“互动双推”模式
                                 if (ch2 == '$' || ch2 == '*') {  // 互动双推时，只有逆推地图中的箱子讲成为正推的目标点位
                                     switch (ch) {
                                         case '-':
@@ -4192,11 +4219,11 @@ public class myGameView extends Activity {
         final SeekBar color_B = (SeekBar) view2.findViewById(R.id.dialog_color_B);  //标尺字体颜色 -- 蓝
 
         final int[] mColor = {
-                (myMaps.m_Sets[4] & 0x00FF0000) >> 16,
-                (myMaps.m_Sets[4] & 0x0000FF00) >> 8,
-                myMaps.m_Sets[4] & 0x000000FF };
+                (myMaps.m_Settings[4] & 0x00FF0000) >> 16,
+                (myMaps.m_Settings[4] & 0x0000FF00) >> 8,
+                myMaps.m_Settings[4] & 0x000000FF };
 
-        vw.setBackgroundColor(myMaps.m_Sets[4] | 0xff000000);
+        vw.setBackgroundColor(myMaps.m_Settings[4] | 0xff000000);
 
         color_R.setProgress(mColor[0]);
         color_G.setProgress(mColor[1]);
@@ -4257,7 +4284,7 @@ public class myGameView extends Activity {
                 .setView(view2)
                 .setPositiveButton(getString(R.string.okay), new OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        myMaps.m_Sets[4] = mColor[0] << 16 | mColor[1] << 8 | mColor[2] | 0xff000000;
+                        myMaps.m_Settings[4] = mColor[0] << 16 | mColor[1] << 8 | mColor[2] | 0xff000000;
                         myMaps.bk_Pic = "使用背景色";
                         mMap.invalidate();
                     }
@@ -5144,7 +5171,7 @@ public class myGameView extends Activity {
 
     //为消除音量键的按键音
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (myMaps.m_Sets[15] == 1 && (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN))
+        if (myMaps.m_Settings[15] == 1 && (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN))
             return true;
 
         return super.onKeyUp(keyCode, event);
@@ -5182,7 +5209,7 @@ public class myGameView extends Activity {
                 startActivity(intent2);
             }
             return true;
-        } else if (myMaps.m_Sets[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+        } else if (myMaps.m_Settings[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             int n1 = myMaps.m_lstMaps.indexOf(myMaps.curMap);
             if (n1 > 0) {
                 //指向上一关卡
@@ -5192,7 +5219,7 @@ public class myGameView extends Activity {
                 MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
             }
             return true;
-        } else if (myMaps.m_Sets[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+        } else if (myMaps.m_Settings[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
             int n2 = myMaps.m_lstMaps.indexOf(myMaps.curMap);
             if (n2 >= 0 && n2+1 < myMaps.m_lstMaps.size()) {
                 //指向下一关卡
@@ -5207,7 +5234,7 @@ public class myGameView extends Activity {
     }
 
     private void hideSystemUI() {
-        if (myMaps.m_Sets[16] == 1) return;
+        if (myMaps.m_Settings[16] == 1) return;
 
         int myFlags = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |         //隐藏导航栏或操作栏
                       View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |        //隐藏状态栏和导航栏时的沉浸模式和保持交互性
@@ -5844,7 +5871,7 @@ public class myGameView extends Activity {
                         }
                         if (myMaps.isMacroDebug) break;  //断点生效
                     }
-                    if (System.currentTimeMillis() - myTime > mySpeed[myMaps.m_Sets[10]]) {  //刷新间隔
+                    if (System.currentTimeMillis() - myTime > mySpeed[myMaps.m_Settings[10]]) {  //刷新间隔
                         myTime = System.currentTimeMillis();
                         publishProgress();
                     }

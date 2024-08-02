@@ -92,7 +92,7 @@ public class myAbout2 extends Activity {
 			iv_Map2.setImageBitmap(getBitmap(myMaps.curMap.Map, true));  //当前关卡图
 		}
 		
-		if (myMaps.m_Sets[0] < 3 || myMaps.sFile.equals("相似关卡")) {  //设置内置关卡只读
+		if (myMaps.m_Settings[0] < 3 || myMaps.sFile.equals("相似关卡")) {  //设置内置关卡只读
 			et_Title.setCursorVisible(false);      
 			et_Title.setFocusable(false);         
 			et_Title.setFocusableInTouchMode(false);    
