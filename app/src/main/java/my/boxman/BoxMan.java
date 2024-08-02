@@ -165,8 +165,6 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 
 		setContentView(R.layout.main);
 
-		groups = new String[] { getString(R.string.beginner_puzzles), getString(R.string.advanced_puzzles), getString(R.string.tricky_puzzles), getString(R.string.additional_puzzles) };
-
 		myMaps.res = getResources();
 		myMaps.m_Settings = new int[44]; //系统参数设置数组 | Array of settings
 
@@ -180,6 +178,8 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
         myMaps.myPathList[0] = myMaps.sPath + "关卡图/";
 
 		setLocale();
+
+		groups = new String[] { getString(R.string.beginner_puzzles), getString(R.string.advanced_puzzles), getString(R.string.tricky_puzzles), getString(R.string.additional_puzzles) };
 
 		//取得 Context
 		try {
