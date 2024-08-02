@@ -727,6 +727,34 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 //				startActivity(intent1);
 
 				return true;
+
+			case R.id.menu_language:
+				//语言设置 | change language
+				AlertDialog.Builder languageSelection = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
+				String[] languages = new String[] { getString(R.string.chinese), getString(R.string.english) };
+				int checkedItem = myMaps.localCode.equalsIgnoreCase("zh") ? 0 : 1;
+
+				final String[] selectedLanguageLocaleCode = { myMaps.localCode };
+
+				languageSelection.setTitle(getString(R.string.language))
+						.setSingleChoiceItems(languages, checkedItem, (languageDialog, selectedLanguageIndex) ->
+							selectedLanguageLocaleCode[0] = (selectedLanguageIndex == 0) ? "zh" : "en"
+						)
+						.setPositiveButton(getString(R.string.okay), (languageDialog, selectedButton) -> {
+							myMaps.localCode = selectedLanguageLocaleCode[0];	// set new language code in the settings
+							setLocale();										// Set new locale for the app
+							saveSets();											// Save the new locale in the settings file
+
+							Intent intent = new Intent(this, BoxMan.class);		// Restart the activity with new locale
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+							startActivity(intent);
+						})
+						.setNegativeButton(getString(R.string.cancel), null);
+				languageSelection.setCancelable(false).show();
+
+				return true;
+
+
 			case R.id.menu_about:
 //			if (mySQLite.m_SQL.exp_Inf_ALL())
 //				MyToast.showToast(BoxMan.this, "导出成功！", Toast.LENGTH_SHORT);

@@ -39,6 +39,11 @@
 		android:title="@string/menu_mf8_competition_list" />
 
 	<item
+		android:id="@+id/menu_language"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:title="@string/language" />
+	<item
 		android:id="@+id/menu_help"
 		android:title="@string/menu_help" />
 

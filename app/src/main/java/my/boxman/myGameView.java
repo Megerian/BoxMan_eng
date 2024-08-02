@@ -3555,8 +3555,7 @@ public class myGameView extends Activity {
                         getString(R.string.speed_settings),
                         getString(R.string.change_skin),
                         getString(R.string.change_background),
-                        getString(R.string.alternating_tile_brightness),
-                        getString(R.string.change_language),
+                        getString(R.string.alternating_tile_brightness)
                 };
                 Builder builder2 = new Builder(this, AlertDialog.THEME_HOLO_DARK);
                 builder2.setTitle(getString(R.string.settings)).setSingleChoiceItems(m_menu2, -1, new OnClickListener() {
@@ -3676,27 +3675,6 @@ public class myGameView extends Activity {
                                 dialog.dismiss();
                                 mMap.m_lParityBrightnessShade = true;
                                 mMap.invalidate();
-                                break;
-
-                            case 4:   //语言设置 | change language
-                                Builder languageSelection = new Builder(myGameView.this, AlertDialog.THEME_HOLO_DARK);
-                                String[] languages = new String[] { getString(R.string.chinese), getString(R.string.english) };
-                                int checkedItem = myMaps.localCode.equalsIgnoreCase("zh") ? 0 : 1;
-                                languageSelection.setTitle(getString(R.string.language)).setSingleChoiceItems(languages, checkedItem,
-                                        (languageDialog, selectedLanguageIndex) ->
-                                            myMaps.localCode = selectedLanguageIndex == 0 ? "zh" : "en"
-                                        )
-                                        .setPositiveButton(getString(R.string.okay), (languageDialog, selectedLanguageIndex) -> {
-                                            Locale locale = new Locale(myMaps.localCode);
-                                            Locale.setDefault(locale);
-                                            Configuration config = new Configuration();
-                                            config.setLocale(locale);
-                                            getResources().updateConfiguration(config, getResources().getDisplayMetrics());
-
-                                            MyToast.showToast(myGameView.this, getString(R.string.restart_app_for_language_change), Toast.LENGTH_LONG);
-                                        }
-                                ).setNegativeButton(getString(R.string.cancel), null);
-                                languageSelection.setCancelable(false).show();
                                 break;
 
                         }  //end switch
