@@ -808,6 +808,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 			myMaps.mMatchNo = "";
 			myMaps.mMatchDate1 = "";
 			myMaps.mMatchDate2 = "";
+			myMaps.localCode = "??";  // => use phone language
 			return;
 		}
 
@@ -821,7 +822,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		myMaps.m_Settings[12] = Integer.parseInt(file.get("常规", "是否标识出重复关卡", "1").toString());
 		myMaps.m_Settings[33] = Integer.parseInt(file.get("常规", "浏览时每行的图标数", "0").toString());
 		myMaps.m_Settings[34] = Integer.parseInt(file.get("常规", "浏览时每行的图标默认数", "0").toString());
-		myMaps.localCode = file.get("常规", "语言设置", "??").toString(); // Language: ZH = Chinese, EN = English
+		myMaps.localCode = file.get("常规", "语言设置", "ZH").toString(); // Language: ZH = Chinese, EN = English
 
 		myMaps.m_Settings[4] = Integer.parseInt(file.get("界面", "背景色", "0").toString());
 		myMaps.skin_File = file.get("界面", "皮肤", "默认皮肤").toString();
