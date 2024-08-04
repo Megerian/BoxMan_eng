@@ -675,4 +675,16 @@
     <string name="english">英语 / English</string>
     <string name="chinese">简体中文 / Chinese</string>
     <string name="restart_app_for_language_change">重新启动应用以应用语言更改。</string>
+    <string name="options">选项</string>
+    <string name="clean_the_walls">清理墙壁</string>
+    <string name="clear_pure_boxes">清理纯箱子</string>
+    <string name="clear_all_boxes">清理所有箱子</string>
+    <string name="clear_goals_and_boxes">清理目标点箱子</string>
+    <string name="preserve_goals_while_clearing_boxes">保留目标点清理箱子</string>
+    <string name="clear_pure_goals">清理纯目标点</string>
+    <string name="clear_all_goals">清理所有目标点</string>
+    <string name="please_select_">请选择:</string>
+    <string name="enter_edit_mode">进入编辑</string>
+    <string name="recognition_settings">识别设置</string>
+    <string name="title_edit">编辑</string>
 </resources>

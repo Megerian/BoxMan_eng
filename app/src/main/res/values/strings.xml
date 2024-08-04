@@ -299,7 +299,7 @@
     <string name="title_exit">Exit</string>
     <string name="button_undo">Undo</string>
     <string name="button_redo">Redo</string>
-    <string name="button_instant_moves">Instant moves</string>
+    <string name="button_instant_moves">Instant move</string>
     <string name="button_reverse_play">Reverse play</string>
     <string name="button_counting">Counting</string>
     <string name="button_rotate">Rotate</string>
@@ -675,6 +675,18 @@
     <string name="english">English / 英语</string>
     <string name="chinese">Chinese / 简体中文</string>
     <string name="restart_app_for_language_change">Restart the app to apply the language change.</string>
+    <string name="options">Options</string>
+    <string name="clean_the_walls">Clean the walls</string>
+    <string name="clear_pure_boxes">Clear pure boxes</string>
+    <string name="clear_all_boxes">Clear all boxes</string>
+    <string name="clear_goals_and_boxes">Clear goals and boxes</string>
+    <string name="preserve_goals_while_clearing_boxes">Preserve goals while clearing boxes</string>
+    <string name="clear_pure_goals">Clear pure goals</string>
+    <string name="clear_all_goals">Clear all goals</string>
+    <string name="please_select_">Please select:</string>
+    <string name="enter_edit_mode">Enter edit mode</string>
+    <string name="recognition_settings">Recognition settings</string>
+    <string name="title_edit">Edit</string>
 
     <item type="id" name="tag_g"></item>
     <item type="id" name="tag_c"></item>

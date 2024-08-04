@@ -751,10 +751,10 @@ public class myRecogViewMap extends View {
             myPaint.setTextSize(ss);
             myPaint.setARGB(255, 0, 0, 0);
             myPaint.setStrokeWidth(5);
-            canvas.drawText("关卡尺寸: " + m_nCols + " × " + m_nRows, 10, ss / 2 * 3, myPaint);
+            canvas.drawText(getContext().getString(R.string.puzzle_size)+ ": " + m_nCols + " × " + m_nRows, 10, ss / 2 * 3, myPaint);
             myPaint.setARGB(255, 255, 255, 255);
             myPaint.setStrokeWidth(3);
-            canvas.drawText("关卡尺寸: " + m_nCols + " × " + m_nRows, 10, ss / 2 * 3, myPaint);
+            canvas.drawText(getContext().getString(R.string.puzzle_size)+ ": " + m_nCols + " × " + m_nRows, 10, ss / 2 * 3, myPaint);
 
             m_Recog.myCount();
 

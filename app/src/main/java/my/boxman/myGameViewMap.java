@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Locale;
 
 public class myGameViewMap extends View {
 
@@ -989,6 +990,10 @@ public class myGameViewMap extends View {
             "","日","一","二","三","四","五","六"
     };
 
+    private String currentLocalCode = myMaps.localCode;
+    private Locale currentLocale = new Locale(myMaps.localCode);
+
+
     @Override
     public void onDraw(Canvas canvas) {
 
@@ -1775,7 +1780,13 @@ public class myGameViewMap extends View {
         // 在背景上显示当前时间
         if (myMaps.m_Settings[25] == 1) {
             Date dt = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm E");
+
+            if(!currentLocalCode.equals(myMaps.localCode)) {
+                currentLocalCode = myMaps.localCode;
+                currentLocale = new Locale(myMaps.localCode);
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm E", currentLocale);
             String str_time = sdf.format(dt);
 
             myPaint.setStyle(Paint.Style.FILL_AND_STROKE);

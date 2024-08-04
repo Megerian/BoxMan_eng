@@ -3761,7 +3761,7 @@ public class myGameView extends Activity {
                             mChk[15] = myMaps.m_Settings[16] == 1;   //显示系统虚拟按键
                             mChk[16] = myMaps.m_Settings[20] == 1;   //禁用全屏
                             mChk[17] = myMaps.m_Settings[28] == 1;   //演示时仅推动
-                            mChk[18] = myMaps.m_Settings[25] == 1;   //在背景上显示当前时间
+                            mChk[18] = myMaps.m_Settings[25] == 1;   //在背景上显示当前时间 | Display the current time on the background
                             mChk[19] = myMaps.m_Settings[15] == 1;   //音量键选择关卡
 
                             dialog.dismiss();

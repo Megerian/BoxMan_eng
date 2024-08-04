@@ -82,12 +82,12 @@ public class myRecogView extends Activity {
                 mMap.m_nObj = -1;
                 setColor(0);
                 String[] m_menu = {
-                        "清空地图"
+                        getString(R.string.reset_the_map)
                 };
                 Builder dlg = new Builder(myRecogView.this, AlertDialog.THEME_HOLO_DARK);
                 dlg.setCancelable(false);
 
-                dlg.setTitle("选项").setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                dlg.setTitle(R.string.options).setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         clearXSB();
@@ -111,12 +111,12 @@ public class myRecogView extends Activity {
                 mMap.m_nObj = -1;
                 setColor(1);
                 String[] m_menu = {
-                        "清理墙壁"
+                        getString(R.string.clean_the_walls)
                 };
                 Builder dlg = new Builder(myRecogView.this, AlertDialog.THEME_HOLO_DARK);
                 dlg.setCancelable(false);
 
-                dlg.setTitle("选项").setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                dlg.setTitle(R.string.options).setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         removeXSB('#', true);
@@ -140,14 +140,14 @@ public class myRecogView extends Activity {
                 mMap.m_nObj = -1;
                 setColor(2);
                 String[] m_menu = {
-                        "清理纯箱子",
-                        "清理所有箱子"
+                        getString(R.string.clear_pure_boxes),
+                        getString(R.string.clear_all_boxes)
                 };
                 selNum = 0;
                 Builder dlg = new Builder(myRecogView.this, AlertDialog.THEME_HOLO_DARK);
                 dlg.setCancelable(false);
 
-                dlg.setTitle("选项").setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                dlg.setTitle(R.string.options).setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         removeXSB('$', selNum == 1);
@@ -176,14 +176,14 @@ public class myRecogView extends Activity {
                 mMap.m_nObj = -1;
                 setColor(3);
                 String[] m_menu = {
-                        "清理目标点箱子",
-                        "保留目标点清理箱子"
+                        getString(R.string.clear_goals_and_boxes),
+                        getString(R.string.preserve_goals_while_clearing_boxes)
                 };
                 selNum = 0;
                 Builder dlg = new Builder(myRecogView.this, AlertDialog.THEME_HOLO_DARK);
                 dlg.setCancelable(false);
 
-                dlg.setTitle("选项").setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                dlg.setTitle(R.string.options).setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         removeXSB('*', selNum == 0);
@@ -212,14 +212,14 @@ public class myRecogView extends Activity {
                 mMap.m_nObj = -1;
                 setColor(4);
                 String[] m_menu = {
-                        "清理纯目标点",
-                        "清理所有目标点"
+                        getString(R.string.clear_pure_goals),
+                        getString(R.string.clear_all_goals)
                 };
                 selNum = 0;
                 Builder dlg = new Builder(myRecogView.this, AlertDialog.THEME_HOLO_DARK);
                 dlg.setCancelable(false);
 
-                dlg.setTitle("选项").setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                dlg.setTitle(R.string.options).setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         removeXSB('.', selNum == 1);
@@ -376,8 +376,8 @@ public class myRecogView extends Activity {
         });
 
         Builder dlg0 = new Builder(this);
-        dlg0.setTitle("请选择:").setCancelable(false).setNegativeButton(getString(R.string.cancel), null)
-                .setPositiveButton("进入编辑", new DialogInterface.OnClickListener(){
+        dlg0.setTitle(getString(R.string.please_select_)).setCancelable(false).setNegativeButton(getString(R.string.cancel), null)
+                .setPositiveButton(R.string.enter_edit_mode, new OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -413,7 +413,7 @@ public class myRecogView extends Activity {
                         startActivity(intent2);
                     }
                 })
-                .setNeutralButton("退出", new OnClickListener() {
+                .setNeutralButton(getString(R.string.title_exit), new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         finish();
@@ -773,15 +773,15 @@ public class myRecogView extends Activity {
                         setBT_Color(my_RBS[mMap.mSimilarity-5], true);
                     }
                 });
-                dlg2.setTitle("识别设置").setPositiveButton(getString(R.string.okay), null).setCancelable(false).create().show();
+                dlg2.setTitle(R.string.recognition_settings).setPositiveButton(getString(R.string.okay), null).setCancelable(false).create().show();
                 return true;
             case R.id.recog_complete:  // 开始识别
                 setColor(-1);  // 取消底行 XSB 元素高亮
-                if (mt.getTitle().equals("识别")) {
-                    mt.setTitle("编辑");
+                if (mt.getTitle().equals(getString(R.string.recog_complete))) {
+                    mt.setTitle(getString(R.string.title_edit));
                     mMap.isRecog = false;
                 } else {
-                    mt.setTitle("识别");
+                    mt.setTitle(getString(R.string.recog_complete));
                     mMap.isRecog = true;
                 }
                  return true;
