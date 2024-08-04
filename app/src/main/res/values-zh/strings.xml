@@ -690,4 +690,7 @@
     <string name="adapt_to_new_puzzle">改编为新关卡</string>
     <string name="unlock_icon">图标解锁</string>
     <string name="title_jump_to">跳至</string>
+    <string name="puzzles_will_be_deleted_are_you_sure">" 个关卡将被删除，\n确认吗？"</string>
+    <string name="a_total_of">"共有 "</string>
+    <string name="_puzzle_wil_be_deleted_are_you_sure">" 号关卡将被删除，确认吗？"</string>
 </resources>

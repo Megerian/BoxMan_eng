@@ -690,7 +690,10 @@
     <string name="adapt_to_new_puzzle">Adapt to new puzzle</string>
     <string name="unlock_icon">Unlock icon</string>
     <string name="title_jump_to">Jump to</string>
+    <string name="a_total_of">"A total of "</string>
+    <string name="_puzzle_wil_be_deleted_are_you_sure">"  puzzle will be deleted. Are you sure?"</string>
 
     <item type="id" name="tag_g"></item>
     <item type="id" name="tag_c"></item>
+    <string name="puzzles_will_be_deleted_are_you_sure">Puzzles will be deleted.\\nAre you sure?</string>
 </resources>

@@ -1481,10 +1481,10 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 							myMaps.mArray.add(k);
 						}
 					}
-					str3 = "共有 " + myMaps.mArray.size() + " 个关卡将被删除，\n确认吗？";
+					str3 = getString(R.string.a_total_of) + myMaps.mArray.size() + getString(R.string.puzzles_will_be_deleted_are_you_sure);
 				} else {  //单关卡迁移
 					myMaps.mArray.add(m_Num);
-					str3 = (m_Num+1) + " 号关卡将被删除，确认吗？";
+					str3 = (m_Num+1) + getString(R.string._puzzle_wil_be_deleted_are_you_sure);
 				}
 
 				new Builder(this, AlertDialog.THEME_HOLO_DARK).setMessage(str3)
