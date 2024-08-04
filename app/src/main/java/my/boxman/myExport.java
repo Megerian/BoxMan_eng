@@ -89,8 +89,8 @@ public class myExport extends Activity implements myGifMakeFragment.GifMakeStatu
 				}
 				if (my_imPort_YASS.toLowerCase().indexOf("yass") >= 0) {
 					my_imPort_YASS = "YASS" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-				} else if (my_imPort_YASS.toLowerCase().indexOf("导入") >= 0) {
-					my_imPort_YASS = "导入" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+				} else if (my_imPort_YASS.toLowerCase().indexOf(getString(R.string.import2)) >= 0) {
+					my_imPort_YASS = getString(R.string.import2) + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 				} else {
 					my_imPort_YASS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 				}
@@ -106,7 +106,7 @@ public class myExport extends Activity implements myGifMakeFragment.GifMakeStatu
 		 ActionBar actionBar = getActionBar();
 		 actionBar.setDisplayHomeAsUpEnabled(true);
          actionBar.setDisplayShowHomeEnabled(false);
-		 setTitle("导出");
+		 setTitle(getString(R.string.export));
 
 		 //界面初始化
 		 et_Action = (EditText)this.findViewById(R.id.ex_edit_text);

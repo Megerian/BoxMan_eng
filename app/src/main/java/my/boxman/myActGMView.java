@@ -77,7 +77,7 @@ public class myActGMView extends Activity {
          ActionBar actionBar = getActionBar();
          actionBar.setDisplayHomeAsUpEnabled(true);
          actionBar.setDisplayShowHomeEnabled(false);
-		 setTitle("导入");
+		 setTitle(getString(R.string.import2));
 
 		 //界面初始化
 		 et_Action = (EditText)this.findViewById(R.id.etAction);
