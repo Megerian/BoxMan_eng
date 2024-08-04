@@ -20,37 +20,37 @@ import java.util.ArrayList;
 
 public class myRecogViewMap extends View {
 
-    myRecogView m_Recog;            //父控件指针，以便使用父控件的功能
-    ArrayList<Integer> curPoints = new ArrayList<Integer>();  //识别出来的物件
+    myRecogView m_Recog;            //父控件指针，以便使用父控件的功能  | Parent control pointer to use parent control functions
+    ArrayList<Integer> curPoints = new ArrayList<Integer>();  //识别出来的物件 | Recognized objects
 
-    private PointF mClickPoint = new PointF();  //第一触点，相对及绝对坐标，判断双击时使用
+    private PointF mClickPoint = new PointF();  //第一触点，相对及绝对坐标，判断双击时使用 | First touch point, relative and absolute coordinates, used to determine double-clicks
     Paint myPaint = new Paint();
-    int m_nArenaTop;                //舞台 Top 距屏幕顶的距离
-    int m_nPicWidth, m_nPicHeight;  //关卡图的像素尺寸
-    int m_nMapTop, m_nMapLeft, m_nMapBottom, m_nMapRight;      //图片有效区域的左、上、右、下
-    float m_nWidth = -1;            //格子的尺寸 -- 默认为“未定”
-    int m_nRows = 2;                //垂直方向的格子数
-    int m_nCols = 2;                //水平方向的格子数
-    boolean isLeftTop = true;       //默认：左、上边的指示灯点亮
-    int m_nObj = -1;                //选中的物件（XSB元素）
-    int cur_Row = -1, cur_Col;      //点击的格子
-    Rect cur_Rect = new Rect();     //点击的格子
-    RectF L_Rect = new RectF();     //左边线指示灯
-    RectF T_Rect = new RectF();     //上边线指示灯
-    RectF R_Rect = new RectF();     //右边线指示灯
-    RectF B_Rect = new RectF();     //下边线指示灯
-    int m_Lamp = -1;                //长按的指示灯
-    boolean isLamp = true;          //长按的指示灯，仓管员元素闪烁用
+    int m_nArenaTop;                //舞台 Top 距屏幕顶的距离 | Distance from the top of the stage to the top of the screen
+    int m_nPicWidth, m_nPicHeight;  //关卡图的像素尺寸 | Pixel dimensions of the level map
+    int m_nMapTop, m_nMapLeft, m_nMapBottom, m_nMapRight;      //图片有效区域的左、上、右、下 | Valid area of the image: left, top, right, bottom
+    float m_nWidth = -1;            //格子的尺寸 -- 默认为“未定” | Grid size -- default is "undefined"
+    int m_nRows = 2;                //垂直方向的格子数 | Number of vertical grids
+    int m_nCols = 2;                //水平方向的格子数 | Number of horizontal grids
+    boolean isLeftTop = true;       //默认：左、上边的指示灯点亮 | Default: left and top indicator lights on
+    int m_nObj = -1;                //选中的物件（XSB元素） | Selected object (XSB element)
+    int cur_Row = -1, cur_Col;      //点击的格子 | Clicked grid
+    Rect cur_Rect = new Rect();     //点击的格子 | Clicked grid
+    RectF L_Rect = new RectF();     //左边线指示灯 | Left indicator light
+    RectF T_Rect = new RectF();     //上边线指示灯 | Top indicator light
+    RectF R_Rect = new RectF();     //右边线指示灯 | Right indicator light
+    RectF B_Rect = new RectF();     //下边线指示灯 | Bottom indicator light
+    int m_Lamp = -1;                //长按的指示灯 | Long-pressed indicator light
+    boolean isLamp = true;          //长按的指示灯，| Long-pressed indicator light仓管员元素闪烁用
 
-    int[] m_SampleArray0 = new int[1024];           //样本的比较数组
-    int my_Color0, my_Color1;                       //图片的颜色偏重
-    int my_Grey0, my_Grey1;                         //图片的灰度值
+    int[] m_SampleArray0 = new int[1024];           //样本的比较数组 | Comparison array of sample
+    int my_Color0, my_Color1;                       //图片的颜色偏重 | Color bias
+    int my_Grey0, my_Grey1;                         //图片的灰度值 | Grayscale value
 
-    public Matrix mMatrix = new Matrix();         //图片原始变换矩阵
-    public Matrix mCurrentMatrix = new Matrix();  //当前变换矩阵
-    private Matrix mMapMatrix = new Matrix();     //onDraw()用的当前变换矩阵
-    float m_fTop, m_fLeft, m_fScale, mScale;      //关卡图的当前上边界、左边界、缩放倍数；原始缩放倍数
-    public float mMaxScale = 32;                   //最大缩放级别
+    public Matrix mMatrix = new Matrix();         //图片原始变换矩阵 | Original image transformation matrix
+    public Matrix mCurrentMatrix = new Matrix();  //当前变换矩阵 | Current transformation matrix
+    private Matrix mMapMatrix = new Matrix();     //onDraw()用的当前变换矩阵 | Current transformation matrix used in onDraw()
+    float m_fTop, m_fLeft, m_fScale, mScale;      //关卡图的当前上边界、左边界、缩放倍数；原始缩放倍数 | Current top border, left border, zoom scale; original zoom scale
+    public float mMaxScale = 32;                   //最大缩放级别 | Maximum zoom level
     float[] values = new float[9];
 
     // 识别参数默认值
@@ -86,41 +86,14 @@ public class myRecogViewMap extends View {
 
     //计算原始变换矩阵
     private Matrix getInnerMatrix(Matrix matrix) {
-        if (matrix == null) {
-            matrix = new Matrix();
-        } else {
-            matrix.reset();
-        }
-
-        // Original image dimensions
-        float srcWidth = m_nPicWidth;
-        float srcHeight = m_nPicHeight;
-
-        // View dimensions
-        float dstWidth = getWidth();
-        float dstHeight = getHeight() - m_nArenaTop;
-
-        // Calculate the scale factor to fit the image within the view
-        float scaleX = dstWidth / srcWidth;
-        float scaleY = dstHeight / srcHeight;
-
-        // Use the smaller scale factor to ensure the image fits within the view
-        float scale = Math.min(scaleX, scaleY);
-
-        // Truncate scale to one decimal place
-        scale = (int) (scale * 10) / 10.0f;
-
-        // Calculate the scaled dimensions
-        int scaledWidth = (int) (srcWidth * scale);
-        int scaledHeight = (int) (srcHeight * scale);
-
-        // Calculate the translation to center the image (if there is extra space)
-        int dx = (int) ((dstWidth - scaledWidth) / 2);
-        int dy = (int) ((dstHeight - scaledHeight) / 2);
-
-        // Apply the scaling and translation to the matrix
-        matrix.setScale(scale, scale);
-        matrix.postTranslate(dx, dy);
+        if (matrix == null) matrix = new Matrix();
+        else matrix.reset();
+        //原图大小
+        RectF tempSrc = new RectF(0, 0, m_nPicWidth, m_nPicHeight);
+        //控件大小
+        RectF tempDst = new RectF(0, 0, getWidth(), getHeight() - m_nArenaTop);
+        //计算fit center矩阵
+        matrix.setRectToRect(tempSrc, tempDst, Matrix.ScaleToFit.CENTER);
 
         return matrix;
     }
@@ -578,6 +551,12 @@ public class myRecogViewMap extends View {
         // 计算缩放等参数
         mCurrentMatrix.getValues(values);
         values[Matrix.MTRANS_Y] += m_nArenaTop;
+
+        values[Matrix.MSCALE_X] = values[Matrix.MSCALE_Y] =
+                ((int) (50 * values[Matrix.MSCALE_X])) / (float) 50; // scale so the images are scaled without fractions
+        values[Matrix.MTRANS_X] = (int) values[Matrix.MTRANS_X];     // translate without fractions
+        values[Matrix.MTRANS_Y] = (int) values[Matrix.MTRANS_Y];     // translate without fractions
+
         mMapMatrix.setValues(values);
         m_fTop = values[Matrix.MTRANS_Y];
         m_fLeft = values[Matrix.MTRANS_X];

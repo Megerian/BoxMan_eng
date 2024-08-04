@@ -59,7 +59,7 @@ public class myGameViewMap extends View {
     Matrix mMatrix = new Matrix();  //图片原始变换矩阵
     Matrix mCurrentMatrix = new Matrix();  //当前变换矩阵
     Matrix mMapMatrix = new Matrix();  //当前变换矩阵
-    float m_fTop, m_fLeft, m_fScale, mScale;  //关卡图的当前上边界、左边界、缩放倍数；原始缩放倍数
+    float m_fTop, m_fLeft, m_fScale, mScale;  //关卡图的当前上边界、左边界、缩放倍数；原始缩放倍数 | current top boundary, left boundary, scale, original scale
     float[] values = new float[9];
 
     //上一关、下一关按钮
@@ -224,42 +224,14 @@ public class myGameViewMap extends View {
 
     //计算原始变换矩阵
     private Matrix getInnerMatrix(Matrix matrix) {
-
-        if (matrix == null) {
-            matrix = new Matrix();
-        } else {
-            matrix.reset();
-        }
-
-        // Original image dimensions
-        float srcWidth = m_nPicWidth;
-        float srcHeight = m_nPicHeight;
-
-        // View dimensions
-        float dstWidth = getWidth();
-        float dstHeight = getHeight() - m_nArenaTop;
-
-        // Calculate the scale factor to fit the image within the view
-        float scaleX = dstWidth / srcWidth;
-        float scaleY = dstHeight / srcHeight;
-
-        // Use the smaller scale factor to ensure the image fits within the view
-        float scale = Math.min(scaleX, scaleY);
-
-        // Truncate scale to one decimal place
-        scale = (int) (scale * 10) / 10.0f;
-
-        // Calculate the scaled dimensions
-        int scaledWidth = (int) (srcWidth * scale);
-        int scaledHeight = (int) (srcHeight * scale);
-
-        // Calculate the translation to center the image (if there is extra space)
-        int dx = (int) ((dstWidth - scaledWidth) / 2);
-        int dy = (int) ((dstHeight - scaledHeight) / 2);
-
-        // Apply the scaling and translation to the matrix
-        matrix.setScale(scale, scale);
-        matrix.postTranslate(dx, dy);
+        if (matrix == null) matrix = new Matrix();
+        else matrix.reset();
+        //原图大小
+        RectF tempSrc = new RectF(0, 0, m_nPicWidth, m_nPicHeight);
+        //控件大小
+        RectF tempDst = new RectF(0, 0, getWidth(), getHeight() - m_nArenaTop);
+        //计算fit center矩阵
+        matrix.setRectToRect(tempSrc, tempDst, Matrix.ScaleToFit.CENTER);
 
         return matrix;
     }
@@ -767,12 +739,12 @@ public class myGameViewMap extends View {
         private float checkMaxScale(float scale, float[] values) {
             if (mScale >= mMaxScale)
                 scale = mScale / values[Matrix.MSCALE_X];
-            else if (scale * values[Matrix.MSCALE_X] > mMaxScale)  //大于最大倍数限制时
+            else if (scale * values[Matrix.MSCALE_X] > mMaxScale)  //大于最大倍数限制时 | greater than the maximum scale factor
                 scale = mMaxScale / values[Matrix.MSCALE_X];
-            else if (scale * values[Matrix.MSCALE_X] < mScale * 0.9F) //小于原始缩放倍数的 90% 时
+            else if (scale * values[Matrix.MSCALE_X] < mScale * 0.9F) //小于原始缩放倍数的 90% 时 | less than 90% of the original scale factor
                 scale = mScale * 0.9F / values[Matrix.MSCALE_X];
 
-            return scale; //两极缩放级别之间，正常缩放
+            return scale; //两极缩放级别之间，正常缩放 | // Normal scaling between the two extreme zoom levels
         }
 
         //重置 Matrix，在小于原始地图时恢复
@@ -1042,6 +1014,12 @@ public class myGameViewMap extends View {
         canvas.save();
         mCurrentMatrix.getValues(values);
         values[Matrix.MTRANS_Y] += m_nArenaTop;
+
+        values[Matrix.MSCALE_X] = values[Matrix.MSCALE_Y] =
+                ((int) (m_PicWidth * values[Matrix.MSCALE_X])) / (float) m_PicWidth; // scale so the images are scaled without fractions
+        values[Matrix.MTRANS_X] = (int) values[Matrix.MTRANS_X];                     // translate without fractions
+        values[Matrix.MTRANS_Y] = (int) values[Matrix.MTRANS_Y];                     // translate without fractions
+
         mMapMatrix.setValues(values);
         m_fTop = values[Matrix.MTRANS_Y];
         m_fLeft = values[Matrix.MTRANS_X];

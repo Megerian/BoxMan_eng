@@ -192,7 +192,7 @@ public class myMaps {
 	static Bitmap skinGif = null; //GIF皮肤
 	static Bitmap skinBit = null; //皮肤
 	static Bitmap bkPict = null; //背景图片
-	static Bitmap edPict = null;  //关卡编辑界面的背景图片
+	static Bitmap edPict = null;  //关卡编辑界面的背景图片 | level editor background image
 	static int edPictLeft, edPictTop, edPictRight, edPictBottom;  // 关卡编辑界面的背景图片的四至
 	static int edRows, edCols;                                    // 识别时的关卡尺寸
 	static android.graphics.Bitmap.Config cfg = Bitmap.Config.ARGB_4444;
