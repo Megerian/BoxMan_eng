@@ -687,4 +687,7 @@
     <string name="enter_edit_mode">进入编辑</string>
     <string name="recognition_settings">识别设置</string>
     <string name="title_edit">编辑</string>
+    <string name="adapt_to_new_puzzle">改编为新关卡</string>
+    <string name="unlock_icon">图标解锁</string>
+    <string name="title_jump_to">跳至</string>
 </resources>

@@ -687,6 +687,9 @@
     <string name="enter_edit_mode">Enter edit mode</string>
     <string name="recognition_settings">Recognition settings</string>
     <string name="title_edit">Edit</string>
+    <string name="adapt_to_new_puzzle">Adapt to new puzzle</string>
+    <string name="unlock_icon">Unlock icon</string>
+    <string name="title_jump_to">Jump to</string>
 
     <item type="id" name="tag_g"></item>
     <item type="id" name="tag_c"></item>

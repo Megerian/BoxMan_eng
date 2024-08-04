@@ -218,8 +218,8 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 			m_Num = arg2;
 			mGridView.showContextMenu();
 
-			MyContMenu.getItem(1).setTitle("改编为新关卡");
-			MyContMenu.getItem(2).setTitle("图标加锁");
+			MyContMenu.getItem(1).setTitle(getString(R.string.adapt_to_new_puzzle));
+			MyContMenu.getItem(2).setTitle(getString(R.string.lock_icon));
 
 			MyContMenu.getItem(0).setVisible(false);     // 打开
 			MyContMenu.getItem(1).setVisible(false);     // 改编为新关卡（或编辑）
@@ -244,7 +244,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				MyContMenu.getItem(13).setVisible(true);    // 详细...
 			} else
 			if (myMaps.sFile.equals("创编关卡")) {
-				MyContMenu.getItem(1).setTitle("编辑");
+				MyContMenu.getItem(1).setTitle(getString(R.string.title_edit));
 
 				MyContMenu.getItem(1).setVisible(true);     // 改编为新关卡（或编辑）
 				MyContMenu.getItem(9).setVisible(true);     // 删除
@@ -267,7 +267,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 				MyContMenu.getItem(13).setVisible(true);    // 详细...
 			} else
 			if (myMaps.m_Settings[0] == 3) {  // 扩展关卡组
-				if (myMaps.m_lstMaps.get(arg2).Lock) MyContMenu.getItem(2).setTitle("图标解锁");
+				if (myMaps.m_lstMaps.get(arg2).Lock) MyContMenu.getItem(2).setTitle(getString(R.string.unlock_icon));
 
 				MyContMenu.getItem(0).setVisible(true);     // 打开
 				MyContMenu.getItem(1).setVisible(true);     // 改编为新关卡（或编辑）
@@ -549,7 +549,7 @@ public class myGridView extends Activity implements OnScrollListener, myFindFrag
 						return false;
 					}
 				});
-				dlg.setTitle("跳至").setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+				dlg.setTitle(getString(R.string.title_jump_to)).setNegativeButton(getString(R.string.cancel), null).setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						int n = -1;
