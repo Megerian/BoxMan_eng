@@ -7,7 +7,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 35
         versionCode 9
-        versionName "9.99t-eng"
+        versionName "9.99u_eng"
+        multiDexEnabled true
     }
     buildTypes {
         release {
