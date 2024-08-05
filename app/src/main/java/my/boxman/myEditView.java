@@ -719,7 +719,7 @@ public class myEditView extends Activity {
                 });
 
                 Builder dlg = new Builder(this, AlertDialog.THEME_HOLO_DARK);
-                dlg.setView(view).setCancelable(false).setTitle("当前尺寸：" + (mMap.m_nMapRight-mMap.m_nMapLeft+1) + " × " + (mMap.m_nMapBottom-mMap.m_nMapTop+1)).setNegativeButton(getString(R.string.cancel), null);
+                dlg.setView(view).setCancelable(false).setTitle(getString(R.string.current_size_) + (mMap.m_nMapRight-mMap.m_nMapLeft+1) + " × " + (mMap.m_nMapBottom-mMap.m_nMapTop+1)).setNegativeButton(getString(R.string.cancel), null);
                 dlg.setPositiveButton(getString(R.string.okay), new OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         int newLeft, newRight, newTop, newBottom;
@@ -798,7 +798,7 @@ public class myEditView extends Activity {
 
                 return true;
             case R.id.edit_exit:  //离开
-                MyToast.showToast(myEditView.this, "离开！", Toast.LENGTH_SHORT);
+                MyToast.showToast(myEditView.this, getString(R.string.exit), Toast.LENGTH_SHORT);
                 if (!bt_Save.isEnabled()) finish();
                 else exitDlg.show();  //做过编辑修改，提示保存
 
@@ -1232,7 +1232,7 @@ public class myEditView extends Activity {
         final EditText et = new EditText(this);
         et.setTypeface(Typeface.MONOSPACE);
         et.setText(str);
-        new Builder(this).setTitle("剪切板").setView(et).setCancelable(false)
+        new Builder(this).setTitle(getString(R.string.clipboard)).setView(et).setCancelable(false)
                 .setNegativeButton(getString(R.string.cancel), null)
                 .setPositiveButton(getString(R.string.okay), new OnClickListener() {
                     @Override
@@ -1289,7 +1289,7 @@ public class myEditView extends Activity {
                                     bt_Save.setEnabled(true);
                                 } else throw new Exception();
                             } catch (Exception e) {
-                                MyToast.showToast(myEditView.this, "数据不可用！", Toast.LENGTH_SHORT);
+                                MyToast.showToast(myEditView.this, getString(R.string.no_data_found_), Toast.LENGTH_SHORT);
                             }
 
                         }}).create().show();

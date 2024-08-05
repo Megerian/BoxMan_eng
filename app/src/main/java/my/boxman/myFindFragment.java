@@ -310,7 +310,7 @@ public class myFindFragment extends DialogFragment {
 
                         n++;  //搜索进度
                         if (mCount < 0) mCount = cursor.getCount();
-                        publishProgress("查找中... " + n + "/" + mCount + "\n答案库");
+                        publishProgress(getString(R.string.searching2___) + n + "/" + mCount + "\n"+ getString(R.string.solution_database));
 
                         try {
                             Map0 = cursor.getString(cursor.getColumnIndex("L_thin_XSB"));  //标准化关卡
@@ -459,10 +459,8 @@ public class myFindFragment extends DialogFragment {
             int m, m2, n, n2, dR1, dC1, dR2, dC2;
             char ch1, ch2;
 
-            if (Rows1 < Rows2) m = Rows1;
-            else m = Rows2;
-            if (Cols1 < Cols2) n = Cols1;
-            else n = Cols2;
+            m = Math.min(Rows1, Rows2);
+            n = Math.min(Cols1, Cols2);
 
             //参加对比的格子数不够，不需比对
             if (m * n < mLeast) return 0;

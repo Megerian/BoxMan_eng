@@ -592,7 +592,7 @@
     <string name="more_">More</string>
     <string name="export_sokoban_board">Export Sokoban board</string>
     <string name="keep_board_rotation">Keep board rotation</string>
-    <string name="solution_library">Solution library</string>
+    <string name="solution_database">Solution database</string>
     <string name="live_skin">Live skin</string>
     <string name="none_">None</string>
     <string name="text_default">Default</string>
@@ -694,16 +694,23 @@
     <string name="_puzzle_wil_be_deleted_are_you_sure">"  puzzle will be deleted. Are you sure?"</string>
     <string name="puzzles_will_be_deleted_are_you_sure">Puzzles will be deleted.\\nAre you sure?</string>
     <string name="import2">Import</string>
-    <string name="register">寄存器</string>
-    <string name="title_save_to">保存到</string>
-    <string name="moves_made">已做动作</string>
-    <string name="subsequent_moves">后续动作</string>
-    <string name="file">文档</string>
-    <string name="only_standard_move_characters_are_supported_">仅支持规范的动作字符！</string>
+    <string name="register">Register</string>
+    <string name="title_save_to">Save to</string>
+    <string name="moves_made">Moves made</string>
+    <string name="subsequent_moves">Subsequent moves</string>
+    <string name="file">File</string>
+    <string name="only_standard_move_characters_are_supported_">Only standard move characters are supported!</string>
 
     <item type="id" name="tag_g"></item>
     <item type="id" name="tag_c"></item>
     <string name="macro">Macro</string>
     <string name="file_import">File: Import</string>
+    <string name="current_size_">Current size：</string>
+    <string name="no_data_found_">No data found!</string>
+    <string name="columns">Columns</string>
+    <string name="rows">Rows</string>
+    <string name="there_is_nothing_to_export_">There is nothing to export!</string>
+    <string name="selected">Selected</string>
+    <string name="puzzle_sets_">puzzle sets:</string>
 
 </resources>

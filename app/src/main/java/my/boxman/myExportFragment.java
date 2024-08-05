@@ -112,14 +112,14 @@ public class myExportFragment extends DialogFragment {
         @Override
         protected String doInBackground(Void... params) {
 
-            if (mySets == null) return "没有可导出的内容！";
+            if (mySets == null) return getString(R.string.there_is_nothing_to_export_);
 
             int set_Count = 0;
             for (int k = 0; k < mySets.length; k++) {  //计数选中的关卡集个数
                 if (mySets[k] > 0) set_Count++;
             }
             if (myAns) set_Count++;
-            mInf = new StringBuilder("共选择").append(set_Count).append("个关卡集:");
+            mInf = new StringBuilder(getString(R.string.selected)).append(set_Count).append(getString(R.string.puzzle_sets_));
 
             for (int k = 0; k < mySets.length; k++) {  //导出选中的关卡集
 
@@ -130,7 +130,7 @@ public class myExportFragment extends DialogFragment {
                     if (myMaps.m_lstMaps.size() > 0){
                         myMaps.sFile = myMaps.J_Title;
                         my_Name = myMaps.sFile + (myLurd ? ".txt" : ".xsb");  // 导出文档名，不含路径
-                        publishProgress("导出...\n" + my_Name);
+                        publishProgress(getString(R.string.export___)+"\n" + my_Name);
                         if (isCancelled()) return mInf.append("...Break！").toString();
 
                         File file = new File(myMaps.sRoot + myMaps.sPath + "导出/" + my_Name);

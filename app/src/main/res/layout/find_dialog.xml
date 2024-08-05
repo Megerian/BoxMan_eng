@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:checked="false"
-                android:text="@string/solution_library"/>
+                android:text="@string/solution_database"/>
 
             <CheckBox
                 android:id="@+id/find_all"

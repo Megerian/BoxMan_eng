@@ -54,7 +54,7 @@ public class myAbout1 extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(false);
-		setTitle(myMaps.sFile + " - 关于");
+		setTitle(myMaps.sFile + " - "+ getString(R.string.puzzles_about));
 
 		et_Title = (EditText)this.findViewById(R.id.etTitle);
 		et_Author = (EditText)this.findViewById(R.id.etAuthor);

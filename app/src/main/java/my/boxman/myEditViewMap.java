@@ -728,7 +728,7 @@ public class myEditViewMap extends View {
 
             //计算尺寸或游标
             if (isSize) {
-                mStr = (m_nMapRight-m_nMapLeft+1)  + "列" + (m_nMapBottom-m_nMapTop+1) + "行" + m_Edit.getBoxs();  //关卡尺寸
+                mStr = ((m_nMapRight - m_nMapLeft) + 1) + getContext().getString(R.string.columns) + ((m_nMapBottom - m_nMapTop) + 1) + getContext().getString(R.string.rows) + m_Edit.getBoxs();  //关卡尺寸
             } else {
                 if (m_iR < 0 || m_iC < 0 || m_iR > (m_nMapBottom-m_nMapTop) || m_iC > (m_nMapRight-m_nMapLeft)) mStr = " ";
                 else mStr = mGetCur(m_iR, m_iC);  //游标
