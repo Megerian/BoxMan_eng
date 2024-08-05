@@ -13,6 +13,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -366,7 +367,13 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 
 	private void setLocale() {
 		if(Objects.equals(myMaps.localCode, "??")) {
-			myMaps.localCode = getResources().getConfiguration().locale.getLanguage();
+			Locale locale;
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+				locale = getResources().getConfiguration().getLocales().get(0);
+			} else {
+				locale = getResources().getConfiguration().locale;
+			}
+			myMaps.localCode = locale.getLanguage();
 		}
 
 		Locale locale = new Locale(myMaps.localCode);
