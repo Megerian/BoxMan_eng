@@ -163,21 +163,21 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 
 	void continueWithPermissions() {
 
-		setContentView(R.layout.main);
-
-		myMaps.res = getResources();
-		myMaps.m_Settings = new int[44]; //系统参数设置数组 | Array of settings
-
 		//路径设置
 //		myMaps.sRoot = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getPath(); // this folder is deleted when the app is uninstalled and the user can't add files to it.
 //		myMaps.sRoot = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getPath();
 		myMaps.sRoot = Environment.getExternalStorageDirectory().getPath();
 
 		myMaps.sPath = new StringBuilder("/推箱快手/").toString();
+
+		myMaps.m_Settings = new int[44]; //系统参数设置数组 | Array of settings
 		loadSettings();  //读入系统设置
         myMaps.myPathList[0] = myMaps.sPath + "关卡图/";
 
 		setLocale();
+		myMaps.res = getResources();
+
+		setContentView(R.layout.main);
 
 		groups = new String[] { getString(R.string.beginner_puzzles), getString(R.string.advanced_puzzles), getString(R.string.tricky_puzzles), getString(R.string.additional_puzzles) };
 

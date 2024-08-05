@@ -205,20 +205,20 @@ public class myActGMView extends Activity {
 			 @Override
 			 public void onClick(View v) {
 				 String[] m_menu = {
-						 "宏",
-						 "剪切板",
-						 "寄存器1",
-						 "寄存器2",
-						 "寄存器3",
-						 "寄存器4",
-						 "寄存器5",
-						 "寄存器6",
-						 "寄存器7",
-						 "寄存器8",
-						 "寄存器9"
+						 getString(R.string.macro),
+						 getString(R.string.clipboard),
+						 getString(R.string.register)+"1",
+						 getString(R.string.register)+"2",
+						 getString(R.string.register)+"3",
+						 getString(R.string.register)+"4",
+						 getString(R.string.register)+"5",
+						 getString(R.string.register)+"6",
+						 getString(R.string.register)+"7",
+						 getString(R.string.register)+"8",
+						 getString(R.string.register)+"9"
 				 };
 				 AlertDialog.Builder builder1 = new Builder(myActGMView.this, AlertDialog.THEME_HOLO_DARK);
-				 builder1.setTitle("保存到").setSingleChoiceItems(m_menu, -1, new DialogInterface.OnClickListener() {
+				 builder1.setTitle(getString(R.string.title_save_to)).setSingleChoiceItems(m_menu, -1, new DialogInterface.OnClickListener() {
 					 @Override
 					 public void onClick(DialogInterface dialog, int which) {
 						 switch (which) {
@@ -334,20 +334,20 @@ public class myActGMView extends Activity {
 
 	private void myLoad() {
 		String[] m_menu = {
-				"宏",
-				"已做动作",
-				"后续动作",
-				"文档",
-				"剪切板",
-				"寄存器1",
-				"寄存器2",
-				"寄存器3",
-				"寄存器4",
-				"寄存器5",
-				"寄存器6",
-				"寄存器7",
-				"寄存器8",
-				"寄存器9"
+				getString(R.string.macro),
+				getString(R.string.moves_made),
+				getString(R.string.subsequent_moves),
+				getString(R.string.file),
+				getString(R.string.clipboard),
+				getString(R.string.register)+"1",
+				getString(R.string.register)+"2",
+				getString(R.string.register)+"3",
+				getString(R.string.register)+"4",
+				getString(R.string.register)+"5",
+				getString(R.string.register)+"6",
+				getString(R.string.register)+"7",
+				getString(R.string.register)+"8",
+				getString(R.string.register)+"9"
 		};
 		AlertDialog.Builder builder1 = new Builder(myActGMView.this, AlertDialog.THEME_HOLO_DARK);
 		builder1.setTitle(getString(R.string.select_puzzle)).setSingleChoiceItems(m_menu, -1, new DialogInterface.OnClickListener() {
@@ -396,7 +396,7 @@ public class myActGMView extends Activity {
 						m_nItemSelect = -1;
 						myMaps.newSetList();
 						if (myMaps.mFile_List.size() > 0) {
-							new Builder(myActGMView.this, AlertDialog.THEME_HOLO_DARK).setTitle("文档：导入").setCancelable(false)
+							new Builder(myActGMView.this, AlertDialog.THEME_HOLO_DARK).setTitle(R.string.file_import).setCancelable(false)
 									.setSingleChoiceItems(myMaps.mFile_List.toArray(new String[myMaps.mFile_List.size()]), -1, new DialogInterface.OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
@@ -712,7 +712,7 @@ public class myActGMView extends Activity {
 					m.appendTail(sb);
 					et_Action.setText(sb.toString());
 				} else {
-					MyToast.showToast(this, "仅支持规范的动作字符！", Toast.LENGTH_SHORT);
+					MyToast.showToast(this, getString(R.string.only_standard_move_characters_are_supported_), Toast.LENGTH_SHORT);
 				}
 				return true;
 			case R.id.act_R_90:  //右旋90度（Lurd）
@@ -732,7 +732,7 @@ public class myActGMView extends Activity {
 					m.appendTail(sb);
 					et_Action.setText(sb.toString());
 				} else {
-					MyToast.showToast(this, "仅支持规范的动作字符！", Toast.LENGTH_SHORT);
+					MyToast.showToast(this, getString(R.string.only_standard_move_characters_are_supported_), Toast.LENGTH_SHORT);
 				}
 				return true;
 			case R.id.act_180:  //右旋180度（Lurd）
@@ -752,7 +752,7 @@ public class myActGMView extends Activity {
 					m.appendTail(sb);
 					et_Action.setText(sb.toString());
 				} else {
-					MyToast.showToast(this, "仅支持规范的动作字符！", Toast.LENGTH_SHORT);
+					MyToast.showToast(this, getString(R.string.only_standard_move_characters_are_supported_), Toast.LENGTH_SHORT);
 				}
 				return true;
 			case R.id.act_LR:  //左右翻转（Lurd）
@@ -772,7 +772,7 @@ public class myActGMView extends Activity {
 					m.appendTail(sb);
 					et_Action.setText(sb.toString());
 				} else {
-					MyToast.showToast(this, "仅支持规范的动作字符！", Toast.LENGTH_SHORT);
+					MyToast.showToast(this, getString(R.string.only_standard_move_characters_are_supported_), Toast.LENGTH_SHORT);
 				}
 				return true;
 			case R.id.act_UD:  //上下翻转（Lurd）
@@ -792,7 +792,7 @@ public class myActGMView extends Activity {
 					m.appendTail(sb);
 					et_Action.setText(sb.toString());
 				} else {
-					MyToast.showToast(this, "仅支持规范的动作字符！", Toast.LENGTH_SHORT);
+					MyToast.showToast(this, getString(R.string.only_standard_move_characters_are_supported_), Toast.LENGTH_SHORT);
 				}
 				return true;
 			case R.id.act_recording:

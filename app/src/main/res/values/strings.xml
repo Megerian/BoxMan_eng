@@ -494,7 +494,7 @@
     <string name="forward_clear">Forward clear!</string>
     <string name="forward_and_backward_clear">Forward and backward clear!</string>
     <string name="reverse_clear">Reverse clear!</string>
-    <string name="elapsed_time">Elapsed time</string>
+    <string name="elapsed_time">Elapsed time </string>
     <string name="seconds">seconds</string>
     <string name="this_is_an_unsolvable_puzzle_">This puzzle is unsolvable!</string>
     <string name="title_consecutive_selections">Consecutive selections</string>
@@ -505,7 +505,7 @@
     <string name="file_name">File name</string>
     <string name="puzzle_query">Puzzle query</string>
     <string name="clipboard_xsv_and_lurd">Clipboard: XSB+Lurd</string>
-    <string name="title_operation_instructions">Operation instructions</string>
+    <string name="title_operation_instructions">User manual</string>
     <string name="single_click_empty_space">【Single click on empty space】: Move the player (must be reachable position)</string>
     <string name="single_click_player">【Single click on player】: Shows reachable positions for the player</string>
     <string name="single_click_on_box">【Single click on box】: Shows its reachable positions. If this box is part of a \'staircase\' formation and is the first step in the \'staircase\', clicking on the second box in the \'staircase\' while in its reachable state will show the \'staircase\' walking method. Click again on a reachable position to automatically push the box into place</string>
@@ -694,8 +694,16 @@
     <string name="_puzzle_wil_be_deleted_are_you_sure">"  puzzle will be deleted. Are you sure?"</string>
     <string name="puzzles_will_be_deleted_are_you_sure">Puzzles will be deleted.\\nAre you sure?</string>
     <string name="import2">Import</string>
+    <string name="register">寄存器</string>
+    <string name="title_save_to">保存到</string>
+    <string name="moves_made">已做动作</string>
+    <string name="subsequent_moves">后续动作</string>
+    <string name="file">文档</string>
+    <string name="only_standard_move_characters_are_supported_">仅支持规范的动作字符！</string>
 
     <item type="id" name="tag_g"></item>
     <item type="id" name="tag_c"></item>
+    <string name="macro">Macro</string>
+    <string name="file_import">File: Import</string>
 
 </resources>

@@ -694,4 +694,12 @@
     <string name="a_total_of">"共有 "</string>
     <string name="_puzzle_wil_be_deleted_are_you_sure">" 号关卡将被删除，确认吗？"</string>
     <string name="import2">导入</string>
+    <string name="register">寄存器</string>
+    <string name="title_save_to">保存到</string>
+    <string name="moves_made">已做动作</string>
+    <string name="subsequent_moves">后续动作</string>
+    <string name="file">文档</string>
+    <string name="only_standard_move_characters_are_supported_">仅支持规范的动作字符！</string>
+    <string name="macro">宏</string>
+    <string name="file_import">文档：导入</string>
 </resources>

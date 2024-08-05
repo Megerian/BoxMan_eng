@@ -37,6 +37,23 @@ public class myAboutRecgo extends Activity {
 		 "  5、编辑：\n" +
 		 "     对于少量的关卡元素，也可以直接手动编辑而不做自动识别，可以通过点击顶行的“识别”或“编辑”菜单项进行模式切换。在“编辑”模式下，先点选底行的 XSB“元素”，然后点击“格子”即可。特别的，长按底行的 XSB“元素”，会有更多功能，具体不做详述。";
 
+		 if(myMaps.localCode.equalsIgnoreCase("en")) {
+			 s =
+			 "Image recognition is a feature that uses level screenshots to automatically identify their XSB format. It serves as an auxiliary tool for level creation.\n\n" +
+			 "General Steps:\n\n" +
+			 "  1. Border Positioning:\n" +
+			 "     The border line is equipped with circular 'indicator lights'. A pink light means the line is 'lit up', indicating that the border line is selected. Long press to 'light up' (when no XSB elements from the bottom row are selected, a click can also light it up). The 'up, down, left, right' buttons in the bottom row are used to fine-tune the selected border line's position. You can also double-tap near the 'indicator light' for fine-tuning. Long press the indicator light (at this time, the 'Warehouse Keeper' element in the bottom row will blink) to drag the current border line directly. The border line is composed of 'black and white' lines, with the optimal alignment being the white line 'pressing the edge'.\n" +
+			 "  2. Determine the Number of Horizontal Grid Cells:\n" +
+			 "     Once the border is set, you can use the 'increase' and 'decrease' buttons in the top row to adjust the number of grid cells horizontally.\n" +
+			 "  3. Recognition:\n" +
+			 "     After the grid aligns with the image elements, first select the XSB 'element' in the bottom row, then click the corresponding grid cell in the image, and QuickHand will automatically start the 'recognition'.\n" +
+			 "  4. Recognition Settings:\n" +
+			 "     If recognition efficiency is poor, you can adjust the recognition 'similarity' using the 'degree' button in the top row for some improvement.\n" +
+			 "  5. Editing:\n" +
+			 "     For a small number of level elements, you can manually edit them without automatic recognition. You can switch between 'recognition' and 'editing' modes by clicking the respective menu item in the top row. In 'editing' mode, first select the XSB 'element' in the bottom row, then click the 'grid'. Specifically, long pressing the XSB 'element' in the bottom row will reveal more functions, which are not detailed here.";
+
+		 }
+
 		tv_help.setText(s);
 	 }
 	 
