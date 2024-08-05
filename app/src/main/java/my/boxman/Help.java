@@ -132,135 +132,245 @@ public class Help extends Activity {
 					 .append(getString(R.string.invalid_coordinates_3));
 		 } else if (m_Num == 5) {   // 宏功能说明
 			 setTitle(getString(R.string.description_of_macro_function));
-			 s.append('\n')
-				 .append("声明：仅正推支持“宏”功能！\n").append('\n')
-				 .append("一、“宏”功能使用说明：\n").append('\n')
-				 .append("  1、“宏”以文本文档形式，保存在").append('\n')
-				 .append("     “推箱快手/宏/”文件夹中；").append('\n')
-				 .append("  2、“宏”不支持嵌套；").append('\n')
-				 .append("  3、支持行内块（一行多语句）；").append('\n')
-				 .append("  4、常规动作（Lurd）可以独占一行，").append('\n')
-				 .append("     也可以分行书写；").append('\n')
-				 .append("  5、空行将被忽略").append('\n')
-				 .append("  6、“宏”符号支持全角半角字符，").append('\n')
-				 .append("     请尽量使用英文（半角）字符，").append('\n')
-				 .append("     命令中可适当用空格、制表符来").append('\n')
-				 .append("     美化布局，“宏”符号包括：").append('\n')
-				 .append("     {}、()、[]、<>、+、@、~ 、^、").append('\n')
-				 .append("     =、*、?、% 、;、:").append('\n').append('\n')
-				 .append("二、“宏”命令详解：").append('\n').append('\n')
-				 .append("* => 块循环符号，两种写法：").append('\n')
-				 .append("     一是“*n”，即星号后面紧跟一个").append('\n')
-				 .append("     数字，标识块循环开始，数字为").append('\n')
-				 .append("     循环次数；二是“*”，即星号独占").append('\n')
-				 .append("     一行，标识块循环结束。").append('\n')
-				 .append("{} => 动作符号").append('\n')
-				 .append("     其内为常规动作（Lurd）字符或数").append('\n')
-				 .append("     字，若为数字（1--99）会用数字").append('\n')
-				 .append("     对应的寄存器（1--9 为内部寄存").append('\n')
-				 .append("     器，在导入对话框中对其进行赋值").append('\n')
-				 .append("     --动作寄存，而10--99 为玩家自").append('\n')
-				 .append("     定义的寄存器，可以使用“宏”指").append('\n')
-				 .append("     令对其赋值--现场动作寄存，引用").append('\n')
-				 .append("     时，二者同功）中保存的动作串进").append('\n')
-				 .append("     行替换，花括号后面可以跟数字，").append('\n')
-				 .append("     也可以不跟，数字标识动作重复次").append('\n')
-				 .append("     数（0 为无限次），不跟数字时，").append('\n')
-				 .append("     默认动作执行一次。动作执行时，").append('\n')
-				 .append("     会遇错即停。").append('\n')
-				 .append("= => 特别符号，两种用途").append('\n')
-				 .append("     1、用于首行首字符，强制“宏”").append('\n')
-				 .append("     代码从关卡初态开始执行，否则，").append('\n')
-				 .append("     “从当前点”执行，位于其它行时").append('\n')
-				 .append("     无此作用，且忽略其后面的字符。").append('\n')
-				 .append("     特别注意，执行“宏”时，导入对").append('\n')
-				 .append("     话框中的“从当前点”将被忽略；").append('\n')
-				 .append("     2、用于花括号后面，表示向寄存器").append('\n')
-				 .append("     赋值，寄存器数字允许“10-99”，").append('\n')
-				 .append("     等号后面为常规动作字符（Lurd）,").append('\n')
-				 .append("     赋值后的引用，可参照前面“动作").append('\n')
-				 .append("     符号”中的说明。").append('\n')
-				 .append("() => 撤销动作符号").append('\n')
-				 .append("     其内为数字，表示撤销的单步数。").append('\n')
-				 .append("[] => 走位符号，绝对坐标走位").append('\n')
-				 .append("     两种格式，一种是“标尺”格式，").append('\n')
-				 .append("     即字母数字格式，一种是逗号分隔").append('\n')
-				 .append("     两个数字的格式，先行后列，行列").append('\n')
-				 .append("     序号从 0 开始计数。仓管员走位").append('\n')
-				 .append("     后，不论是否走位成功，新位置都").append('\n')
-				 .append("     会自动记忆，以便下次走位时作为").append('\n')
-				 .append("     参照使用。").append('\n')
-				 .append("+[] => 走位符号，相对坐标走位").append('\n')
-				 .append("     相对于上次记忆的坐标进行走位，").append('\n')
-				 .append("     两个坐标做加法，仅支持逗号分隔").append('\n')
-				 .append("     两个数字一种格式。格式同上，功").append('\n')
-				 .append("     能同上。").append('\n')
-				 .append("@[] => 走位符号，相对坐标走位").append('\n')
-				 .append("     相对于仓管员当前坐标进行走位，").append('\n')
-				 .append("     两个坐标做加法，仅支持逗号分隔").append('\n')
-				 .append("     两个数字一种格式。格式同上，功").append('\n')
-				 .append("     能同上。").append('\n')
-				 .append("~ => 辅助符号，两种用途，").append('\n')
-				 .append("     1、跟在“动作”符号（花括号）").append('\n')
-				 .append("     后面，表示动作时忽略大小写。该").append('\n')
-				 .append("     符号即可以放在重复数字前，也可").append('\n')
-				 .append("     以放在重复数字后面；").append('\n')
-				 .append("     2、跟在“坐标”符号（方括号）").append('\n')
-				 .append("     后面，表示仅记忆坐标，不走位。").append('\n')
-				 .append("? => 条件语句符号").append('\n')
-				 .append("     格式为：? ① = ② : ③ / ④").append('\n')
-				 .append("     其中 ① 为坐标，② 为关卡元素，").append('\n')
-				 .append("     ③ 为语句1，④ 为语句2。意思是").append('\n')
-				 .append("     当 ②（可多个元素连写）包含关卡").append('\n')
-				 .append("     坐标 ① 上的元素时，执行 ③ 处").append('\n')
-				 .append("     的语句1，否则执行 ④ 处的语句2").append('\n')
-				 .append("     ④ 处的语句2可以省略，① 处的坐").append('\n')
-				 .append("     标不记忆、不走位。注意： ③ 和").append('\n')
-				 .append("     ④处可以是行内块语句，但是不能").append('\n')
-				 .append("     再包含“条件语句”，即条件语句").append('\n')
-				 .append("     不支持嵌套。").append('\n')
-				 .append("<> => 行内块符号，即一行内多条语句").append('\n')
-				 .append("     在尖括号中，书写多条单行“宏”语").append('\n')
-				 .append("     句，各语句间用分号隔开即可。特").append('\n')
-				 .append("     别的，尖括号后面可以跟数字，也").append('\n')
-				 .append("     可以不跟，数字标识动作重复的次").append('\n')
-				 .append("     数（参照花括号，但为 0 时，是").append('\n')
-				 .append("     执行默认的一次，而非无限次）。").append('\n')
-				 .append("% => 跳转符号，即：GoTo 语句").append('\n')
-				 .append("     跳转到冒号为首的标记处执行，标").append('\n')
-				 .append("     记为非负整数。允许循环块外向循").append('\n')
-				 .append("     环块内的跳转，不允许循环块内向").append('\n')
-				 .append("     循环块外的跳转。该语句有风险！").append('\n')
-				 .append("     特别的：“%*”表示跳出循环块。").append('\n')
-				 .append(": => 标记符号").append('\n')
-				 .append("     通常与跳转语句（%）配合使用，").append('\n')
-				 .append("     冒号后面是一个非负整数，标记要").append('\n')
-				 .append("     独占一行。").append('\n')
-				 .append("^ => 断点符号，调试符号，独占一行").append('\n')
-				 .append("     宏代码执行到此行后，会暂停并转").append('\n')
-				 .append("     到单步调试模式。注意，循环块内").append('\n')
-				 .append("     的断点符号不起作用。").append('\n')
-				 .append("; => 注释符号").append('\n')
-				 .append("     执行“宏”时，会忽略分号（;）后").append('\n')
-				 .append("     面的内容，可独占一行，也可放在").append('\n')
-				 .append("     “宏”语句的后面。");
+
+			 if(myMaps.localCode.equalsIgnoreCase("zh")) {
+				 s.append('\n')
+						 .append("声明：仅正推支持“宏”功能！\n").append('\n')
+						 .append("一、“宏”功能使用说明：\n").append('\n')
+						 .append("  1、“宏”以文本文档形式，保存在").append('\n')
+						 .append("     “推箱快手/宏/”文件夹中；").append('\n')
+						 .append("  2、“宏”不支持嵌套；").append('\n')
+						 .append("  3、支持行内块（一行多语句）；").append('\n')
+						 .append("  4、常规动作（Lurd）可以独占一行，").append('\n')
+						 .append("     也可以分行书写；").append('\n')
+						 .append("  5、空行将被忽略").append('\n')
+						 .append("  6、“宏”符号支持全角半角字符，").append('\n')
+						 .append("     请尽量使用英文（半角）字符，").append('\n')
+						 .append("     命令中可适当用空格、制表符来").append('\n')
+						 .append("     美化布局，“宏”符号包括：").append('\n')
+						 .append("     {}、()、[]、<>、+、@、~ 、^、").append('\n')
+						 .append("     =、*、?、% 、;、:").append('\n').append('\n')
+						 .append("二、“宏”命令详解：").append('\n').append('\n')
+						 .append("* => 块循环符号，两种写法：").append('\n')
+						 .append("     一是“*n”，即星号后面紧跟一个").append('\n')
+						 .append("     数字，标识块循环开始，数字为").append('\n')
+						 .append("     循环次数；二是“*”，即星号独占").append('\n')
+						 .append("     一行，标识块循环结束。").append('\n')
+						 .append("{} => 动作符号").append('\n')
+						 .append("     其内为常规动作（Lurd）字符或数").append('\n')
+						 .append("     字，若为数字（1--99）会用数字").append('\n')
+						 .append("     对应的寄存器（1--9 为内部寄存").append('\n')
+						 .append("     器，在导入对话框中对其进行赋值").append('\n')
+						 .append("     --动作寄存，而10--99 为玩家自").append('\n')
+						 .append("     定义的寄存器，可以使用“宏”指").append('\n')
+						 .append("     令对其赋值--现场动作寄存，引用").append('\n')
+						 .append("     时，二者同功）中保存的动作串进").append('\n')
+						 .append("     行替换，花括号后面可以跟数字，").append('\n')
+						 .append("     也可以不跟，数字标识动作重复次").append('\n')
+						 .append("     数（0 为无限次），不跟数字时，").append('\n')
+						 .append("     默认动作执行一次。动作执行时，").append('\n')
+						 .append("     会遇错即停。").append('\n')
+						 .append("= => 特别符号，两种用途").append('\n')
+						 .append("     1、用于首行首字符，强制“宏”").append('\n')
+						 .append("     代码从关卡初态开始执行，否则，").append('\n')
+						 .append("     “从当前点”执行，位于其它行时").append('\n')
+						 .append("     无此作用，且忽略其后面的字符。").append('\n')
+						 .append("     特别注意，执行“宏”时，导入对").append('\n')
+						 .append("     话框中的“从当前点”将被忽略；").append('\n')
+						 .append("     2、用于花括号后面，表示向寄存器").append('\n')
+						 .append("     赋值，寄存器数字允许“10-99”，").append('\n')
+						 .append("     等号后面为常规动作字符（Lurd）,").append('\n')
+						 .append("     赋值后的引用，可参照前面“动作").append('\n')
+						 .append("     符号”中的说明。").append('\n')
+						 .append("() => 撤销动作符号").append('\n')
+						 .append("     其内为数字，表示撤销的单步数。").append('\n')
+						 .append("[] => 走位符号，绝对坐标走位").append('\n')
+						 .append("     两种格式，一种是“标尺”格式，").append('\n')
+						 .append("     即字母数字格式，一种是逗号分隔").append('\n')
+						 .append("     两个数字的格式，先行后列，行列").append('\n')
+						 .append("     序号从 0 开始计数。仓管员走位").append('\n')
+						 .append("     后，不论是否走位成功，新位置都").append('\n')
+						 .append("     会自动记忆，以便下次走位时作为").append('\n')
+						 .append("     参照使用。").append('\n')
+						 .append("+[] => 走位符号，相对坐标走位").append('\n')
+						 .append("     相对于上次记忆的坐标进行走位，").append('\n')
+						 .append("     两个坐标做加法，仅支持逗号分隔").append('\n')
+						 .append("     两个数字一种格式。格式同上，功").append('\n')
+						 .append("     能同上。").append('\n')
+						 .append("@[] => 走位符号，相对坐标走位").append('\n')
+						 .append("     相对于仓管员当前坐标进行走位，").append('\n')
+						 .append("     两个坐标做加法，仅支持逗号分隔").append('\n')
+						 .append("     两个数字一种格式。格式同上，功").append('\n')
+						 .append("     能同上。").append('\n')
+						 .append("~ => 辅助符号，两种用途，").append('\n')
+						 .append("     1、跟在“动作”符号（花括号）").append('\n')
+						 .append("     后面，表示动作时忽略大小写。该").append('\n')
+						 .append("     符号即可以放在重复数字前，也可").append('\n')
+						 .append("     以放在重复数字后面；").append('\n')
+						 .append("     2、跟在“坐标”符号（方括号）").append('\n')
+						 .append("     后面，表示仅记忆坐标，不走位。").append('\n')
+						 .append("? => 条件语句符号").append('\n')
+						 .append("     格式为：? ① = ② : ③ / ④").append('\n')
+						 .append("     其中 ① 为坐标，② 为关卡元素，").append('\n')
+						 .append("     ③ 为语句1，④ 为语句2。意思是").append('\n')
+						 .append("     当 ②（可多个元素连写）包含关卡").append('\n')
+						 .append("     坐标 ① 上的元素时，执行 ③ 处").append('\n')
+						 .append("     的语句1，否则执行 ④ 处的语句2").append('\n')
+						 .append("     ④ 处的语句2可以省略，① 处的坐").append('\n')
+						 .append("     标不记忆、不走位。注意： ③ 和").append('\n')
+						 .append("     ④处可以是行内块语句，但是不能").append('\n')
+						 .append("     再包含“条件语句”，即条件语句").append('\n')
+						 .append("     不支持嵌套。").append('\n')
+						 .append("<> => 行内块符号，即一行内多条语句").append('\n')
+						 .append("     在尖括号中，书写多条单行“宏”语").append('\n')
+						 .append("     句，各语句间用分号隔开即可。特").append('\n')
+						 .append("     别的，尖括号后面可以跟数字，也").append('\n')
+						 .append("     可以不跟，数字标识动作重复的次").append('\n')
+						 .append("     数（参照花括号，但为 0 时，是").append('\n')
+						 .append("     执行默认的一次，而非无限次）。").append('\n')
+						 .append("% => 跳转符号，即：GoTo 语句").append('\n')
+						 .append("     跳转到冒号为首的标记处执行，标").append('\n')
+						 .append("     记为非负整数。允许循环块外向循").append('\n')
+						 .append("     环块内的跳转，不允许循环块内向").append('\n')
+						 .append("     循环块外的跳转。该语句有风险！").append('\n')
+						 .append("     特别的：“%*”表示跳出循环块。").append('\n')
+						 .append(": => 标记符号").append('\n')
+						 .append("     通常与跳转语句（%）配合使用，").append('\n')
+						 .append("     冒号后面是一个非负整数，标记要").append('\n')
+						 .append("     独占一行。").append('\n')
+						 .append("^ => 断点符号，调试符号，独占一行").append('\n')
+						 .append("     宏代码执行到此行后，会暂停并转").append('\n')
+						 .append("     到单步调试模式。注意，循环块内").append('\n')
+						 .append("     的断点符号不起作用。").append('\n')
+						 .append("; => 注释符号").append('\n')
+						 .append("     执行“宏”时，会忽略分号（;）后").append('\n')
+						 .append("     面的内容，可独占一行，也可放在").append('\n')
+						 .append("     “宏”语句的后面。");
+			 } else {
+				 s.append( "Declaration:\n\n" +
+						 "The \"Macro\" feature is only supported in forward play mode!\n\n" +
+
+						 "I. Instructions for Using the \"Macro\" Feature:\n\n" +
+
+						 "- Macros are stored as text documents in the \"Boxman/Macros/\" folder.\n" +
+						 "- Macros do not support nesting.\n" +
+						 "- Inline blocks (multiple statements on one line) are supported.\n" +
+						 "- Regular moves (L, u, r, d) can be written on separate lines or on the same line.\n" +
+						 "- Empty lines will be ignored.\n" +
+						 "- Macro symbols support both full-width and half-width characters." +
+						 "  Please use English (half-width) characters whenever possible. Spaces and tabs can be used to improve the layout.\n" +
+						 "  Macro symbols include: {}, (), [], <>, +, @, ~, ^, =, *, ?, %, ;, :.\n\n" +
+
+						 "II. Detailed Explanation of Macro Commands:\n\n" +
+
+						 "* (Block Loop Symbol): There are two ways to write this:\n" +
+						 "  *n: An asterisk followed immediately by a number indicates the beginning of a block loop. The number represents the number of loop iterations.\n" +
+						 "  * (on a separate line): An asterisk on its own line indicates the end of a block loop.\n\n" +
+
+						 "{} (Move Symbol):\n" +
+						 "Contains regular move characters (L, u, r, d) or numbers.\n" +
+						 "If a number (1-99) is used, it will be replaced with the move sequence stored in the corresponding register.\n" +
+						 "Registers 1-9 are internal registers and are assigned values in the import dialog (move storage).\n" +
+						 "Registers 10-99 are user-defined registers and can be assigned values using macro commands (live move storage). Both types of registers function the same way when referenced.\n" +
+						 "Curly braces can be followed by a number or not. The number indicates the number of times the move sequence should be repeated (0 for infinite repetition). If no number is specified, the move sequence is executed once.\n" +
+						 "Move execution will stop immediately upon encountering an error.\n\n" +
+
+						 "= (Special Symbol): Has two purposes:\n" +
+						 "When used as the first character on the first line, it forces the macro code to execute from the initial state of the level. Otherwise, the macro will execute from the current position. This function only applies when used on the first line and has no effect on other lines. Characters following the = on the first line are ignored. Please note: The \"Start from Current Position\" option in the import dialog will be ignored when executing a macro.\n" +
+						 "When used after curly braces {}, it indicates an assignment to a register. Register numbers from 10 to 99 are allowed. Regular move characters (L, u, r, d) follow the equals sign. Refer to the explanation of the \"Move Symbol\" above for how to reference assigned registers.\n\n" +
+
+						 "() (Undo Move Symbol):\n" +
+						 "Contains a number indicating the number of single steps to undo.\n\n" +
+
+						 "[] (Move to Position Symbol - Absolute Coordinates):\n" +
+						 "There are two formats: \"ruler\" format (alphanumeric) and comma-separated numbers (row, column). Row and column numbers start from 0.\n" +
+						 "After the pusher moves to a position, whether successful or not, the new position is automatically remembered and used as a reference for the next move.\n\n" +
+
+						 "+[] (Move to Position Symbol - Relative Coordinates):\n" +
+						 "Moves the pusher relative to the last remembered coordinates. The two coordinates are added together. Only the comma-separated number format is supported. The format and function are the same as above.\n\n" +
+
+						 "@[] (Move to Position Symbol - Relative Coordinates):\n" +
+						 "Moves the pusher relative to its current coordinates. The two coordinates are added together. Only the comma-separated number format is supported. The format and function are the same as above.\n\n" +
+
+						 "~ (Auxiliary Symbol): Has two purposes:\n" +
+						 "When used after the \"Move\" symbol ({}), it indicates that the case of the move characters should be ignored. This symbol can be placed before or after the repetition number.\n" +
+						 "When used after the \"Coordinate\" symbol ([]), it indicates that only the coordinates should be remembered, and the pusher should not move.\n\n" +
+
+						 "? (Conditional Statement Symbol):\n" +
+						 "Format: ? ① = ② : ③ / ④\n" +
+						 "①: Coordinates.\n" +
+						 "②: Level elements (multiple elements can be written together).\n" +
+						 "③: Statement 1.\n" +
+						 "④: Statement 2 (optional).\n" +
+						 "If ② contains the element at coordinates ①, statement 1 (③) is executed. Otherwise, statement 2 (④) is executed. Statement 2 can be omitted. The coordinates in ① are not remembered or used for movement. Note: Statements ③ and ④ can be inline block statements, but they cannot contain conditional statements (conditional statements cannot be nested).\n\n" +
+
+						 "<> (Inline Block Symbol):\n" +
+						 "Allows writing multiple single-line macro commands within angle brackets, separated by semicolons.\n" +
+						 "A number can be added after the closing angle bracket to specify the number of times the block should be repeated (similar to curly braces, but 0 means execute once, not infinitely).\n\n" +
+
+						 "% (Jump Symbol): GoTo statement.\n" +
+						 "Jumps to the label indicated by a colon followed by a non-negative integer. Jumps from outside a loop to inside a loop are allowed, but jumps from inside a loop to outside are not. This statement can be risky!\n" +
+						 "Special case: %* indicates jumping out of the current loop.\n\n" +
+
+						 ": (Label Symbol):\n" +
+						 "Usually used with the jump statement (%). A colon is followed by a non-negative integer and must be on a separate line.\n\n" +
+
+						 "^ (Breakpoint Symbol): Debugging symbol.\n" +
+						 "When the macro code execution reaches this line, it will pause and switch to single-step debugging mode. Note: Breakpoint symbols inside loops have no effect.\n\n" +
+
+						 "; (Comment Symbol):\n" +
+						 "When executing a macro, everything after a semicolon (;) is ignored. Can be used on a separate line or at the end of a macro statement. ");
+			 }
 		 } else if (m_Num == 6) {   // 图片识别说明
-			 setTitle("操作说明");
-			 s.append('\n')
-				 .append("  图像识别，是利用关卡截图，自动识别出其 XSB，属于创编关卡的辅助功能。\n").append('\n')
-				 .append("一般步骤：\n").append('\n')
-				 .append("  1、边框定位：").append('\n')
-				 .append("     边框线上带有圆形“指示灯”，粉红色为“点亮”状态，表示该边线被选中，长按可以“点亮”（当没有选择底行的 XSB 元素时，也可以单击“点亮”）。底行的“上下左右”按钮对被选中的边线进行微调定位，也可以在“指示灯”附近双击进行微调；“长按”指示灯（此时，指示灯会闪烁）可以直接拖动当前边线；边框线采用了“黑白”双色线条，对位的最佳效果是以白线“压边”。").append('\n')
-				 .append("  2、确定横向格子数：").append('\n')
-				 .append("     当边框确定好后，就可以利用顶行的“增”、“减”按钮调整关卡横向的格子数，而纵向格子数会自动计算。").append('\n')
-				 .append("  3、识别：").append('\n')
-				 .append("     当格线调整好之后，先点选底行的 XSB“元素”，然后点击图片中的相应格子，快手会自动启动“识别”。").append('\n')
-				 .append("  4、识别设置：").append('\n')
-				 .append("     当识别效果不理想时，可以通过顶行的“度”按钮，调整识别“相似度”，会有一定程度的改善。").append('\n')
-				 .append("  5、编辑：").append('\n')
-				 .append("     对于少量的关卡元素，也可以直接手动编辑而不做自动识别。通过点击顶行的“识别”或“编辑”菜单项进行模式切换。在“编辑”模式下，先点选底行的 XSB“元素”，然后点击“格子”即可。特别的，长按底行的 XSB“元素”，会有更多功能，具体不做详述。");
+			 setTitle(getString(R.string.title_operation_instructions));
+			 if(myMaps.localCode.equalsIgnoreCase("zh")) {
+				 s.append('\n')
+						 .append("  图像识别，是利用关卡截图，自动识别出其 XSB，属于创编关卡的辅助功能。\n").append('\n')
+						 .append("一般步骤：\n").append('\n')
+						 .append("  1、边框定位：").append('\n')
+						 .append("     边框线上带有圆形“指示灯”，粉红色为“点亮”状态，表示该边线被选中，长按可以“点亮”（当没有选择底行的 XSB 元素时，也可以单击“点亮”）。底行的“上下左右”按钮对被选中的边线进行微调定位，也可以在“指示灯”附近双击进行微调；“长按”指示灯（此时，指示灯会闪烁）可以直接拖动当前边线；边框线采用了“黑白”双色线条，对位的最佳效果是以白线“压边”。").append('\n')
+						 .append("  2、确定横向格子数：").append('\n')
+						 .append("     当边框确定好后，就可以利用顶行的“增”、“减”按钮调整关卡横向的格子数，而纵向格子数会自动计算。").append('\n')
+						 .append("  3、识别：").append('\n')
+						 .append("     当格线调整好之后，先点选底行的 XSB“元素”，然后点击图片中的相应格子，快手会自动启动“识别”。").append('\n')
+						 .append("  4、识别设置：").append('\n')
+						 .append("     当识别效果不理想时，可以通过顶行的“度”按钮，调整识别“相似度”，会有一定程度的改善。").append('\n')
+						 .append("  5、编辑：").append('\n')
+						 .append("     对于少量的关卡元素，也可以直接手动编辑而不做自动识别。通过点击顶行的“识别”或“编辑”菜单项进行模式切换。在“编辑”模式下，先点选底行的 XSB“元素”，然后点击“格子”即可。特别的，长按底行的 XSB“元素”，会有更多功能，具体不做详述。");
+			 } else {
+				 s.append('\n').append(
+						 "General Steps:\n" +
+						 "1. Border Positioning:\n" +
+						 "  Border lines have circular \"indicator lights.\" Pink indicates an \"active\" state, meaning the border line is selected." +
+						 " Long-press to activate a border line (you can also single-tap to activate if no XSB element is selected in the bottom row)." +
+						 " Use the \"Up,\" \"Down,\" \"Left,\" and \"Right\" buttons in the bottom row to fine-tune the position of the selected border line." +
+						 " You can also double-tap near an \"indicator light\" for fine adjustments." +
+						 " Long-pressing an indicator light (it will flash) allows you to directly drag the corresponding border line." +
+						 " Border lines use a \"black and white\" double-line design." +
+						 " The best alignment is achieved when the white line \"overlaps\" the edge of the level.\n\n" +
+
+						 "2. Determine the Number of Horizontal Grids:\n" +
+						 " Once the border is set, use the \"Increase\" and \"Decrease\" buttons in the top row to adjust the number of horizontal grids in the level." +
+						 " The number of vertical grids will be calculated automatically.\n\n" +
+
+						 "3. Recognition:\n" +
+						 "After adjusting the grid lines, first select the XSB \"element\" in the bottom row, then tap the corresponding grid in the image." +
+						 " The app will automatically start the recognition process.\n\n" +
+
+						 "4. Recognition Settings:\n" +
+						 "If the recognition results are not satisfactory, you can adjust the \"similarity\" level using the \"Degree\" button in the top row." +
+						 " This may improve the results.\n\n" +
+
+						 "5. Editing:\n" +
+						 "For a small number of level elements, you can also manually edit them instead of using automatic recognition." +
+						 " Switch between modes by tapping the \"Recognition\" or \"Edit\" menu items in the top row." +
+						 " In \"Edit\" mode, first select the XSB \"element\" in the bottom row, then tap the \"grid.\"\n" +
+						 " Special note: Long-pressing the XSB \"element\" in the bottom row will provide more functions (details not provided here)."
+				 );
+			 }
 		 } else {    // 主界面调用
-			 s.append("====== 特别提醒 ======").append('\n')
+			 if(myMaps.localCode.equalsIgnoreCase("zh")) {
+				 s.append("====== 特别提醒 ======").append('\n')
 				 .append('\n')
 				 .append("  在重要“节点”请及时做好关卡库（DataBase/Boxman.db）的备份，尤其在每次升级“快手”、或在做较多较大关卡集导入的之前，以防不测！！！").append('\n')
 				 .append('\n')
@@ -424,6 +534,80 @@ public class Help extends Activity {
 				 .append("1、优化最后一步的“撤销”功能；").append('\n')
 				 .append("2、完善死锁检测功能，以移植 JSoko 的“闭锁对角”（原“双 L”型）死锁检测为主，创建独立类；").append('\n')
 				 .append("3、将探路算法中的 parent 等变量由原来的 byte[][] 类型改变为 short[][] 类型，已修复因穿越深度过大时，超过 byte 类型最大值的 bug。");
+			 } else {
+				 s.append("====== Special Reminder ======").append('\n')
+				 .append('\n')
+				 .append("  Please back up the checkpoint database (DataBase/Boxman.db) promptly at important 'nodes,' especially before upgrading 'Boxman' or importing many large level sets, to prevent unexpected issues!!!").append('\n')
+				 .append('\n')
+				 .append("===== Download and Community =====").append('\n')
+				 .append('\n')
+				 .append("Website: sokoban.cn").append('\n')
+				 .append("QQ Group: 92017135").append('\n')
+				 .append('\n')
+				 .append("======== Introduction ========").append('\n')
+				 .append('\n')
+				 .append("  1. In 'Boxman,' levels and solutions use the (XSB+Lurd) standard format. Level (set) files support extensions like 'XSB, TXT, SOK, TXZ,' etc.;").append('\n')
+				 .append("  2. 'Boxman' uses an SQLite database to manage level and solution data, referred to as the 'Level Database.' The level database and other data from 'Boxman' are stored under '/storage/emulated/0/Boxman/' on the phone's memory card. 'DataBase/BoxMan.db' is the level database, and data in the level database should not be manually modified, as this may cause the app to crash! However, you can delete or rename (the folder or the level database), and the level database (the original data that comes with 'Boxman') will automatically regenerate;").append('\n')
+				 .append("  3. 'Boxman' supports custom skins. Players can copy custom skin (PNG image) files to the 'skins/' folder and then set them in the app to change the skin. 'defskin.png' is the default skin (size 200 x 400, this file can be deleted, and it will regenerate) that comes with 'Boxman.' Players can draw their own skins based on this format, noting that some elements use a transparent background. Additionally, 'Boxman' supports simplified skins (200 x 350, containing only two directions for the warehouse worker sprite) and ultra-simplified skins (200 x 150, containing only one wall and two directions for the warehouse worker sprite);").append('\n')
+				 .append("  4. 'Boxman' supports level expansion, commonly referred to as 'import.' There are single-level imports, document imports, clipboard imports, and submissions via the level editor. In some import methods, solutions and batch imports can also be imported simultaneously;").append('\n')
+				 .append("  5. To import level sets, first copy the level set files to the 'import/' folder, then select 'Import...' from the menu on the main interface;").append('\n')
+				 .append("  6. For imported solutions obtained or optimized through YASS, 'Boxman' will automatically record '[Import]' or '[YASS]' in the 'Remarks' section of that solution;").append('\n')
+				 .append("  7. 'Boxman' supports saving and exporting 'states' and 'solutions.' Exported files are placed in the 'export/' folder;").append('\n')
+				 .append("  8. Level expansion and deletion only apply to levels expanded by the player, i.e., the 'Level Expansion' group;").append('\n')
+				 .append("  9. In the Boxman editor, XSB import is supported, and Lurd import is also supported (i.e., reverse deriving the level XSB from the solution Lurd). Additionally, 'Boxman' supports automatic recognition of level images. Players can copy level screenshots to the 'level_images/' folder, then automatically recognize the level XSB through 'Image Recognition' in the level editor;").append('\n')
+				 .append("  10. 'Boxman' supports level sizes ranging from 3 to 100 rows and 3 to 100 columns. Levels that exceed these dimensions or have mismatches between boxes and targets, or an invalid number of warehouse workers, are considered invalid and will not be accepted, indicated by a gray preview icon;").append('\n')
+				 .append("  11. 'Boxman' supports the synthesis of GIF animations from solutions (or actions). For 'live skin' animations, you can place an image named 'banner.png' in the 'Boxman/' root folder (recommended size within '200 x 42', and it must be placed before starting Boxman to be effective) as a custom animation watermark. The default watermark is the domain name 'sokoban.cn.' The 'live skin' animation also supports manual box numbering and rulers for teaching purposes. The 'fixed skin' animation has the QQ number of the 'Boxman group' as the default watermark, with custom watermarks automatically taking the player's 'name' when submitting competition solutions.").append('\n')
+				 .append('\n')
+				 .append("====== Recent Updates ======").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99u~: 2024-03-27").append('\n')
+				 .append("1. Added 'Double Tap Numbering' switch.").append('\n')
+//  .append("1. Added color hints for levels with 'state' saved;").append('\n')
+//  .append("2. Added batch modification function for level editing.").append('\n')
+//  .append("2. Added 'Festival Solve' option for levels.").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99t: 2024-03-09").append('\n')
+				 .append("1. Updated to support dual push interaction when exporting live XSB;").append('\n')
+				 .append("2. Supported custom competition websites.").append('\n')
+//  .append("2. Added 'Festival Solve' option for levels.").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99s: 2024-01-27").append('\n')
+				 .append("1. Set the 'Show Time Prompt when Pushing Levels' switch to enabled by default;").append('\n')
+				 .append("2. Fixed an issue where reverse actions couldn't be imported due to incorrect warehouse worker coordinates;").append('\n')
+				 .append("3. Added 'Leave' option to the 'More' section of the level editor module;").append('\n')
+				 .append("4. Resolved an issue where the 'More' button in the level pushing and editing interfaces could only be used once on new phones;").append('\n')
+				 .append("5. Updated SDK to v33 for recompilation.").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99r: 2023-02-14").append('\n')
+				 .append("1. Added a 'Reset to Default' button in the 'Switch Settings' section of the 'Push Box' interface;").append('\n')
+				 .append("2. Fixed a misjudgment issue with 'Diagonal' deadlocks (gl).").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99q: 2023-02-08").append('\n')
+				 .append("1. Added support for the fourth competition level.").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99n: 2022-03-30").append('\n')
+				 .append("1. Fixed an issue where optimizing skin effects caused the right side of the warehouse worker's original position to display abnormally under reverse push state (Torchbearer);").append('\n')
+				 .append("2. Added 'Exit' menu to the 'Push Box' interface.").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99m: 2022-03-11").append('\n')
+				 .append("1. Fixed an issue where splitting skins early caused half-transparent issues in level images after viewing duplicate levels (Meditation Practice, Jumping Spirit).").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99k: 2022-03-09").append('\n')
+				 .append("1. Optimized skin effects.").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99j: 2022-02-22").append('\n')
+				 .append("1. Fixed a bug where importing a level from the clipboard in the level browsing interface caused a crash.").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99i: 2022-02-16").append('\n')
+				 .append("1. Fixed a bug where the app crashed when the warehouse worker long-pressed the 'floor' during reverse push (Torchbearer).").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99h: 2021-05-25").append('\n')
+				 .append("1. To enhance drawing effects, the wall top tile is shrunk inward by one pixel from all sides when drawing the wall top to avoid color interference around the wall top tile.").append('\n')
+				 .append('\n')
+				 .append("BoxMan9.99g: 2021-03-09").append('\n')
+				 .append("1. Optimized the use of the clipboard when importing actions;").append('\n')
+				 .append("2. Added a network lock reminder, restricting its use in non");
+			 }
 		 }
 
 		 tv_help.setText(s.toString());

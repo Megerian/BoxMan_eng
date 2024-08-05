@@ -39,6 +39,43 @@ public class myAbout extends Activity {
 				"以及 Kevin Weiner, FM Software 的 GIF 合成代码。" +
 				"特此鸣谢！同时，也祝各位箱友都能很快的晋升到推箱子群中的快手之列！";
 
+		if(myMaps.localCode.equalsIgnoreCase("en")) {
+			 s = "《BoxMan》\n\n" +
+					"  版Version：9.99u~\n\n" +
+					"  Developer：Yú wēng 愉翁    QQ：252804303\n\n" +
+					"  Design：anian、Yú wēng\n\n" +
+					"  Website：sokoban.cn\n\n" +
+					"  QQ Group：92017135\n\n" +
+
+					"Special Thanks: A huge thank you to anian and Professor Yang Chao, " +
+					"as well as the many enthusiastic Sokoban friends!\n\n" +
+
+					"Throughout the game's design process, anian provided invaluable guidance and conducted " +
+					"extensive testing during development.\n\n" +
+
+					"We received exceptional support and assistance from both anian and Professor Yang, " +
+					"particularly with algorithms like \"cut-point\" pathfinding and \"crossing\" pathfinding.\n\n" +
+
+					"Many of these algorithms were directly ported from Professor Yang Chao's \"SokoPlayer HTML5.\"\n\n" +
+
+					"Furthermore, anian provided almost all of the original level set files for the game.\n\n" +
+
+					"A small number of levels were selected from \"http://sokoban.cn/\" .\n\n" +
+
+					"During the game's public beta, we received valuable suggestions from many Sokoban players, " +
+					"covering aspects such as ease of use, interface adjustments, feature additions and removals, and bug fixes.\n\n" +
+
+					"It's safe to say that without the dedicated guidance of anian and Professor Yang Chao, " +
+					"and the enthusiastic support of our fellow Sokoban players, this game would not have been completed so smoothly.\n\n" +
+
+					"We would also like to acknowledge the following: An \"ini file utility class\" written by \"Yi Jiu\" found online, " +
+					"which was used for storing and retrieving system configurations; \"Closed corner\" deadlock detection code " +
+					"and XSB's automatic image recognition code, ported from JSoko by Matthias Meger from Germany;" +
+					" and GIF synthesis code by Kevin Weiner, FM Software.\n\n" +
+
+					"Thank you all! We also wish all Sokoban players a swift rise to the ranks of the fastest hands in the Sokoban community!";
+		}
+
 		tv_help.setText(s);
 	 }
 	 

@@ -136,6 +136,82 @@ public class myAboutMacro extends Activity {
 		 "     面的内容，可独占一行，也可放在\n" +
 		 "     “宏”语句的后面。";
 
+		 if(myMaps.localCode.equalsIgnoreCase("en")) {
+			 s = "Declaration:\n\n" +
+					 "The \"Macro\" feature is only supported in forward play mode!\n\n" +
+
+					 "I. Instructions for Using the \"Macro\" Feature:\n\n" +
+
+					 "- Macros are stored as text documents in the \"Boxman/Macros/\" folder.\n" +
+					 "- Macros do not support nesting.\n" +
+					 "- Inline blocks (multiple statements on one line) are supported.\n" +
+					 "- Regular moves (L, u, r, d) can be written on separate lines or on the same line.\n" +
+					 "- Empty lines will be ignored.\n" +
+					 "- Macro symbols support both full-width and half-width characters." +
+					 "  Please use English (half-width) characters whenever possible. Spaces and tabs can be used to improve the layout.\n" +
+					 "  Macro symbols include: {}, (), [], <>, +, @, ~, ^, =, *, ?, %, ;, :.\n\n" +
+
+					 "II. Detailed Explanation of Macro Commands:\n\n" +
+
+					 "* (Block Loop Symbol): There are two ways to write this:\n" +
+					 "  *n: An asterisk followed immediately by a number indicates the beginning of a block loop. The number represents the number of loop iterations.\n" +
+					 "  * (on a separate line): An asterisk on its own line indicates the end of a block loop.\n\n" +
+
+					 "{} (Move Symbol):\n" +
+					 "Contains regular move characters (L, u, r, d) or numbers.\n" +
+					 "If a number (1-99) is used, it will be replaced with the move sequence stored in the corresponding register.\n" +
+					 "Registers 1-9 are internal registers and are assigned values in the import dialog (move storage).\n" +
+					 "Registers 10-99 are user-defined registers and can be assigned values using macro commands (live move storage). Both types of registers function the same way when referenced.\n" +
+					 "Curly braces can be followed by a number or not. The number indicates the number of times the move sequence should be repeated (0 for infinite repetition). If no number is specified, the move sequence is executed once.\n" +
+					 "Move execution will stop immediately upon encountering an error.\n\n" +
+
+					 "= (Special Symbol): Has two purposes:\n" +
+					 "When used as the first character on the first line, it forces the macro code to execute from the initial state of the level. Otherwise, the macro will execute from the current position. This function only applies when used on the first line and has no effect on other lines. Characters following the = on the first line are ignored. Please note: The \"Start from Current Position\" option in the import dialog will be ignored when executing a macro.\n" +
+					 "When used after curly braces {}, it indicates an assignment to a register. Register numbers from 10 to 99 are allowed. Regular move characters (L, u, r, d) follow the equals sign. Refer to the explanation of the \"Move Symbol\" above for how to reference assigned registers.\n\n" +
+
+					 "() (Undo Move Symbol):\n" +
+					 "Contains a number indicating the number of single steps to undo.\n\n" +
+
+					 "[] (Move to Position Symbol - Absolute Coordinates):\n" +
+					 "There are two formats: \"ruler\" format (alphanumeric) and comma-separated numbers (row, column). Row and column numbers start from 0.\n" +
+					 "After the pusher moves to a position, whether successful or not, the new position is automatically remembered and used as a reference for the next move.\n\n" +
+
+					 "+[] (Move to Position Symbol - Relative Coordinates):\n" +
+					 "Moves the pusher relative to the last remembered coordinates. The two coordinates are added together. Only the comma-separated number format is supported. The format and function are the same as above.\n\n" +
+
+					 "@[] (Move to Position Symbol - Relative Coordinates):\n" +
+					 "Moves the pusher relative to its current coordinates. The two coordinates are added together. Only the comma-separated number format is supported. The format and function are the same as above.\n\n" +
+
+					 "~ (Auxiliary Symbol): Has two purposes:\n" +
+					 "When used after the \"Move\" symbol ({}), it indicates that the case of the move characters should be ignored. This symbol can be placed before or after the repetition number.\n" +
+					 "When used after the \"Coordinate\" symbol ([]), it indicates that only the coordinates should be remembered, and the pusher should not move.\n\n" +
+
+					 "? (Conditional Statement Symbol):\n" +
+					 "Format: ? ① = ② : ③ / ④\n" +
+					 "①: Coordinates.\n" +
+					 "②: Level elements (multiple elements can be written together).\n" +
+					 "③: Statement 1.\n" +
+					 "④: Statement 2 (optional).\n" +
+					 "If ② contains the element at coordinates ①, statement 1 (③) is executed. Otherwise, statement 2 (④) is executed. Statement 2 can be omitted. The coordinates in ① are not remembered or used for movement. Note: Statements ③ and ④ can be inline block statements, but they cannot contain conditional statements (conditional statements cannot be nested).\n\n" +
+
+					 "<> (Inline Block Symbol):\n" +
+					 "Allows writing multiple single-line macro commands within angle brackets, separated by semicolons.\n" +
+					 "A number can be added after the closing angle bracket to specify the number of times the block should be repeated (similar to curly braces, but 0 means execute once, not infinitely).\n\n" +
+
+					 "% (Jump Symbol): GoTo statement.\n" +
+					 "Jumps to the label indicated by a colon followed by a non-negative integer. Jumps from outside a loop to inside a loop are allowed, but jumps from inside a loop to outside are not. This statement can be risky!\n" +
+					 "Special case: %* indicates jumping out of the current loop.\n\n" +
+
+					 ": (Label Symbol):\n" +
+					 "Usually used with the jump statement (%). A colon is followed by a non-negative integer and must be on a separate line.\n\n" +
+
+					 "^ (Breakpoint Symbol): Debugging symbol.\n" +
+					 "When the macro code execution reaches this line, it will pause and switch to single-step debugging mode. Note: Breakpoint symbols inside loops have no effect.\n\n" +
+
+					 "; (Comment Symbol):\n" +
+					 "When executing a macro, everything after a semicolon (;) is ignored. Can be used on a separate line or at the end of a macro statement. ";
+		 }
+
 		tv_help.setText(s);
 	 }
 	 

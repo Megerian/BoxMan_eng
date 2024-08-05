@@ -61,6 +61,40 @@ public class myAboutImport extends Activity {
 		 "     坐标位置不能放置仓管员。“关卡\n" +
 		 "     坐标”没有无效之说。";
 
+		 if(myMaps.localCode.equalsIgnoreCase("en")) {
+			 s =
+				"Importing Move Sequences\n\n"+
+			 "1. General Rules\n\n"+
+
+			 "Forward Play: Supports importing macros (complex move sequences)." +
+
+			 "Reverse Play: Supports importing regular moves (e.g., Left, Up, Right, Down).\n" +
+			 "You can include the starting position of the pusher before the moves using the format [x,y].\n\n" +
+
+			 "Editing Moves: You can rotate, mirror, and temporarily save regular moves while editing.\n\n" +
+
+			 "Macros: Macros cannot be temporarily saved during editing. You can save and load macros as text files in the \"Macros\" folder.\n\n" +
+
+			 "Start from Current Position: If selected, imported moves will be executed from the player's current position in the level.\n" +
+		 	 "Otherwise, moves will be executed from the level's initial state.\n"+
+			 "Note: \"Rotate with Level\" is different from the rotate/flip options in the menu." +
+			 "Player coordinates: Reverse play moves don't require pusher coordinates.\n" +
+		 	 "If no coordinates are provided, moves are usually executed from the current position.\n" +
+			 "Forward play moves can include coordinates, in which case they will be treated as macros.\n\n" +
+
+			 "2. Reverse Play and Coordinates\n\n " +
+
+			 "Two Types of Coordinates: \n\n" +
+			 "Imported Coordinates: The coordinates included in the imported move sequence.\n" +
+			 "Level Coordinates: The pusher's current coordinates in the level.\n" +
+			 "Coordinate Priority: If \"Start from Current Position\" is selected, level coordinates are used by default.\n" +
+			 "Otherwise, imported coordinates are used.\n" +
+			 "Invalid Coordinates: If the default coordinates are invalid (e.g., outside the level boundaries or on an obstacle), " +
+			 "the app will try to use the other type of coordinates. If both are invalid, the import will be canceled.\n " +
+			 "Invalid Imported Coordinates: Occur when the coordinates are outside the level or the pusher cannot be placed at that location.\n" +
+			 "Puzzle coordinates are always considered valid.";
+		 }
+
 		tv_help.setText(s);
 	 }
 	 
