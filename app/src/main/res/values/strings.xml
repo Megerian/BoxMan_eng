@@ -124,8 +124,8 @@
     <string name="solver_not_found">Solver not found</string>
     <string name="okay">Okay</string>
     <string name="cancel">Cancel</string>
-    <string name="advanced_puzzles">Advanced puzzles</string>
-    <string name="tricky_puzzles">Tricky puzzles</string>
+    <string name="advanced_puzzles">Intermediate puzzles</string>
+    <string name="tricky_puzzles">Variety puzzles</string>
     <string name="additional_puzzles">Additional puzzles</string>
     <string name="db_update_necessary">DB update necessary</string>
     <string name="new_puzzle_set">New puzzle set</string>
