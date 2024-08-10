@@ -4360,35 +4360,6 @@ public class myGameView extends Activity {
         }
     }
 
-    private static String getSolution(InputStream is, byte[] searcheddigest) throws IOException {
-
-        DataInputStream in = new DataInputStream(new BufferedInputStream(is));
-
-        String solution = null;
-        byte[] sha1 = new byte[20];
-
-        // File format is a repetition of 20 bytes sha1, each followed by the solution.
-        // The solution is a UDLR string prefixed by a 2 byte string length.
-
-        int bytesread;
-        do {
-            bytesread = in.read(sha1, 0, 20);
-            if (bytesread == 20) {
-                String udlr = in.readUTF();
-
-                // Check if the sha1 digest from the file is the same
-                // as the digest of the searched level
-                if(Arrays.equals(sha1, searcheddigest)) {
-                    // Solution is found!
-                    solution = udlr;
-                    break;
-                }
-            }
-        } while (bytesread == 20);
-        in.close();
-        return solution;
-    }
-
     //启动打开状态对话框
     private void myOpenState() {
         mySQLite.m_SQL.load_StateList(myMaps.curMap.Level_id, myMaps.curMap.key);
