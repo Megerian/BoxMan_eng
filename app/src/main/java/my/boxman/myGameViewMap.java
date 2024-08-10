@@ -53,6 +53,11 @@ public class myGameViewMap extends View {
     selNode selNode, selNode2; //计数区域对角点，计数区域内的各类箱子数量
     char mClickObj;  //点击的物件（箱子、空地、墙壁等）
 
+    private static final int MODE_NONE = 0;
+    private static final int MODE_DRAG = 1;  //拖动模式
+    private static final int MODE_ZOOM = 2;  //缩放模式
+    private int mMode = 0;
+
     public int m_nArenaTop;  //舞台 Top 距屏幕顶的距离
     int w_bkPic, h_bkPic, w_bkNum, h_bkNum;  //（舞台用）背景图片的宽、高；及其平铺时的横、纵个数
     int m_nPicWidth, m_nPicHeight, m_nRows, m_nCols;  //关卡图的像素尺寸
@@ -239,10 +244,6 @@ public class myGameViewMap extends View {
 
     //缩放、拖拽
     private class TouchListener implements OnTouchListener {
-        private static final int MODE_NONE = 0;
-        private static final int MODE_DRAG = 1;  //拖动模式
-        private static final int MODE_ZOOM = 2;  //缩放模式
-        private int mMode = MODE_NONE;      //当前模式
 
         float mMaxScale = 5;   //最大缩放级别
         private float mStartDis;  //缩放开始时的手指间距
@@ -705,21 +706,23 @@ public class myGameViewMap extends View {
                 mStartDis = endDis;               //重置距离
                 mCurrentMatrix.getValues(values);
                 scale = checkMaxScale(scale, values);
-                PointF centerF = getCenter(scale, values);
+//                PointF centerF = getCenter(scale, values);    // original BoxMan center calculation
+                PointF centerF = new PointF();                  // new center calculation
+                midPoint(centerF, event);                       // new center calculation
                 mCurrentMatrix.postScale(scale, scale, centerF.x, centerF.y);
             }
         }
 
-        //计算缩放的中心点，主要是控制图片边界尽量不离开屏幕边界
+        //计算缩放的中心点，主要是控制图片边界尽量不离开屏幕边界 | Calculate the center point for scaling to keep the image edges within the screen bounds as much as possible.
         private PointF getCenter(float scale, float[] values) {
             float cx = mid.x;
             float cy = mid.y;
             float height = getHeight() - m_nArenaTop;
 
-            if (scale > 1) {  //放大时，若图片边缘小于屏幕边缘，则以屏幕中心为缩放中心
+            if (scale > 1) {  //放大时，若图片边缘小于屏幕边缘，则以屏幕中心为缩放中心 | When zooming in, if the image edges are smaller than the screen edges, use the center of the screen as the zoom center.
                 if (m_nPicWidth * scale * values[Matrix.MSCALE_X] < getWidth()) cx = getWidth() / 2;
                 if (m_nPicHeight * scale * values[Matrix.MSCALE_Y] < height) cy = height / 2;
-            } else {  //缩小时，若图片边缘会离开屏幕边缘，则以屏幕边缘为缩放中心
+            } else {  //缩小时，若图片边缘会离开屏幕边缘，则以屏幕边缘为缩放中心 | When zooming out, if the image edges would move off-screen, use the screen edge as the zoom center.
                 if (m_nPicWidth * scale * values[Matrix.MSCALE_X] < getWidth()) cx = getWidth() / 2;
                 else {
                     if ((cx - values[Matrix.MTRANS_X]) * scale < cx) cx = 0;
@@ -1020,10 +1023,12 @@ public class myGameViewMap extends View {
         mCurrentMatrix.getValues(values);
         values[Matrix.MTRANS_Y] += m_nArenaTop;
 
-        values[Matrix.MSCALE_X] = values[Matrix.MSCALE_Y] =
-                ((int) (m_PicWidth * values[Matrix.MSCALE_X])) / (float) m_PicWidth; // scale so the images are scaled without fractions
-        values[Matrix.MTRANS_X] = (int) values[Matrix.MTRANS_X];                     // translate without fractions
-        values[Matrix.MTRANS_Y] = (int) values[Matrix.MTRANS_Y];                     // translate without fractions
+        if(mMode != MODE_ZOOM) {
+            values[Matrix.MSCALE_X] = values[Matrix.MSCALE_Y] =
+                    ((int) (m_PicWidth * values[Matrix.MSCALE_X])) / (float) m_PicWidth; // scale so the images are scaled without fractions
+            values[Matrix.MTRANS_X] = Math.round(values[Matrix.MTRANS_X]);               // translate without fractions
+            values[Matrix.MTRANS_Y] = Math.round(values[Matrix.MTRANS_Y]);               // translate without fractions
+        }
 
         mMapMatrix.setValues(values);
         m_fTop = values[Matrix.MTRANS_Y];
