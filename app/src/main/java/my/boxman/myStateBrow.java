@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Map;
 
 public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeStatusUpdate{
 	AlertDialog DelDlg;
@@ -58,6 +59,8 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 
 	ExpandableListView s_expView;
 	MyExpandableListView s_Adapter;
+
+	Map<Integer, SolverHelper.Solver> m_Solvers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -186,10 +189,11 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == 1) {  //优化返回
+		SolverHelper.Solver solver = m_Solvers.get(requestCode);
+		if (solver != null) {  //优化返回
 			if (resultCode == RESULT_OK) {
 				final String str = data.getStringExtra("SOLUTION");
-				final String time = "[YASS]" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+				final String time = "[" + solver.getDisplayName() + "]" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 				AlertDialog.Builder dlg0 = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
 				dlg0.setTitle(getString(R.string.success)).setMessage(R.string.optimization_successful_save_results).setCancelable(false).setNegativeButton(R.string.abandon, null)
 					.setNeutralButton(R.string.take, new DialogInterface.OnClickListener(){
@@ -264,8 +268,13 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 
 		getMenuInflater().inflate(R.menu.state_ctx, menu);
 
+		m_Solvers = SolverHelper.getSolvers(this, true);
+		int solverMenuItemId = SolverHelper.addSolverMenuItem(menu, 1, m_Solvers, true);
+
 		menu.findItem(R.id.open).setVisible(false);                                // 打开
-		menu.findItem(R.id.yass_optimization).setVisible(false);                   // YASS优化
+		if (solverMenuItemId != Menu.NONE) {
+			menu.findItem(solverMenuItemId).setVisible(false);                     // 优化
+		}
 		menu.findItem(R.id.export_to_file_xsb_and_lurd).setVisible(false);         // 导出到文档: XSB+Lurd
 		menu.findItem(R.id.export_to_clipboard_xsb_and_lurd).setVisible(false);    // 导出到剪切板: XSB+Lurd
 		menu.findItem(R.id.copy_to_clipboard_lurd).setVisible(false);              // 导出到剪切板: Lurd
@@ -289,7 +298,9 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 			menu.findItem(R.id.delete_all_saved_states).setVisible(true);          // 删除全部状态
 		} else {
 			menu.findItem(R.id.open).setVisible(true);                             // 打开
-			menu.findItem(R.id.yass_optimization).setVisible(true);                // YASS优化
+			if (solverMenuItemId != Menu.NONE) {
+				menu.findItem(solverMenuItemId).setVisible(true);                  // 优化
+			}
 			menu.findItem(R.id.export_to_file_xsb_and_lurd).setVisible(true);      // 导出到文档: XSB+Lurd
 			menu.findItem(R.id.export_to_clipboard_xsb_and_lurd).setVisible(true); // 导出到剪切板: XSB+Lurd
 			menu.findItem(R.id.copy_to_clipboard_lurd).setVisible(true);           // 导出到剪切板: Lurd
@@ -308,28 +319,27 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				set_State();
 			}
-			if (itemId == R.id.yass_optimization) {  //YASS 优化
-				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
-				StringBuilder str = new StringBuilder();
-				int len = myMaps.m_State.ans.length();
-				if (len > 0) {
-					try {
-						Intent intent3 = new Intent(Intent.ACTION_MAIN);
-						intent3.addCategory(Intent.CATEGORY_LAUNCHER);
-						ComponentName name = new ComponentName("net.sourceforge.sokobanyasc.joriswit.yass", "yass.YASSActivity");
-						intent3.setComponent(name);
-						String actName = intent3.getAction();
-						intent3.setAction("nl.joriswit.sokosolver.OPTIMIZE");
-						intent3.putExtra("LEVEL", myMaps.curMap.Map);
-						str.append(myMaps.m_State.ans.replaceAll("[K,k,,]", ""));
-						intent3.putExtra("SOLUTION", str.toString());
-						startActivityForResult(intent3, 1);
-						intent3.setAction(actName);
-					}catch (Exception e){
-						MyToast.showToast(this, getString(R.string.solver_not_found_), Toast.LENGTH_SHORT);
+			if (m_Solvers != null) {  //优化
+				SolverHelper.Solver solver = m_Solvers.get(itemId);
+				if (solver != null) {
+					myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
+					StringBuilder str = new StringBuilder();
+					int len = myMaps.m_State.ans.length();
+					if (len > 0) {
+						try {
+							Intent intent3 = new Intent("nl.joriswit.sokosolver.OPTIMIZE");
+							intent3.addCategory(Intent.CATEGORY_DEFAULT);
+							intent3.setPackage(solver.getPackageName());
+							intent3.putExtra("LEVEL", myMaps.curMap.Map);
+							str.append(myMaps.m_State.ans.replaceAll("[K,k,,]", ""));
+							intent3.putExtra("SOLUTION", str.toString());
+							startActivityForResult(intent3, itemId);
+						} catch (Exception e) {
+							MyToast.showToast(this, getString(R.string.solver_not_found_), Toast.LENGTH_SHORT);
+						}
+					} else {
+						MyToast.showToast(this, getString(R.string.no_solution_found), Toast.LENGTH_SHORT);
 					}
-				} else {
-					MyToast.showToast(this, getString(R.string.no_solution_found), Toast.LENGTH_SHORT);
 				}
 			}
 			if (itemId == R.id.export_to_file_xsb_and_lurd) {  //导出到文档: XSB+Lurd

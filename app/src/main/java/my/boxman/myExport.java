@@ -20,8 +20,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class myExport extends Activity implements myGifMakeFragment.GifMakeStatusUpdate{
 	 EditText et_Action = null;
@@ -38,7 +36,7 @@ public class myExport extends Activity implements myGifMakeFragment.GifMakeStatu
 	 String my_Loca8 = "";  //关卡正推现场 -- 旋转
 	 String my_XSB = "";  //关卡 XSB
 	 String my_Lurd = "";  //lurd
-	 String my_imPort_YASS = "";  //是否为“导入”或“YASS”动作
+	 String my_imPort_Solver = "";  //是否为“导入”或“YASS”动作
 	 StringBuilder my_AND;  //答案时的链接字符串
 
 	private myGifMakeFragment mDialog;
@@ -74,29 +72,23 @@ public class myExport extends Activity implements myGifMakeFragment.GifMakeStatu
 			my_BoxNum = null;  //迷宫箱子编号（人为）
 			m_Gif_Start = 0;  //导出 GIF 的起点
 			my_Loca8 = "";  //接收关卡现场 -- 旋转
-			my_imPort_YASS = "";  //是否为“导入”或“YASS”动作
+			my_imPort_Solver = "";  //是否为“导入”或“YASS”动作
 		} else {  // 推关卡界面的导出
 			my_Rule = bundle.getBooleanArray("my_Rule");  //需要显示标尺的格子
 			my_BoxNum = bundle.getShortArray("my_BoxNum");  //迷宫箱子编号（人为）
 			m_Gif_Start = bundle.getInt("m_Gif_Start");  //导出 GIF 的起点
 			my_Loca8 = bundle.getString("LOCAL8");  //接收关卡现场 -- 旋转
-			my_imPort_YASS = bundle.getString("m_InPort_YASS");  //是否为“导入”或“YASS”动作
+			my_imPort_Solver = bundle.getString("m_InPort_Solver");  //是否为“导入”或“YASS”动作
 			if (is_ANS) {
 				int len = my_Lurd.length();
 				int p = 0;
 				for (int k = 0; k < len; k++) {
 					if ("LURD".indexOf(my_Lurd.charAt(k)) >= 0) p++;
 				}
-				if (my_imPort_YASS.toLowerCase().indexOf("yass") >= 0) {
-					my_imPort_YASS = "YASS" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-				} else if (my_imPort_YASS.toLowerCase().indexOf(getString(R.string.import2)) >= 0) {
-					my_imPort_YASS = getString(R.string.import2) + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-				} else {
-					my_imPort_YASS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-				}
+				my_imPort_Solver = SolverHelper.setImportSolver(SolverHelper.getSolvers(this, false), my_imPort_Solver, this, true);
 				my_AND.append("Solution (moves ").append(len).append(", pushes ").append(p);
 				if (myMaps.m_Settings[30] == 1) {  //是否导出答案备注
-					my_AND.append(", comment ").append(my_imPort_YASS);
+					my_AND.append(", comment ").append(my_imPort_Solver);
 				}
 				my_AND.append("): \n");
 			}
