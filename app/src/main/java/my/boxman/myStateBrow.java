@@ -262,64 +262,53 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 
-		menu.add(0, 1, 0, getString(R.string.open));
-		menu.add(0, 2, 1, getString(R.string.yass_optimization));
-		menu.add(0, 3, 2, getString(R.string.export_to_file_xsb_and_lurd));
-		menu.add(0, 4, 3, getString(R.string.export_to_clipboard_xsb_and_lurd));
-		menu.add(0, 5, 4, getString(R.string.copy_to_clipboard_lurd));
-		menu.add(0, 6, 5, getString(R.string.copy_to_clipboard_forward_lurd));
-		menu.add(0, 7, 6, getString(R.string.copy_to_clipboard_backwards_lurd));
-		menu.add(0, 8, 7, getString(R.string.note_tags));
-		menu.add(0, 9, 8, getString(R.string.delete));
-		menu.add(0, 10, 9,getString( R.string.delete_all_saved_states));
-		menu.add(0, 11, 10, getString(R.string.submit_solution_sokoban_cn));
-		menu.add(0, 12, 11, getString(R.string.generate_gif_animation));
+		getMenuInflater().inflate(R.menu.state_ctx, menu);
 
-		menu.getItem(0).setVisible(false);    // 打开
-		menu.getItem(1).setVisible(false);    // YASS优化
-		menu.getItem(2).setVisible(false);    // 导出到文档: XSB+Lurd
-		menu.getItem(3).setVisible(false);    // 导出到剪切板: XSB+Lurd
-		menu.getItem(4).setVisible(false);    // 导出到剪切板: Lurd
-		menu.getItem(5).setVisible(false);    // 导出到剪切板: 正推 Lurd
-		menu.getItem(6).setVisible(false);    // 导出到剪切板: 逆推 Lurd
-		menu.getItem(7).setVisible(false);    // 注释标签
-		menu.getItem(8).setVisible(false);    // 删除
-		menu.getItem(9).setVisible(false);    // 删除全部状态
-		menu.getItem(10).setVisible(false);   // 提交答案（sokoban.cn）
-		menu.getItem(11).setVisible(false);   // 制作 GIF 演示动画
+		menu.findItem(R.id.open).setVisible(false);                                // 打开
+		menu.findItem(R.id.yass_optimization).setVisible(false);                   // YASS优化
+		menu.findItem(R.id.export_to_file_xsb_and_lurd).setVisible(false);         // 导出到文档: XSB+Lurd
+		menu.findItem(R.id.export_to_clipboard_xsb_and_lurd).setVisible(false);    // 导出到剪切板: XSB+Lurd
+		menu.findItem(R.id.copy_to_clipboard_lurd).setVisible(false);              // 导出到剪切板: Lurd
+		menu.findItem(R.id.copy_to_clipboard_forward_lurd).setVisible(false);      // 导出到剪切板: 正推 Lurd
+		menu.findItem(R.id.copy_to_clipboard_backwards_lurd).setVisible(false);    // 导出到剪切板: 逆推 Lurd
+		menu.findItem(R.id.note_tags).setVisible(false);                           // 注释标签
+		menu.findItem(R.id.delete).setVisible(false);                              // 删除
+		menu.findItem(R.id.delete_all_saved_states).setVisible(false);             // 删除全部状态
+		menu.findItem(R.id.submit_solution_sokoban_cn).setVisible(false);          // 提交答案（sokoban.cn）
+		menu.findItem(R.id.generate_gif_animation).setVisible(false);              // 制作 GIF 演示动画
 
 		if (g_Pos == 0) {
-			menu.getItem(0).setVisible(true);    // 打开
-			menu.getItem(2).setVisible(true);    // 导出到文档: XSB+Lurd
-			menu.getItem(3).setVisible(true);    // 导出到剪切板: XSB+Lurd
-			menu.getItem(4).setVisible(true);    // 导出到剪切板: Lurd
-			menu.getItem(5).setVisible(true);    // 导出到剪切板: 正推 Lurd
-			menu.getItem(6).setVisible(true);    // 导出到剪切板: 逆推 Lurd
-			menu.getItem(7).setVisible(true);    // 注释标签
-			menu.getItem(8).setVisible(true);    // 删除
-			menu.getItem(9).setVisible(true);    // 删除全部状态
+			menu.findItem(R.id.open).setVisible(true);                             // 打开
+			menu.findItem(R.id.export_to_file_xsb_and_lurd).setVisible(true);      // 导出到文档: XSB+Lurd
+			menu.findItem(R.id.export_to_clipboard_xsb_and_lurd).setVisible(true); // 导出到剪切板: XSB+Lurd
+			menu.findItem(R.id.copy_to_clipboard_lurd).setVisible(true);           // 导出到剪切板: Lurd
+			menu.findItem(R.id.copy_to_clipboard_forward_lurd).setVisible(true);   // 导出到剪切板: 正推 Lurd
+			menu.findItem(R.id.copy_to_clipboard_backwards_lurd).setVisible(true); // 导出到剪切板: 逆推 Lurd
+			menu.findItem(R.id.note_tags).setVisible(true);                        // 注释标签
+			menu.findItem(R.id.delete).setVisible(true);                           // 删除
+			menu.findItem(R.id.delete_all_saved_states).setVisible(true);          // 删除全部状态
 		} else {
-			menu.getItem(0).setVisible(true);    // 打开
-			menu.getItem(1).setVisible(true);    // YASS优化
-			menu.getItem(2).setVisible(true);    // 导出到文档: XSB+Lurd
-			menu.getItem(3).setVisible(true);    // 导出到剪切板: XSB+Lurd
-			menu.getItem(4).setVisible(true);    // 导出到剪切板: Lurd
-			menu.getItem(7).setVisible(true);    // 注释标签
-			menu.getItem(8).setVisible(true);    // 删除
-			menu.getItem(10).setVisible(true);   // 提交答案（sokoban.cn）
-			menu.getItem(11).setVisible(true);   // 制作 GIF 演示动画
+			menu.findItem(R.id.open).setVisible(true);                             // 打开
+			menu.findItem(R.id.yass_optimization).setVisible(true);                // YASS优化
+			menu.findItem(R.id.export_to_file_xsb_and_lurd).setVisible(true);      // 导出到文档: XSB+Lurd
+			menu.findItem(R.id.export_to_clipboard_xsb_and_lurd).setVisible(true); // 导出到剪切板: XSB+Lurd
+			menu.findItem(R.id.copy_to_clipboard_lurd).setVisible(true);           // 导出到剪切板: Lurd
+			menu.findItem(R.id.note_tags).setVisible(true);                        // 注释标签
+			menu.findItem(R.id.delete).setVisible(true);                           // 删除
+			menu.findItem(R.id.submit_solution_sokoban_cn).setVisible(true);       // 提交答案（sokoban.cn）
+			menu.findItem(R.id.generate_gif_animation).setVisible(true);           // 制作 GIF 演示动画
 		}
 	}
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		if (c_Pos >= 0) {
-			switch (item.getItemId()){
-			case 1:  //打开
+			int itemId = item.getItemId();
+			if (itemId == R.id.open) {  //打开
 				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				set_State();
-				break;
-			case 2:  //YASS 优化
+			}
+			if (itemId == R.id.yass_optimization) {  //YASS 优化
 				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				StringBuilder str = new StringBuilder();
 				int len = myMaps.m_State.ans.length();
@@ -342,40 +331,40 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 				} else {
 					MyToast.showToast(this, getString(R.string.no_solution_found), Toast.LENGTH_SHORT);
 				}
-				break;
-			case 3:  //导出到文档: XSB+Lurd
+			}
+			if (itemId == R.id.export_to_file_xsb_and_lurd) {  //导出到文档: XSB+Lurd
 				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				saveAnsToFile(m_Sel_id);
-				break;
-			case 4:  //导出到剪切板: XSB+Lurd
+			}
+			if (itemId == R.id.export_to_clipboard_xsb_and_lurd) {  //导出到剪切板: XSB+Lurd
 				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				myExport2(m_Sel_id);
-				break;
-			case 5:  //导出到剪切板: Lurd
+			}
+			if (itemId == R.id.copy_to_clipboard_lurd) {  //导出到剪切板: Lurd
 				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				myExport();
-				break;
-			case 6:  //导出到剪切板: 正推 Lurd
+			}
+			if (itemId == R.id.copy_to_clipboard_forward_lurd) {  //导出到剪切板: 正推 Lurd
 				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				myExport3();
-				break;
-			case 7:  //导出到剪切板: 逆推 Lurd
+			}
+			if (itemId == R.id.copy_to_clipboard_backwards_lurd) {  //导出到剪切板: 逆推 Lurd
 				myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				myExport4();
-				break;
-			case 8:  //注释
+			}
+			if (itemId == R.id.note_tags) {  //注释
 				final EditText et = new EditText(this);
 
 				if (g_Pos == 0) {
 					if (myMaps.mState1.get(c_Pos).time.toLowerCase().indexOf("yass") >= 0 || myMaps.mState1.get(c_Pos).time.toLowerCase().indexOf("导入") >= 0) {
 						MyToast.showToast(myStateBrow.this, getString(R.string.read_only), Toast.LENGTH_SHORT);
-						break;
+						return true;
 					}
 					et.setText(myMaps.mState1.get(c_Pos).time);
 				} else {
 					if (myMaps.mState2.get(c_Pos).time.toLowerCase().indexOf("yass") >= 0 || myMaps.mState2.get(c_Pos).time.toLowerCase().indexOf("导入") >= 0) {
 						MyToast.showToast(myStateBrow.this, getString(R.string.read_only), Toast.LENGTH_SHORT);
-						break;
+						return true;
 					}
 					et.setText(myMaps.mState2.get(c_Pos).time);
 				}
@@ -401,20 +390,20 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 						.setNegativeButton(getString(R.string.cancel), null).setCancelable(false)
 						.show();
 
-				break;
-			case 9:  //删除
+			}
+			if (itemId == R.id.delete) {  //删除
 				DelDlg.show();
-				break;
-			case 10:  //删除全部状态
+			}
+			if (itemId == R.id.delete_all_saved_states) {  //删除全部状态
 				DelDlgAll.show();
-				break;
-			case 11:  //提交答案
+			}
+			if (itemId == R.id.submit_solution_sokoban_cn) {  //提交答案
                 myMaps.m_State = mySQLite.m_SQL.load_State(m_Sel_id);
 				Intent intent2 = new Intent();
 				intent2.setClass(this, mySubmit.class);
 				startActivity(intent2);
-				break;
-			case 12:  //生成 GIF 演示动画
+			}
+			if (itemId == R.id.generate_gif_animation) {  //生成 GIF 演示动画
 //				MyToast.showToast(myStateBrow.this, "这里不支持标尺与箱子编号！", Toast.LENGTH_SHORT);
 				File targetDir = new File(myMaps.sRoot+myMaps.sPath + "GIF/");
 				if (!targetDir.exists()) targetDir.mkdirs();  //创建自定义GIF文件夹
@@ -502,7 +491,6 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
                             }
                         }).setCancelable(false).show();
 
-                break;
  			}
 		}
 		return true;
