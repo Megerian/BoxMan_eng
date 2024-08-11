@@ -88,11 +88,6 @@
         <activity android:name="my.boxman.myFileExplorerActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <service android:name="my.boxman.service.MyService"
-            android:priority="1000"
-            android:enabled="true"
-            android:exported="true">
-         </service>
     </application>
 
 </manifest>

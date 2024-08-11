@@ -72,7 +72,6 @@ import java.util.Objects;
 
 
 public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatusUpdate, myQueryFragment.FindStatusUpdate, myExportFragment.ExportStatusUpdate {
-//	Intent serviceIntent;
 
 	private static final int REQUEST_PERMISSIONS = 1;
 	private static final int REQUEST_MANAGE_EXTERNAL_STORAGE = 2;
@@ -359,10 +358,6 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 		myMaps.loadSkins();  //加载皮肤
 		myMaps.loadBKPic();  //背景图片
 		loadGifSkins();      //加载 Gif 皮肤
-
-		//用提高APP服务级别的方式，避免因相机崩溃的问题
-//		serviceIntent = new Intent(this, MyService.class);
-//		startService(serviceIntent);
 	}
 
 	private void setLocale() {
@@ -2101,7 +2096,6 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 
 	@Override
 	protected void onDestroy() {
-//		stopService(serviceIntent);
 		super.onDestroy();
 	}
 

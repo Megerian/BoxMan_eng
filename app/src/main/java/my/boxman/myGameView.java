@@ -3150,7 +3150,7 @@ public class myGameView extends Activity {
                     ans.pkey = myMaps.curMap.key;
                     ans.moves = m_iStep[1];
                     ans.pushs = m_iStep[0];
-                    ans.inf = "移动: " + m_iStep[1] + ", 推动: " + m_iStep[0];
+                    ans.inf = getString(R.string.move_) + m_iStep[1] + getString(R.string.push_)+ m_iStep[0];
                     ans.time = m_imPort_Solver;
                     myMaps.mState2.add(ans);
                     mMap.invalidate();
@@ -3252,7 +3252,7 @@ public class myGameView extends Activity {
                     ans.id = hh;
                     ans.pid = myMaps.curMap.Level_id;
                     ans.pkey = myMaps.curMap.key;
-                    ans.inf = "移动: " + m_iStep[1] + ", 推动: " + m_iStep[0];
+                    ans.inf = getString(R.string.move_) + m_iStep[1] + getString(R.string.push_) + m_iStep[0];
                     ans.time = m_imPort_Solver;
                     myMaps.mState2.add(ans);
                     Builder builder = new Builder(this, AlertDialog.THEME_HOLO_DARK);
