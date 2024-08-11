@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -50,6 +49,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Queue;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
@@ -121,7 +121,7 @@ public class myGameView extends Activity {
     int m_Gif_Start = 0;  //导出 GIF 的起点
     int m_nStep, m_nLastSteps = -1;  //执行"推"、"移"的步数
     boolean m_bYanshi, m_bYanshi2;  //是否演示
-    String m_imPort_YASS;  //是否做过动作“导入”或“YASS”过动作
+    String m_imPort_Solver;  //是否做过动作“导入”或“YASS”过动作
     int m_iStep[] = new int[4];    //记录"推"、"移"的步数
     boolean m_bACT_ERROR;  //执行动作时是否遇到错误
     boolean m_bACT_IgnoreCase;  //执行动作时是否忽略大小写
@@ -129,6 +129,8 @@ public class myGameView extends Activity {
     boolean m_bBusing;  //忙中
     boolean m_bPush;  //推
     boolean m_bNetLock;  //网锁
+
+    Map<Integer, SolverHelper.Solver> m_Solvers;
 
     //四邻：左、右、上、下
     final byte[] dr4 = {0, 0, -1, 1};
@@ -2041,7 +2043,7 @@ public class myGameView extends Activity {
             m_bYanshi = false;
             m_bYanshi2 = false;
             myMaps.m_StateIsRedy = false;
-            m_imPort_YASS = "";
+            m_imPort_Solver = "";
             myMaps.m_Settings[14] = 2;
             myMaps.m_Settings[5] = 2;
             m_nLastSteps = -1;
@@ -2053,6 +2055,10 @@ public class myGameView extends Activity {
             myMaps.curMap.Cols = 2;
 //            finish();
         }
+    }
+
+    private void setImportSolver(String state, boolean includeDatetime) {
+        m_imPort_Solver = SolverHelper.setImportSolver(m_Solvers, state, this, includeDatetime);
     }
 
     private void initMap() {
@@ -2097,13 +2103,7 @@ public class myGameView extends Activity {
             int len = myMaps.m_State.ans.length();
             if (len > 0) {
                 formatPath(myMaps.m_State.ans, false);
-                if (myMaps.m_State.time.toLowerCase().indexOf("yass") >= 0) {
-                    m_imPort_YASS = "[YASS]";
-                } else if (myMaps.m_State.time.toLowerCase().indexOf("导入") >= 0) {
-                    m_imPort_YASS = "[导入]";
-                } else {
-                    m_imPort_YASS = "";
-                }
+                setImportSolver(myMaps.m_State.time, false);
                 len = m_lstMovReDo.size();
                 for (int k = 0; k < len; k++) reDo1();
                 m_bBusing = false;
@@ -3090,13 +3090,7 @@ public class myGameView extends Activity {
             }
         }
 
-        if (m_imPort_YASS.toLowerCase().indexOf("yass") >= 0) {
-            m_imPort_YASS = "[YASS]" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        } else if (m_imPort_YASS.toLowerCase().indexOf("导入") >= 0) {
-            m_imPort_YASS = "[导入]" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        } else {
-            m_imPort_YASS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        }
+        setImportSolver(m_imPort_Solver, true);
 
         if (m_Solution == 0 && (m_lstMovUnDo.size() > myMaps.m_nMaxSteps || m_lstMovUnDo2.size() > myMaps.m_nMaxSteps) || m_Solution == 1 && m_lstMovUnDo.size() > myMaps.m_nMaxSteps) {  //答案或状态太长，保存到文档
             final StringBuilder str = new StringBuilder();
@@ -3108,7 +3102,7 @@ public class myGameView extends Activity {
                 str.append(s1).append("\n[").append(m_nRow0).append(", ").append(m_nCol0).append("]").append(s2);
             } else {  //答案
                 str.append("Solution (moves ").append(m_iStep[1]).append(", pushes " ).append(m_iStep[0]).append(": ");
-                str.append(m_imPort_YASS);
+                str.append(m_imPort_Solver);
                 str.append(s1);
             }
 
@@ -3143,7 +3137,7 @@ public class myGameView extends Activity {
                     myMaps.curMap.key,
                     m_Solution == 0 ? -1 : myMaps.curMap.L_CRC_Num,
                     m_Solution == 0 ? "" : myMaps.curMap.Map0,
-                    m_imPort_YASS);
+                    m_imPort_Solver);
 
             m_bMoved = false;
             if (hh > 0) {
@@ -3157,7 +3151,7 @@ public class myGameView extends Activity {
                     ans.moves = m_iStep[1];
                     ans.pushs = m_iStep[0];
                     ans.inf = "移动: " + m_iStep[1] + ", 推动: " + m_iStep[0];
-                    ans.time = m_imPort_YASS;
+                    ans.time = m_imPort_Solver;
                     myMaps.mState2.add(ans);
                     mMap.invalidate();
                 } else {  //保存的是状态
@@ -3202,13 +3196,7 @@ public class myGameView extends Activity {
             }
         }
 
-        if (m_imPort_YASS.toLowerCase().indexOf("yass") >= 0) {
-            m_imPort_YASS = "[YASS]" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        } else if (m_imPort_YASS.toLowerCase().indexOf("导入") >= 0) {
-            m_imPort_YASS = "[导入]" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        } else {
-            m_imPort_YASS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        }
+        setImportSolver(m_imPort_Solver, true);
 
         if (m_lstMovUnDo.size() + m_lstMovReDo.size() > myMaps.m_nMaxSteps) {  //答案太长，保存到文档
             final StringBuilder str = new StringBuilder();
@@ -3217,7 +3205,7 @@ public class myGameView extends Activity {
             str.append("\nComment:\n").append(myMaps.curMap.Comment).append("\nComment-End:\n");
 
             str.append("Solution (moves ").append(m_iStep[1] + m_lstMovReDo.size()).append(", pushes " ).append(m_iStep[0] + m_iStep[2]).append(": ");
-            str.append(m_imPort_YASS);
+            str.append(m_imPort_Solver);
             str.append(s1);
 
             File targetDir = new File(myMaps.sRoot+myMaps.sPath + "超长答案/");
@@ -3254,7 +3242,7 @@ public class myGameView extends Activity {
                     myMaps.curMap.key,
                     myMaps.curMap.L_CRC_Num,
                     myMaps.curMap.Map0,
-                    m_imPort_YASS);
+                    m_imPort_Solver);
 
             myMaps.curMap.Solved = true;
             m_bMoved = false;
@@ -3265,7 +3253,7 @@ public class myGameView extends Activity {
                     ans.pid = myMaps.curMap.Level_id;
                     ans.pkey = myMaps.curMap.key;
                     ans.inf = "移动: " + m_iStep[1] + ", 推动: " + m_iStep[0];
-                    ans.time = m_imPort_YASS;
+                    ans.time = m_imPort_Solver;
                     myMaps.mState2.add(ans);
                     Builder builder = new Builder(this, AlertDialog.THEME_HOLO_DARK);
                     builder.setTitle(getString(R.string.title_forward_and_reverse_match))
@@ -3300,13 +3288,7 @@ public class myGameView extends Activity {
             int len = myMaps.m_State.ans.length();
             if (len > 0) {
                 formatPath(myMaps.m_State.ans, false);
-                if (myMaps.m_State.time.toLowerCase().indexOf("yass") >= 0) {
-                    m_imPort_YASS = "[YASS]";
-                } else if (myMaps.m_State.time.toLowerCase().indexOf("导入") >= 0) {
-                    m_imPort_YASS = "[导入]";
-                } else {
-                    m_imPort_YASS = "";
-                }
+                setImportSolver(myMaps.m_State.time, false);
                 if (myMaps.m_State.solution == 0) {  //答案，停在开始位置；状态，停在结束位置
                     len = m_lstMovReDo.size();
                     for (int k = 0; k < len; k++) reDo1();
@@ -3380,6 +3362,11 @@ public class myGameView extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.player, menu);
+
+        m_Solvers = SolverHelper.getSolvers(this, false);
+
+        SolverHelper.addSolverMenuItem(menu, 11, m_Solvers, false);
+
         return true;
     }
 
@@ -3534,22 +3521,6 @@ public class myGameView extends Activity {
                 }
 
                 break;
-            case R.id.player_Yass_Solver:  //YASS求解
-                if (!bt_BK.isChecked()) {
-                    mySolution(0);  //YASS求解
-                } else {
-                    MyToast.showToast(this, getString(R.string.this_feature_is_not_available_in_reverse_mode), Toast.LENGTH_SHORT);
-                }
-
-                break;
-//            case R.id.player_Festival_Solver:  //Festival求解
-//                if (!bt_BK.isChecked()) {
-//                    mySolution(1);  //Festival求解
-//                } else {
-//                    MyToast.showToast(this, "逆推时，无此功能！", Toast.LENGTH_SHORT);
-//                }
-//
-//                break;
             case R.id.player_settings1:  //场景设置
                 String[] m_menu2 = {
                         getString(R.string.speed_settings),
@@ -4152,7 +4123,7 @@ public class myGameView extends Activity {
                 bundle2.putString("LOCAL8", s_XSB8.toString());  //关卡正推现场 -- 旋转
                 bundle2.putString("m_XSB", s_XSB.toString());  //关卡初态
                 bundle2.putString("m_Lurd", s_Lurd.toString());  //Lurd
-                bundle2.putString("m_InPort_YASS", m_imPort_YASS);  //是否为“导入”或“YASS”动作
+                bundle2.putString("m_InPort_Solver", m_imPort_Solver);  //是否为“导入”或“YASS”动作
                 intent3.putExtras(bundle2);
 
                 intent3.setClass(myGameView.this, myExport.class);
@@ -4184,6 +4155,14 @@ public class myGameView extends Activity {
                 }
 
                 break;
+        }
+
+        if (m_Solvers != null && m_Solvers.containsKey(mt.getItemId())) {
+            if (!bt_BK.isChecked()) {
+                mySolution(mt.getItemId());  //求解
+            } else {
+                MyToast.showToast(this, getString(R.string.this_feature_is_not_available_in_reverse_mode), Toast.LENGTH_SHORT);
+            }
         }
         return super.onOptionsItemSelected(mt);
     }
@@ -4275,11 +4254,13 @@ public class myGameView extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1) {  //求解返回
+        SolverHelper.Solver solver = m_Solvers.get(requestCode);
+
+        if (solver != null) {  //求解返回
             if (resultCode == RESULT_OK) {
                 formatPath(data.getStringExtra("SOLUTION"), false);
                 MyToast.showToast(this, getString(R.string.the_solution_has_been_loaded), Toast.LENGTH_SHORT);
-                m_imPort_YASS = "[YASS]";
+                m_imPort_Solver = "[" + solver.getDisplayName() + "]";
             } else {
                 MyToast.showToast(this, getString(R.string.the_solution_could_not_be_completed), Toast.LENGTH_SHORT);
             }
@@ -4287,7 +4268,7 @@ public class myGameView extends Activity {
     }
 
     // YASS 或 Festival 求解
-    protected void mySolution(int XYZ) {
+    protected void mySolution(int solverKey) {
         try {
             //拼接正逆推动作，进行查重和保存
             char[] Move = {'l', 'u', 'r', 'd', 'L', 'U', 'R', 'D'};
@@ -4309,15 +4290,12 @@ public class myGameView extends Activity {
                 }
             }
 
+            SolverHelper.Solver solver = m_Solvers.get(solverKey);
+            assert solver != null;
+
             //自动保存一下当前状态（自动查重），避免yass闪退造成丢失
             if ((m_iStep[1] > 0 || m_iStep[3] > 0) && mySQLite.m_SQL.count_S(myMaps.curMap.Level_id, m_iStep[1], m_iStep[0], m_iStep[3], m_iStep[2], m_nRow0, m_nCol0, myMaps.getCRC32(s1.toString()+s2.toString())) <= 0) {
-                if (m_imPort_YASS.toLowerCase().indexOf("yass") >= 0) {
-                    m_imPort_YASS = "[YASS]" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-                } else if (m_imPort_YASS.toLowerCase().indexOf("导入") >= 0) {
-                    m_imPort_YASS = "[导入]" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-                } else {
-                    m_imPort_YASS = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-                }
+                setImportSolver(m_imPort_Solver, true);
 
                 long hh = mySQLite.m_SQL.add_S(myMaps.curMap.Level_id,
                         3,
@@ -4332,7 +4310,7 @@ public class myGameView extends Activity {
                         myMaps.curMap.key,
                         -1,
                         "",
-                        m_imPort_YASS);
+                        m_imPort_Solver);
 
                 m_bMoved = false;
                 if (hh > 0) {
@@ -4340,53 +4318,15 @@ public class myGameView extends Activity {
                 }
             }
 
-            Intent intent3 = new Intent(Intent.ACTION_MAIN);
-            intent3.addCategory(Intent.CATEGORY_LAUNCHER);
-            ComponentName name;
-            if (XYZ == 1) {
-                name = new ComponentName("net.sourceforge.sokobanyasc.joriswit.builtinlevelsolutions", "builtinlevelsolutions.SolutionActivity");
-            } else {
-                name = new ComponentName("net.sourceforge.sokobanyasc.joriswit.yass", "yass.YASSActivity");
-            }
-            intent3.setComponent(name);
-            String actName = intent3.getAction();
-            intent3.setAction("nl.joriswit.sokosolver.SOLVE");
+            Intent intent3 = new Intent("nl.joriswit.sokosolver.SOLVE");
+            intent3.addCategory(Intent.CATEGORY_DEFAULT);
+            intent3.setPackage(solver.getPackageName());
 //            intent3.putExtra("m_Caller", 1);
             intent3.putExtra("LEVEL", myMaps.getLocale(m_cArray));
-            startActivityForResult(intent3, 1);
-            intent3.setAction(actName);
+            startActivityForResult(intent3, solverKey);
         } catch (Exception e) {
             MyToast.showToast(this, getString(R.string.solver_not_found), Toast.LENGTH_SHORT);
         }
-    }
-
-    private static String getSolution(InputStream is, byte[] searcheddigest) throws IOException {
-
-        DataInputStream in = new DataInputStream(new BufferedInputStream(is));
-
-        String solution = null;
-        byte[] sha1 = new byte[20];
-
-        // File format is a repetition of 20 bytes sha1, each followed by the solution.
-        // The solution is a UDLR string prefixed by a 2 byte string length.
-
-        int bytesread;
-        do {
-            bytesread = in.read(sha1, 0, 20);
-            if (bytesread == 20) {
-                String udlr = in.readUTF();
-
-                // Check if the sha1 digest from the file is the same
-                // as the digest of the searched level
-                if(Arrays.equals(sha1, searcheddigest)) {
-                    // Solution is found!
-                    solution = udlr;
-                    break;
-                }
-            }
-        } while (bytesread == 20);
-        in.close();
-        return solution;
     }
 
     //启动打开状态对话框
@@ -4560,8 +4500,9 @@ public class myGameView extends Activity {
             m_bBusing = false;
             myMaps.m_ActionIsRedy = false;
 
-            if (m_imPort_YASS.toLowerCase().indexOf("yass") < 0 && m_imPort_YASS.indexOf("导入") < 0) {
-                m_imPort_YASS = "[导入]";
+            boolean containsSolver = (SolverHelper.findSolverByDisplayName(m_Solvers, m_imPort_Solver) != null);
+            if (!containsSolver && !m_imPort_Solver.contains(getString(R.string.import2))) {
+                m_imPort_Solver = "[" + getString(R.string.import2) + "]";
             }
         }  //导入动作处理结束
     }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/open"
+		android:title="@string/open"
+		android:orderInCategory="0" />
+
+	<!-- Optimizer item added with android:orderInCategory="1" here -->
+
+	<item
+		android:id="@+id/export_to_file_xsb_and_lurd"
+		android:title="@string/export_to_file_xsb_and_lurd"
+		android:orderInCategory="2" />
+
+	<item
+		android:id="@+id/export_to_clipboard_xsb_and_lurd"
+		android:title="@string/export_to_clipboard_xsb_and_lurd"
+		android:orderInCategory="3" />
+
+	<item
+		android:id="@+id/copy_to_clipboard_lurd"
+		android:title="@string/copy_to_clipboard_lurd"
+		android:orderInCategory="4" />
+
+	<item
+		android:id="@+id/copy_to_clipboard_forward_lurd"
+		android:title="@string/copy_to_clipboard_forward_lurd"
+		android:orderInCategory="5" />
+
+	<item
+		android:id="@+id/copy_to_clipboard_backwards_lurd"
+		android:title="@string/copy_to_clipboard_backwards_lurd"
+		android:orderInCategory="6" />
+
+	<item
+		android:id="@+id/note_tags"
+		android:title="@string/note_tags"
+		android:orderInCategory="7"/>
+
+	<item
+		android:id="@+id/delete"
+		android:title="@string/delete"
+		android:orderInCategory="8" />
+
+	<item
+		android:id="@+id/delete_all_saved_states"
+		android:title="@string/delete_all_saved_states"
+		android:orderInCategory="9" />
+
+	<item
+		android:id="@+id/submit_solution_sokoban_cn"
+		android:title="@string/submit_solution_sokoban_cn"
+		android:orderInCategory="10" />
+
+	<item
+		android:id="@+id/generate_gif_animation"
+		android:title="@string/generate_gif_animation"
+		android:orderInCategory="11" />
+
+</menu>

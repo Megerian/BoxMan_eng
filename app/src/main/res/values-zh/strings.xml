@@ -68,7 +68,7 @@
     <string name="settings_to_toggle">开关选项...</string>
     <string name="player_restart">重新开始</string>
     <string name="player_undo_all">退至首</string>
-    <string name="player_yass_solver">YASS求解</string>
+    <string name="player_solver">求解</string>
     <string name="player_load___">打开状态...</string>
     <string name="player_save">保存状态</string>
     <string name="player_about">关于</string>
@@ -336,7 +336,7 @@
     <string name="error_notes_could_not_be_save">出错了，注释未能保存！</string>
     <string name="puzzle_status">关卡状态</string>
     <string name="delete_this_snapshot_or_solution">删除此状态或答案，确认吗？</string>
-    <string name="yass_optimization">YASS优化</string>
+    <string name="optimization">优化</string>
     <string name="speed_settings">速度设置</string>
     <string name="settings">设置</string>
     <string name="change_skin">更换皮肤</string>

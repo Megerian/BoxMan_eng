@@ -118,7 +118,7 @@
     <string name="error_notes_could_not_be_save">Error: notes could not be saved</string>
     <string name="puzzle_status">Puzzle status</string>
     <string name="delete_this_snapshot_or_solution">Delete this snapshot or solution?</string>
-    <string name="yass_optimization">YASS optimization</string>
+    <string name="optimization">Optimization</string>
     <string name="speed_settings">Speed settings</string>
     <string name="settings">Settings</string>
     <string name="solver_not_found">Solver not found</string>
@@ -185,7 +185,7 @@
     <string name="settings_to_toggle">Setting to toggle…</string>
     <string name="player_restart">Restart</string>
     <string name="player_undo_all">Undo all</string>
-    <string name="player_yass_solver">YASS solver</string>
+    <string name="player_solver">Solver</string>
     <string name="player_load___">Load…</string>
     <string name="player_save">Save</string>
     <string name="player_about">About</string>

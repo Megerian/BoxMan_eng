@@ -92,15 +92,9 @@ public class myEditViewMap extends View {
     //自动求解
     protected void mySolution() {
         try {
-            Intent intent3 = new Intent(Intent.ACTION_MAIN);
-            intent3.addCategory(Intent.CATEGORY_LAUNCHER);
-            ComponentName name = new ComponentName("net.sourceforge.sokobanyasc.joriswit.yass", "yass.YASSActivity");
-            intent3.setComponent(name);
-            String actName = intent3.getAction();
-            intent3.setAction("nl.joriswit.sokosolver.SOLVE");
+            Intent intent3 = new Intent("nl.joriswit.sokosolver.SOLVE");
             intent3.putExtra("LEVEL", myMaps.curMap.Map);
             m_Edit.startActivityForResult (intent3, 1);
-            intent3.setAction(actName);
         } catch (Exception e) {
             MyToast.showToast(myMaps.ctxDealFile, getContext().getString(R.string.no_solver_found), Toast.LENGTH_SHORT);
         }

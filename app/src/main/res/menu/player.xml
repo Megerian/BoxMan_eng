@@ -27,34 +27,34 @@
 
 	<item
         android:id="@+id/player_IN"
-        android:title="@string/import_"/>
+        android:title="@string/import_"
+		android:orderInCategory="10"/>
 
-	<item
-		android:id="@+id/player_Yass_Solver"
-		android:title="@string/player_yass_solver" />
-
-<!--	<item-->
-<!--		android:id="@+id/player_Festival_Solver"-->
-<!--		android:title="Solver求解"/>-->
+	<!-- Solver item added with android:orderInCategory="11" here -->
 
 	<item
 		android:id="@+id/player_load"
-		android:title="@string/player_load___" />
+		android:title="@string/player_load___"
+		android:orderInCategory="12" />
 
 	<item
 		android:id="@+id/player_save"
-		android:title="@string/player_save" />
+		android:title="@string/player_save"
+		android:orderInCategory="13" />
 
 	<item
 		android:id="@+id/player_about"
-		android:title="@string/player_about" />
+		android:title="@string/player_about"
+		android:orderInCategory="14" />
 
 	<item
 		android:id="@+id/player_help"
-		android:title="@string/player_help" />
+		android:title="@string/player_help"
+		android:orderInCategory="15" />
 
 	<item
 		android:id="@+id/player_exit"
-		android:title="@string/player_exit" />
+		android:title="@string/player_exit"
+		android:orderInCategory="16" />
 
 </menu>
