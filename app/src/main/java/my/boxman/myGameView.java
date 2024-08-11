@@ -46,6 +46,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Locale;
@@ -130,7 +131,7 @@ public class myGameView extends Activity {
     boolean m_bPush;  //推
     boolean m_bNetLock;  //网锁
 
-    Map<Integer, SolverHelper.Solver> m_Solvers;
+    Map<Integer, SolverHelper.Solver> m_Solvers = new HashMap<>();
 
     //四邻：左、右、上、下
     final byte[] dr4 = {0, 0, -1, 1};
