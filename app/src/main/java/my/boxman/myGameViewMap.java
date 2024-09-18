@@ -2109,29 +2109,56 @@ public class myGameViewMap extends View {
         m_Game.m_bYanshi = false;
         m_Game.m_bYanshi2 = false;
 
-        if (m_Game.bt_Sel.isChecked()) { //计数状态
-            if (m_Game.bt_BK.isChecked()) {  //逆推
+        if (m_Game.bt_Sel.isChecked()) { //计数状态 | counting is activated
+            if (m_Game.bt_BK.isChecked()) {  //逆推 | reverse mode is activated
                 selNode2.setPT(m_Game.bk_selArray, m_iR, m_iC);
-                m_Count[3] = 0;  //逆推箱子数
-                m_Count[4] = 0;  //逆推目标数
-                m_Count[5] = 0;  //逆推完成数
-                for (int r = 0; r < m_nRows; r++)
-                    for (int c = 0; c < m_nCols; c++) {
-                        switch (m_Game.bk_cArray[r][c]) {
-                            case '$':
-                                m_Count[3] += m_Game.bk_selArray[r][c];
-                                break;
-                            case '*':
-                                m_Count[3] += m_Game.bk_selArray[r][c];
-                                m_Count[4] += m_Game.bk_selArray[r][c];
-                                m_Count[5] += m_Game.bk_selArray[r][c];
-                                break;
-                            case '.':
-                            case '+':
-                                m_Count[4] += m_Game.bk_selArray[r][c];
-                                break;
+                m_Count[3] = 0;  //逆推箱子数 | number of boxes in reverse mode (in selected area)
+                m_Count[4] = 0;  //逆推目标数 | number of goals in reverse mode (in selected area)
+                m_Count[5] = 0;  //逆推完成数 | number of boxes on goals in reverse mode (in selected area)
+
+                if(myMaps.m_Settings[13] == 1) {    // Interactive double push mode is activated
+                    // Interactive double push counting:
+                    // counting the goals means counting the boxes on their current
+                    // forward play position! This means the boxes must be
+                    // read from m_Game.m_cArray
+                    for (int r = 0; r < m_nRows; r++) {
+                        for (int c = 0; c < m_nCols; c++) {
+                            if(m_Game.bk_selArray[r][c] > 0) {  // position is marked for counting
+                                if (m_Game.bk_cArray[r][c] == '$' || m_Game.bk_cArray[r][c] == '*') {   // backward board contains a box
+                                    m_Count[3]++;   // one more box
+                                    if(m_Game.m_cArray[r][c] == '$' || m_Game.m_cArray[r][c] == '*') {  // forward board contains a box
+                                        m_Count[4]++; // one more goal
+                                        m_Count[5]++; // one more box on goal
+                                    }
+                                } else {
+                                    if(m_Game.m_cArray[r][c] == '$' || m_Game.m_cArray[r][c] == '*') { // forward board contains a box
+                                        m_Count[4]++; // one more goal
+                                    }
+                                }
+                            }
                         }
                     }
+                } else {
+                    // Counting for normal reverse play
+                    for (int r = 0; r < m_nRows; r++) {
+                        for (int c = 0; c < m_nCols; c++) {
+                            switch (m_Game.bk_cArray[r][c]) {
+                                case '$':
+                                    m_Count[3] += m_Game.bk_selArray[r][c];
+                                    break;
+                                case '*':
+                                    m_Count[3] += m_Game.bk_selArray[r][c];
+                                    m_Count[4] += m_Game.bk_selArray[r][c];
+                                    m_Count[5] += m_Game.bk_selArray[r][c];
+                                    break;
+                                case '.':
+                                case '+':
+                                    m_Count[4] += m_Game.bk_selArray[r][c];
+                                    break;
+                            }
+                        }
+                    }
+                }
             } else {  //正推
                 selNode.setPT(m_Game.m_selArray, m_iR, m_iC);
                 m_Count[0] = 0;  //正推箱子数
