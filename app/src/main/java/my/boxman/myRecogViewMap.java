@@ -765,10 +765,10 @@ public class myRecogViewMap extends View {
                 myPaint.setTextSize(ss);
                 myPaint.setARGB(255, 0, 0, 0);
                 myPaint.setStrokeWidth(5);
-                canvas.drawText(getContext().getString(R.string.boxes_)+  m_Recog.m_nBoxNum + getContext().getString(R.string.goals_)+  m_Recog.DstNum, 10, ss * 3, myPaint);
+                canvas.drawText(getContext().getString(R.string.boxes_)+ m_Recog.m_nBoxNum + getContext().getString(R.string.goals_)+ m_Recog.DstNum, 10, ss * 3, myPaint);
                 myPaint.setARGB(255, 255, 255, 255);
                 myPaint.setStrokeWidth(3);
-                canvas.drawText(getContext().getString(R.string.boxes_)+  m_Recog.m_nBoxNum + getContext().getString(R.string.goals_)+  m_Recog.DstNum, 10, ss * 3, myPaint);
+                canvas.drawText(getContext().getString(R.string.boxes_)+ m_Recog.m_nBoxNum + getContext().getString(R.string.goals_)+ m_Recog.DstNum, 10, ss * 3, myPaint);
             }
         }
 

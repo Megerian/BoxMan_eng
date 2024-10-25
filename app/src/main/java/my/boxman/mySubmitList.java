@@ -162,7 +162,7 @@ public class mySubmitList extends Activity {
 					msg.obj = myJson(temp, 0);  //解析列表
 				} else {
 					msg.what = 0;
-					msg.obj = getString(R.string.network_error_while_downloading_main_puzzles) + code;
+					msg.obj = getString(R.string.network_error_while_downloading_main_puzzles) + " " + code;
 				}
 				httpResponse = httpClient.execute(httpGet2);
 				code = httpResponse.getStatusLine().getStatusCode();
@@ -177,7 +177,7 @@ public class mySubmitList extends Activity {
 					}
 				} else {
 					msg.what = 0;
-					inf = getString(R.string.network_error_while_downloading_the_puzzles) + code;
+					inf = getString(R.string.network_error_while_downloading_the_puzzles) + " " + code;
 					if (msg.obj.equals("")) {
 						msg.obj = inf;
 					} else {
@@ -217,7 +217,7 @@ public class mySubmitList extends Activity {
 					}
 				} else {
 					msg.what = 0;
-					inf = getString(R.string.network_error_while_downloading_the_puzzles) + code;
+					inf = getString(R.string.network_error_while_downloading_the_puzzles) + " " + code;
 					if (msg.obj.equals("")) {
 						msg.obj = inf;
 					} else {

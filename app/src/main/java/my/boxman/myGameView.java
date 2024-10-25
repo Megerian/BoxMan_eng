@@ -33,19 +33,13 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -3151,7 +3145,7 @@ public class myGameView extends Activity {
                     ans.pkey = myMaps.curMap.key;
                     ans.moves = m_iStep[1];
                     ans.pushs = m_iStep[0];
-                    ans.inf = getString(R.string.move_) + m_iStep[1] + getString(R.string.push_)+ m_iStep[0];
+                    ans.inf = getString(R.string.moves_) + " " + m_iStep[1] + getString(R.string.pushes_)+ " " + m_iStep[0];
                     ans.time = m_imPort_Solver;
                     myMaps.mState2.add(ans);
                     mMap.invalidate();
@@ -3253,7 +3247,7 @@ public class myGameView extends Activity {
                     ans.id = hh;
                     ans.pid = myMaps.curMap.Level_id;
                     ans.pkey = myMaps.curMap.key;
-                    ans.inf = getString(R.string.move_) + m_iStep[1] + getString(R.string.push_) + m_iStep[0];
+                    ans.inf = getString(R.string.moves_) + " " + m_iStep[1] + getString(R.string.pushes_) + " " + m_iStep[0];
                     ans.time = m_imPort_Solver;
                     myMaps.mState2.add(ans);
                     Builder builder = new Builder(this, AlertDialog.THEME_HOLO_DARK);
@@ -5840,7 +5834,7 @@ public class myGameView extends Activity {
                 mMap.invalidate();
                 m_bBusing = false;
                 myMaps.m_ActionIsRedy = false;
-                MyToast.showToast(myGameView.this, msg[type] + getString(R.string.elapsed_time) + ((myTime - myTime0) / 1000) + " " +getString(R.string.seconds), Toast.LENGTH_SHORT);
+                MyToast.showToast(myGameView.this, msg[type] + getString(R.string.elapsed_time) + " " + ((myTime - myTime0) / 1000) + " " +getString(R.string.seconds), Toast.LENGTH_SHORT);
                 if (!m_lstMovReDo.isEmpty()) {  //仅正推
                     m_lstMovReDo.clear();
                 }

@@ -542,7 +542,7 @@ public class myFindView extends Activity {
                 return true;
             case R.id.find_solution:  //答案
                 if (!m_Level && myMaps.curMap.Solved) {  //相似关卡，且有答案
-                    mySQLite.m_SQL.load_SolitionList(myMaps.curMap.key);  //加载答案列表
+                    mySQLite.m_SQL.load_SolutionList(myMaps.curMap.key);  //加载答案列表
                     myMaps.curMap.Solved = (myMaps.mState2.size() > 0); //修正相似关卡预览图之是否有答案
 
                     Collections.sort(myMaps.mState1, new Comparator() {

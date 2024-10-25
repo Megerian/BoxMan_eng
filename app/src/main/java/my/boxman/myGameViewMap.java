@@ -1840,7 +1840,7 @@ public class myGameViewMap extends View {
             myPaint.setStyle(Paint.Style.FILL);
             myPaint.setStrokeWidth(1);
             for (int k = 0; k < myMaps.mState2.size(); k++) {
-                mStr = myMaps.mState2.get(k).inf.replace(getContext().getString(R.string.move_), "").replace(getContext().getString(R.string.push_), "/");
+                mStr = myMaps.mState2.get(k).inf.replace(getContext().getString(R.string.moves_), "").replace(getContext().getString(R.string.pushes_), "/");
                 canvas.drawText(mStr + ", " + myMaps.mState2.get(k).time, 0, m_nArenaTop+ss*(k+1)+4, myPaint);
             }
         }

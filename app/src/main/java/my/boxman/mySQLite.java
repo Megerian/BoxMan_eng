@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,11 +25,13 @@ public class mySQLite {
 	public SQLiteDatabase mSDB;
 	private String my_ANS; //导入答案需要把动作做大小写转换，借用一个全局变量
 	public char[][] m_cArr = new char[myMaps.m_nMaxRow][myMaps.m_nMaxCol];
+	private Context context;
 
 	public static mySQLite getInstance(Context context) {
 		initDataBase(context);
 		if (m_SQL == null) {
 			m_SQL = new mySQLite();
+			m_SQL.context = context;
 		}
 		return m_SQL;
 	}
@@ -1509,11 +1510,12 @@ public class mySQLite {
 
 					moves = cursor.getInt(cursor.getColumnIndex("G_Moves"));
 					pushs = cursor.getInt(cursor.getColumnIndex("G_Pushs"));
-					str.append("移动: ").append(moves).append(", 推动: ").append(pushs);
+					str.append(context.getString(R.string.moves_)).append(" ").append(moves)
+							.append(context.getString(R.string.pushes_)).append(" ").append(pushs);
 					str2.append(cursor.getString(cursor.getColumnIndex("G_DateTime")));
 					if (cursor.getInt(cursor.getColumnIndex("G_Solution")) == 0) {  //答案不需要逆推步数
-						str.append(" [ 移: ").append(cursor.getInt(cursor.getColumnIndex("G_Moves2")))
-								.append(", 拉: ").append(cursor.getInt(cursor.getColumnIndex("G_Pushs2"))).append(" ]");
+						str.append(" [ ").append(context.getString(R.string.move__)).append(cursor.getInt(cursor.getColumnIndex("G_Moves2")))
+								.append(context.getString(R.string._pull_)).append(cursor.getInt(cursor.getColumnIndex("G_Pushs2"))).append(" ]");
 					}
 					state_Node ans = new state_Node();
 					ans.id = cursor.getLong(cursor.getColumnIndex("S_id"));
@@ -1538,7 +1540,7 @@ public class mySQLite {
 	}
 
 	//取得相似关卡(id)的答案列表
-	public boolean load_SolitionList(long key) {
+	public boolean load_SolutionList(long key) {
 		Cursor cursor = mSDB.rawQuery("PRAGMA synchronous=OFF", null);
 		String where = "P_Key = ? and G_Solution = 1";                                 //以CRC查询，解关可能有非本关卡保存的状态及答案
 		String orderBy = "G_Moves, G_Pushs";
@@ -1555,9 +1557,8 @@ public class mySQLite {
 				str2 = new StringBuilder();
 
 				if ((isAnsOK(myMaps.getANS(cursor.getString(cursor.getColumnIndex("G_Ans")), cursor.getInt(cursor.getColumnIndex("P_Key_Num")), myMaps.curMap.L_CRC_Num)))) {    //非本关卡保存的答案，做试推验证cursor.getString(cursor.getColumnIndex("G_Ans"))
-
-					str.append("移动: ").append(cursor.getInt(cursor.getColumnIndex("G_Moves")))
-							.append(", 推动: ").append(cursor.getInt(cursor.getColumnIndex("G_Pushs")));
+					str.append(context.getString(R.string.moves_)).append(" ").append(cursor.getInt(cursor.getColumnIndex("G_Moves")))
+						.append(context.getString(R.string.pushes_)).append(" ").append(cursor.getInt(cursor.getColumnIndex("G_Pushs")));
 					str2.append(cursor.getString(cursor.getColumnIndex("G_DateTime")));
 
 					state_Node ans = new state_Node();
@@ -1916,4 +1917,3 @@ class set_Node{  //关卡集列表
 	long id;
 	String title;
 }
-

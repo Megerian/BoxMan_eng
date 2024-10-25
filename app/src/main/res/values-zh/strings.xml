@@ -462,8 +462,8 @@
     <string name="attention">注意</string>
     <string name="solution_or_snapshot_too_long_to_save">答案或状态太长，保存到文档！</string>
     <string name="the_solution_has_been_saved">答案已保存！</string>
-    <string name="move_">移动: </string>
-    <string name="push_">, 推动: </string>
+    <string name="moves_">移动: </string>
+    <string name="pushes_">, 推动: </string>
     <string name="state_has_been_saved">状态已保存！</string>
     <string name="duplicates_found_rearranged">有重复，已重排！</string>
     <string name="an_error_occurred_saving_failed">出错了，保存失败！</string>
@@ -709,4 +709,6 @@
     <string name="there_is_nothing_to_export_">没有可导出的内容！</string>
     <string name="selected">共选择</string>
     <string name="puzzle_sets_">个关卡集:</string>
+    <string name="move__">"移: "</string>
+    <string name="_pull_">", 拉: "</string>
 </resources>

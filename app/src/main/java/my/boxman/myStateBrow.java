@@ -3,7 +3,6 @@ package my.boxman;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -244,7 +243,7 @@ public class myStateBrow extends Activity implements myGifMakeFragment.GifMakeSt
 								ans.id = hh;
 								ans.pid = myMaps.curMap.Level_id;
 								ans.pkey = myMaps.curMap.key;
-								ans.inf = getString(R.string.move_) + p2 + getString(R.string.push_) + p;
+								ans.inf = getString(R.string.moves_) +" " + p2 + getString(R.string.pushes_) + " " + p;
 								ans.time = time;
 								myMaps.mState2.add(ans);
 								s_Adapter.notifyDataSetChanged();
