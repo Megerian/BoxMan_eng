@@ -1,5 +1,6 @@
 package my.boxman;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@SuppressLint("Range")
 public class mySQLite {
 
 	//将数据库写到手机sd卡中，不再需要SQLiteOpenHelper类了，而是直接通过
@@ -225,7 +227,7 @@ public class mySQLite {
 	}
 
 	//取得通关书及关卡总数
-	public String count_Level() {
+    public String count_Level() {
 		Cursor cursor = mSDB.rawQuery("PRAGMA synchronous=OFF", null);
 
 		long m_count = 0, m_count0 = 0, m_count1 = 0;
@@ -341,7 +343,7 @@ public class mySQLite {
 //	}
 
 	//返回关卡集的 id，增补时使用
-	public long find_Set(String Title) {
+    public long find_Set(String Title) {
 		Cursor cursor = mSDB.rawQuery("PRAGMA synchronous=OFF", null);
 		String where = "T_Title = ?";
 
@@ -360,7 +362,7 @@ public class mySQLite {
 	}
 
 	//返回关卡集的 id，重命名时使用
-	public long find_Set(String Title, long id) {
+    public long find_Set(String Title, long id) {
 		Cursor cursor = mSDB.rawQuery("PRAGMA synchronous=OFF", null);
 		String where = "T_Title = ? AND T_id <> ?";
 
@@ -822,7 +824,7 @@ public class mySQLite {
 		Cursor cursor = mSDB.rawQuery("PRAGMA synchronous=OFF", null);
 		String where = "P_id = ? AND L_id > ?";
 		String[] whereValue = { Long.toString(p_id), Long.toString(l_id) };
-		ArrayList<mapNode> mList = new ArrayList<mapNode>();
+		ArrayList<mapNode> mList = new ArrayList<>();
 
 		try {
 			cursor = mSDB.query("G_Level", null, where, whereValue, null, null, null);
@@ -843,6 +845,7 @@ public class mySQLite {
 				mList.add(nd);
 			}
 		} catch (Exception e) {
+			/* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -905,7 +908,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.rawQuery(sql, new String[]{ Integer.toString(lock), Long.toString(id) });
 			cursor.moveToNext();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -920,7 +923,7 @@ public class mySQLite {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			cursor = mSDB.rawQuery(sql, new String[]{ sdf.format(d), Long.toString(id) });
 			cursor.moveToNext();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -933,7 +936,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.rawQuery(sql, new String[]{ Integer.toString(n), Long.toString(id) });
 			cursor.moveToNext();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -949,7 +952,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.rawQuery(sql, new String[]{ Integer.toString(mSolve), Long.toString(key) });
 			cursor.moveToNext();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -975,7 +978,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.rawQuery(sql, null);
 			cursor.moveToNext();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -988,7 +991,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.rawQuery(sql, new String[]{ Title, Author, Comment, Long.toString(id) });
 			cursor.moveToNext();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1042,7 +1045,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.rawQuery(sql, new String[]{ Comment, Long.toString(id) });
 			cursor.moveToNext();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1055,7 +1058,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.rawQuery(sql, new String[]{ Long.toString(new_id), Long.toString(old_id) });
 			cursor.moveToNext();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1084,7 +1087,7 @@ public class mySQLite {
 					try {
 						cursor = mSDB.rawQuery(sql, new String[]{ Comment, String.valueOf(t_id) });
 						cursor.moveToNext();
-					} catch (Exception e) {
+					} catch (Exception e) { /* do nothing */
 					} finally {
 						if (cursor != null) cursor.close();
 					}
@@ -1126,7 +1129,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.query("G_State", null, where, whereValue, null, null, null);
 			if (cursor.moveToNext()) num = cursor.getCount();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1143,7 +1146,7 @@ public class mySQLite {
 		try {
 			cursor = mSDB.query("G_State", null, where, whereValue, null, null, null);
 			if (cursor.moveToNext()) num = cursor.getLong(cursor.getColumnIndex("S_id"));   //.getCount();
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1192,7 +1195,7 @@ public class mySQLite {
 			mSDB.delete("G_Level", where, whereValue);  //清理关卡表
 			where = "T_id = ?" ;
 			mSDB.delete("G_Set", where, whereValue);  //删除关卡集
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1219,7 +1222,7 @@ public class mySQLite {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace ();
+			e.printStackTrace();
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1450,7 +1453,7 @@ public class mySQLite {
 				}
 			}
 
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1471,14 +1474,10 @@ public class mySQLite {
 				p_key = cursor.getLong(cursor.getColumnIndex("P_Key"));
 
 				// 不是第一个内置关卡，或多于 1 个答案，就允许删除
-				if (p_key != 328550106 || count_S(-1, p_key, 1) > 1) {
-					return false;
-				} else {
-					return true;
-				}
+                return p_key == 328550106 && count_S(-1, p_key, 1) <= 1;
 			}
 
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1532,7 +1531,7 @@ public class mySQLite {
 						myMaps.mState2.add(ans);   //答案
 				}
 			}
-		} catch (Exception e) {
+		} catch (Exception e) {  /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1571,7 +1570,7 @@ public class mySQLite {
 					myMaps.mState2.add(ans);   //答案
 				}
 			}
-		} catch (Exception e) {
+		} catch (Exception e) { /* do nothing */
 		} finally {
 			if (cursor != null) cursor.close();
 		}
@@ -1639,7 +1638,11 @@ public class mySQLite {
 		}
 
 		//没有仓管员、箱子数与目标数不符，地图无效
-		if (nRow < 0 || nCol < 0 || nRow >= myMaps.curMap.Rows|| nCol >= myMaps.curMap.Cols|| nBoxNum != nDstNum) return false;
+		if (nRow < 0 ||
+			nCol < 0 ||
+			nRow >= myMaps.curMap.Rows ||
+			nCol >= myMaps.curMap.Cols ||
+			nBoxNum != nDstNum) return false;
 
 		return true;
 	}
@@ -1874,8 +1877,7 @@ public class mySQLite {
 
 	public boolean openDataBase() {
 		mSDB = SQLiteDatabase.openOrCreateDatabase(DATABASE_PATH + dbName, null);
-		if (mSDB == null) return false;
-		else return true;
+        return mSDB != null;
 	}
 
 }
