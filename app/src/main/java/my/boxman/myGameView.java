@@ -3536,7 +3536,7 @@ public class myGameView extends Activity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         myMaps.m_Settings[10] = which;
                                     }
-                                }).setPositiveButton(getString(R.string.okay), new OnClickListener() {
+                                }).setPositiveButton(getString(R.string.back), new OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         BoxMan.saveSets();  //保存设置
