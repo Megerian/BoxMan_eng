@@ -242,6 +242,18 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 				while (fis.read(buffer) > 0) fos.write(buffer);
 				myMaps.skin_File = "defskin.png";
 			}
+			File skinFile2 = new File(myMaps.sRoot+myMaps.sPath + "皮肤/defskin2.png");
+			if (!skinFile2.exists()) {  //复制系统默认皮肤，供玩家参考
+				fis = getResources().openRawResource(R.raw.defskin2);
+				fos = new FileOutputStream(skinFile2);
+
+				int len = fis.available();
+				byte[] buffer = new byte[len];
+				while (fis.read(buffer) > 0) fos.write(buffer);
+				myMaps.skin_File = "defskin2.png";
+				fos.close();
+			}
+
 			//复制背景图片，供玩家参考
 			targetDir = new File(myMaps.sRoot+myMaps.sPath + "背景/");
 			if (!targetDir.exists()) targetDir.mkdirs();  //创建背景文件夹

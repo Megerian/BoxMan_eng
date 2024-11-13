@@ -406,7 +406,7 @@
     <string name="slower">Slower</string>
     <string name="slowest">Slowest</string>
     <string name="switch_options">Switch options</string>
-    <string name="reset">Reset</string>
+    <string name="reset">Cancel</string>
     <string name="no_solution_found">No solution found!</string>
     <string name="solver_not_found_">Solver not found!</string>
     <string name="the_first_build_in_puzzle_must_have_at_least_1_solution">The first built-in puzzle must have at least 1 solution!</string>
