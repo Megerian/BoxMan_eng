@@ -437,7 +437,8 @@
     <string name="there_are_unsaved_changes_Do_you_want_to_quit_anyway">有状态未保存，坚持退出吗？</string>
     <string name="title_switch_puzzle">更换关卡</string>
     <string name="there_are_unsaved_changes_are_you_sure_to_switch">有状态未保存，坚持更换吗？</string>
-    <string name="none_left">没有了！</string>
+    <string name="reached_start">没有了！</string>
+    <string name="reached_end">没有了！</string>
     <string name="deadlock_move">死锁移动</string>
     <string name="solver_not_found">没有找到求解器！</string>
     <string name="this_move_creates_a_deadlock_do_you_want_to_continue">这一步造成关卡死锁，继续吗？</string>

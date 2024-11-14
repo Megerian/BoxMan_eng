@@ -233,7 +233,7 @@ public class myMaps {
 		} catch (Exception e) {
 			if (!myMaps.skin_File.equals("默认皮肤"))
 				MyToast.showToast(myMaps.ctxDealFile, ctxDealFile.getString(R.string.custom_skin_is_invalid), Toast.LENGTH_SHORT);
-			InputStream fis = myMaps.res.openRawResource(R.raw.defskin);
+			InputStream fis = myMaps.res.openRawResource(R.raw.defskin2);
 			myMaps.skinBit = BitmapFactory.decodeStream(fis);
 		}
 

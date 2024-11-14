@@ -234,7 +234,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 
 			File skinFile = new File(myMaps.sRoot+myMaps.sPath + "皮肤/defskin.png");
 			if (!skinFile.exists()) {  //复制系统默认皮肤，供玩家参考
-				fis = getResources().openRawResource(R.raw.defskin);
+				fis = getResources().openRawResource(R.raw.defskin2);
 				fos = new FileOutputStream(skinFile);
 
 				int len = fis.available();
@@ -244,7 +244,7 @@ public class BoxMan extends Activity implements mySplitLevelsFragment.SplitStatu
 			}
 			File skinFile2 = new File(myMaps.sRoot+myMaps.sPath + "皮肤/defskin2.png");
 			if (!skinFile2.exists()) {  //复制系统默认皮肤，供玩家参考
-				fis = getResources().openRawResource(R.raw.defskin2);
+				fis = getResources().openRawResource(R.raw.defskin);
 				fos = new FileOutputStream(skinFile2);
 
 				int len = fis.available();

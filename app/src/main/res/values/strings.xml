@@ -17,7 +17,7 @@
     <string name="title_information_">Information:</string>
     <string name="change_skin">Skin</string>
     <string name="change_background">Background</string>
-    <string name="alternating_tile_brightness">Alternating tile brightness</string>
+    <string name="alternating_tile_brightness">Checkerboard brightness</string>
     <string name="movement_speed">Movement speed</string>
     <string name="skin">Skin</string>
     <string name="skin_image_file_not_found">Skin image file not found!</string>
@@ -27,7 +27,7 @@
     <string name="automatic_box_numbering">Automatic box numbering</string>
     <string name="ruler">Ruler</string>
     <string name="ruler_does_not_rotate_with_puzzle">Ruler does not rotate with puzzle</string>
-    <string name="distinguish_odd_even_tiles">Distinguish odd and even tiles</string>
+    <string name="distinguish_odd_even_tiles">Enable checkerboard overlay</string>
     <string name="deadlock_detection">Deadlock detection</string>
     <string name="reachability_hints">Reachability hints</string>
     <string name="turning_animation">Turning animation</string>
@@ -182,7 +182,7 @@
     <string name="menu_about">About</string>
     <string name="piclist_path">path</string>
     <string name="settings_menu">Settings…</string>
-    <string name="settings_to_toggle">Switch options…</string>
+    <string name="settings_to_toggle">On/off settings…</string>
     <string name="player_restart">Restart</string>
     <string name="player_undo_all">Undo all</string>
     <string name="player_solver">Solver</string>
@@ -405,7 +405,7 @@
     <string name="medium">Medium</string>
     <string name="slower">Slower</string>
     <string name="slowest">Slowest</string>
-    <string name="switch_options">Switch options</string>
+    <string name="switch_options">On/off settings</string>
     <string name="reset">Cancel</string>
     <string name="no_solution_found">No solution found!</string>
     <string name="solver_not_found_">Solver not found!</string>
@@ -467,7 +467,8 @@
     <string name="there_are_unsaved_changes_Do_you_want_to_quit_anyway">There are unsaved changes. Do you want to quit anyway?</string>
     <string name="title_switch_puzzle">Change puzzle</string>
     <string name="there_are_unsaved_changes_are_you_sure_to_switch">There are unsaved changes. Are you sure you want to go to another puzzle?</string>
-    <string name="none_left">None left!</string>
+    <string name="reached_start">Start of list</string>
+    <string name="reached_end">End of list</string>
     <string name="deadlock_move">Deadlock move</string>
     <string name="this_move_creates_a_deadlock_do_you_want_to_continue">This move will make the puzzle unsolvable. Proceed anyway?</string>
     <string name="turn_off_debugging">Turn off debugging</string>
@@ -714,5 +715,4 @@
     <string name="puzzle_sets_">puzzle sets:</string>
     <string name="move__">"Moves: "</string>
     <string name="_pull_">", Pulls: "</string>
-
 </resources>

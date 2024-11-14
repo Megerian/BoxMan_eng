@@ -1285,7 +1285,7 @@ public class myGameView extends Activity {
                         if (n1 > 0) {
                             myPre(n1-1);
                         } else {
-                            MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                            MyToast.showToast(myGameView.this, getString(R.string.reached_start), Toast.LENGTH_SHORT);
                         }
                     }
                 });
@@ -1302,7 +1302,7 @@ public class myGameView extends Activity {
                         if (n2 >= 0 && n2 + 1  < myMaps.m_lstMaps.size()) {
                             myNext(n2+1);
                         } else {
-                            MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                            MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                         }
                     }
                 });
@@ -1339,7 +1339,7 @@ public class myGameView extends Activity {
 
                 if (bt_BK.isChecked()) {  //逆推
                     if (m_lstMovUnDo2.isEmpty()) {
-                        MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                        MyToast.showToast(myGameView.this, getString(R.string.reached_start), Toast.LENGTH_SHORT);
                     } else {
                         if (myMaps.m_Settings[23] == 1) m_nStep = 1;
                         else m_nStep = getStep(m_lstMovUnDo2);
@@ -1372,11 +1372,11 @@ public class myGameView extends Activity {
                             m_lstMovReDo.clear();
                             mMap.invalidate();
                         } else {
-                            MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                            MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                         }
                     } else {
                         if (m_lstMovUnDo.isEmpty()) {
-                            MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                            MyToast.showToast(myGameView.this, getString(R.string.reached_start), Toast.LENGTH_SHORT);
                         } else {
                             if (myMaps.m_Settings[23] == 1) m_nStep = 1;
                             else  {
@@ -1454,7 +1454,7 @@ public class myGameView extends Activity {
                 if (m_bBusing) return;
                 if (bt_BK.isChecked()) {  //逆推
                     if (m_lstMovReDo2.isEmpty()) {
-                        MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                        MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                     } else {
                         if (myMaps.m_Settings[23] == 1) m_nStep = 1;
                         else m_nStep = getStep2(m_lstMovReDo2);
@@ -1468,11 +1468,11 @@ public class myGameView extends Activity {
 
                             mMap.invalidate();
                         } else {
-                            MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                            MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                         }
                     } else {
                         if (m_lstMovReDo.isEmpty()) {
-                            MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                            MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                         } else {
                             if (myMaps.m_Settings[23] == 1) m_nStep = 1;
                             else m_nStep = getStep(m_lstMovReDo);
@@ -1503,7 +1503,7 @@ public class myGameView extends Activity {
 
                 if (bt_BK.isChecked()) {  //逆推
                     if (m_lstMovReDo2.isEmpty()) {
-                        MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                        MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                     } else {
                         MyToast.showToast(myGameView.this, getString(R.string.go_to_end), Toast.LENGTH_SHORT);
                         if (m_lstMovUnDo2.isEmpty()) goHome();
@@ -1521,11 +1521,11 @@ public class myGameView extends Activity {
 
                             mMap.invalidate();
                         } else {
-                            MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                            MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                         }
                     } else {
                         if (m_lstMovReDo.isEmpty()) {
-                            MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                            MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                         } else {
                             MyToast.showToast(myGameView.this, getString(R.string.replay), Toast.LENGTH_SHORT);
                             m_nStep = m_lstMovReDo.size();
@@ -2575,7 +2575,7 @@ public class myGameView extends Activity {
                     if (m_bMoved) exitDlg2.show();
                     else myPre(n1-1);
                 } else {
-                    MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                    MyToast.showToast(myGameView.this, getString(R.string.reached_start), Toast.LENGTH_SHORT);
                 }
                 break;
             case 8:  //下一关
@@ -2586,7 +2586,7 @@ public class myGameView extends Activity {
                     if (m_bMoved) exitDlg3.show();
                     else myNext(n2+1);
                 } else {
-                    MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                    MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                 }
                 break;
             case 9:  //将录制的动作送入剪切板，并打开“导入”窗口
@@ -3474,7 +3474,7 @@ public class myGameView extends Activity {
                 m_bYanshi2 = false;
                 if (bt_BK.isChecked()) {  //逆推
                     if (m_lstMovUnDo2.isEmpty()) {
-                        MyToast.showToast(this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                        MyToast.showToast(this, getString(R.string.reached_start), Toast.LENGTH_SHORT);
                         m_bBusing = false;
                     } else {
                         m_nStep = m_lstMovUnDo2.size();
@@ -3482,7 +3482,7 @@ public class myGameView extends Activity {
                     }
                 } else {            //正推
                     if (m_lstMovUnDo.isEmpty()) {
-                        MyToast.showToast(this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                        MyToast.showToast(this, getString(R.string.reached_start), Toast.LENGTH_SHORT);
                         m_bBusing = false;
                     } else {
                         m_nStep = m_lstMovUnDo.size();
@@ -3496,7 +3496,7 @@ public class myGameView extends Activity {
                 m_bYanshi2 = false;
                 if (bt_BK.isChecked()) {  //逆推
                     if (m_lstMovReDo2.isEmpty()) {
-                        MyToast.showToast(this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                        MyToast.showToast(this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                         m_bBusing = false;
                     } else {
                         if (m_lstMovUnDo2.isEmpty()) goHome();
@@ -3505,7 +3505,7 @@ public class myGameView extends Activity {
                     }
                 } else {            //正推
                     if (m_lstMovReDo.isEmpty()) {
-                        MyToast.showToast(this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                        MyToast.showToast(this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
                         m_bBusing = false;
                     } else {
                         m_nStep = m_lstMovReDo.size();
@@ -5130,7 +5130,7 @@ public class myGameView extends Activity {
                 if (m_bMoved) exitDlg2.show();
                 else myPre(n1-1);
             } else {
-                MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                MyToast.showToast(myGameView.this, getString(R.string.reached_start), Toast.LENGTH_SHORT);
             }
             return true;
         } else if (myMaps.m_Settings[15] == 1 && keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
@@ -5140,7 +5140,7 @@ public class myGameView extends Activity {
                 if (m_bMoved) exitDlg3.show();
                 else myNext(n2+1);
             } else {
-                MyToast.showToast(myGameView.this, getString(R.string.none_left), Toast.LENGTH_SHORT);
+                MyToast.showToast(myGameView.this, getString(R.string.reached_end), Toast.LENGTH_SHORT);
             }
             return true;
         }
