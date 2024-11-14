@@ -27,7 +27,7 @@
     <string name="automatic_box_numbering">Automatic box numbering</string>
     <string name="ruler">Ruler</string>
     <string name="ruler_does_not_rotate_with_puzzle">Ruler does not rotate with puzzle</string>
-    <string name="distinguish_odd_even_tiles">Enable checkerboard overlay</string>
+    <string name="distinguish_odd_even_tiles">Checkerboard overlay</string>
     <string name="deadlock_detection">Deadlock detection</string>
     <string name="reachability_hints">Reachability hints</string>
     <string name="turning_animation">Turning animation</string>
@@ -122,7 +122,7 @@
     <string name="speed_settings">Movement speed</string>
     <string name="settings">Settings</string>
     <string name="solver_not_found">Solver not found</string>
-    <string name="okay">Okay</string>
+    <string name="okay">OK</string>
     <string name="cancel">Cancel</string>
     <string name="advanced_puzzles">Intermediate puzzles</string>
     <string name="tricky_puzzles">Assorted puzzles</string>
