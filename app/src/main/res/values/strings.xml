@@ -125,7 +125,7 @@
     <string name="okay">OK</string>
     <string name="cancel">Cancel</string>
     <string name="advanced_puzzles">Intermediate puzzles</string>
-    <string name="tricky_puzzles">Assorted puzzles</string>
+    <string name="tricky_puzzles">Hard puzzles</string>
     <string name="additional_puzzles">Extra puzzles</string>
     <string name="db_update_necessary">DB update necessary</string>
     <string name="new_puzzle_set">New puzzle set</string>
