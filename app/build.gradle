@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 36
+    compileSdk = 36
     defaultConfig {
         applicationId 'my.boxman'
         minSdkVersion 21
         targetSdk 36
         versionCode 9
-        versionName "9.99u_eng"
+        versionName "9.99v_eng"
         multiDexEnabled true
     }
     buildTypes {
